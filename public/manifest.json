@@ -3,8 +3,8 @@
     "short_name": "Stats",
     "theme_color": "#2196f3",
     "background_color": "#2196f3",
-    "display": "fullscreen",
+    "display": "standalone",
     "orientation": "portrait",
     "scope": "/",
-    "start_url": "/home"
+    "start_url": "/"
 }
