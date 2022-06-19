@@ -4,7 +4,8 @@
   "private": true,
   "description": "An Ionic project",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve:dev": "vue-cli-service serve --mode development",
+    "serve:prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
@@ -30,6 +31,8 @@
     "@ionic/vue-router": "^6.0.0",
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.2",
+    "sass": "^1.52.3",
+    "sass-loader": "^13.0.0",
     "vue": "^3.2.21",
     "vue-router": "^4.0.12"
   },

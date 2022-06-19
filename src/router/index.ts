@@ -3,29 +3,37 @@ import { RouteRecordRaw } from "vue-router";
 import Navigation from "../views/Navigation.vue";
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/",
-    redirect: "/home",
-  },
+  // {
+  //   path: '/',
+  //   redirect: '/tabs/tab1'
+  // },
   {
     path: "/",
     component: Navigation,
     children: [
       {
-        path: "",
+        path: "/",
         redirect: "/home",
       },
       {
-        path: "home",
-        component: () => import("@/views/Tab1Page.vue"),
+        path: "/home",
+        component: () => import("@/views/Home.vue"),
       },
       {
-        path: "schedules",
-        component: () => import("@/views/Tab2Page.vue"),
+        path: "/search",
+        component: () => import("@/views/Search.vue"),
       },
       {
-        path: "ranks",
-        component: () => import("@/views/Tab3Page.vue"),
+        path: "/schedules",
+        component: () => import("@/views/Schedules.vue"),
+      },
+      {
+        path: "/ranking",
+        component: () => import("@/views/Ranks.vue"),
+      },
+      {
+        path: "/settings",
+        component: () => import("@/views/Settings.vue"),
       },
     ],
   },
