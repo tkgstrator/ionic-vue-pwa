@@ -2,10 +2,12 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Schedules</ion-title>
+        <ion-title>Stats</ion-title>
       </ion-toolbar>
     </ion-header>
-    <CoopSchedules />
+    <ion-content>
+      <p>Nyamo</p>
+    </ion-content>
   </ion-page>
 </template>
 
@@ -16,6 +18,6 @@ import CoopSchedules from '@/components/CoopSchedules.vue';
 
 export default defineComponent({
   name: 'ScheduleView',
-  components: { IonHeader, IonToolbar, IonTitle, IonPage, CoopSchedules }
+  components: { IonHeader, IonToolbar, IonTitle, IonPage }
 });
 </script>

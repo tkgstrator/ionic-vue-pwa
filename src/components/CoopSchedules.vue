@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
-import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg } from '@ionic/vue';
+import { IonButton, IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter } from '@ionic/vue';
+import dayjs from 'dayjs';
 
 interface Schedule {
     start_time: string
@@ -98,11 +99,14 @@ export default defineComponent({
         IonRefresherContent,
         IonContent,
         IonLabel,
-        IonImg
+        IonImg,
+        // IonButton
+        // useIonRouter
         // IonRadio,
         // IonToggle
     },
     setup() {
+        const ionRouter = useIonRouter();
         const schedules: Ref<Schedule[]> = ref<Schedule[]>([]);
 
         console.log(`SERVER: ${process.env.VUE_APP_SERVER_URL}`);
@@ -112,7 +116,7 @@ export default defineComponent({
             schedules.value = response
         });
 
-        return { schedules, StageType, StageName, WeaponType };
+        return { schedules, StageType, StageName, WeaponType, ionRouter };
     },
     methods: {
         onRefresh(event: CustomEvent) {
@@ -124,36 +128,40 @@ export default defineComponent({
         weaponURL(weapon_id: number): string {
             return `https://app.splatoon2.nintendo.net/images/weapons/${weapon_id}`;
         },
+        navigation(start_time: string) {
+            const schedule_id = dayjs(start_time).unix();
+            this.ionRouter.push(`/schedules/${schedule_id}`)
+        }
     },
 });
 </script>
 
 <template>
-    <ion-content fullscreen="true">
-        <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
+    <ion-content fullscreen>
+        <ion-refresher slot="fixed" pull-factor=0.5 @ionRefresh="onRefresh($event)">
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
         <ion-list>
-            <!-- <ion-label>{{ results.length }}</ion-label> -->
-            <ion-item v-for="schedule in schedules" :key="schedule.start_time">
-                <ion-label>
-                    <section class="coop-schedule">
-                        <div class="coop-schedule-summary">
-                            <h3>{{ schedule.start_time }}</h3>
-                            <h2>{{ StageName[schedule.stage_id] }}</h2>
-                        </div>
-                        <div class="coop-schedule-weapon-list">
-                            <ul>
-                                <li class="coop-schedule-weapon-list-item" v-for="weapon_id in schedule.weapon_list"
-                                    :key="weapon_id">
-                                    <ion-img :src="WeaponType[weapon_id]"></ion-img>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-                </ion-label>
-                <!-- <ion-label>{{ result.salmon_id }}</ion-label> -->
-            </ion-item>
+            <template v-for="schedule in schedules" :key="schedule.start_time">
+                <ion-item button @click="navigation(schedule.start_time)">
+                    <ion-label>
+                        <section class="coop-schedule">
+                            <div class="coop-schedule-summary">
+                                <h3>{{ schedule.start_time }}</h3>
+                                <h2>{{ StageName[schedule.stage_id] }}</h2>
+                            </div>
+                            <div class="coop-schedule-weapon-list">
+                                <ul>
+                                    <li class="coop-schedule-weapon-list-item" v-for="weapon_id in schedule.weapon_list"
+                                        :key="weapon_id">
+                                        <ion-img :src="WeaponType[weapon_id]"></ion-img>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </ion-label>
+                </ion-item>
+            </template>
         </ion-list>
     </ion-content>
 </template>
