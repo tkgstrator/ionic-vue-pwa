@@ -28,6 +28,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Schedules.vue"),
       },
       {
+        path: "/schedules/:start_time",
+        component: () => import("@/views/Stats.vue"),
+      },
+      {
         path: "/ranking",
         component: () => import("@/views/Ranks.vue"),
       },
