@@ -5,7 +5,6 @@ import dayjs from 'dayjs';
 import { useRoute } from 'vue-router';
 import { EventType, WaterLevel } from './@types/splatnet2';
 import { ShiftStats, StatsIkura, WaveStatsType } from './@types/response.d';
-import CoopStatsWave from './CoopStatsWave.vue';
 
 export default defineComponent({
   components: {
@@ -16,7 +15,6 @@ export default defineComponent({
     IonLabel,
     IonSegment,
     IonSegmentButton,
-    CoopStatsWave,
   },
   setup() {
     const ionRouter = useIonRouter();
@@ -89,19 +87,8 @@ export default defineComponent({
   </ion-content>
 </template>
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
-
 ion-label {
   margin: 4px 0;
-}
-
-#app {
-  font-family: 'Noto Sans JP' !important;
-}
-
-h2,
-h3 {
-  font-family: 'Noto Sans JP' !important;
 }
 
 h2 {
@@ -113,7 +100,6 @@ h3 {
 }
 
 label {
-  font-family: 'Noto Sans JP' !important;
   font-size: 12px;
 }
 

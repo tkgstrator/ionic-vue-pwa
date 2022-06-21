@@ -16,3 +16,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+* {
+  font-family: "Noto Sans JP";
+}
+</style>

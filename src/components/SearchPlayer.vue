@@ -60,7 +60,7 @@ export default defineComponent({
             <ion-item v-for="player in players" :key="player.nsaid">
                 <ion-label>
                     <div class="coop-result-job-result">
-                        <h3>{{ player.nsaid }}</h3>
+                        <h3 class="nsaid">{{ player.nsaid }}</h3>
                         <h2>{{ player.name }}</h2>
                     </div>
                 </ion-label>
@@ -71,19 +71,12 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+* {
+    font-family: "Noto Sans JP";
+}
 
 ion-label {
     margin: 4px 0;
-}
-
-#app {
-    font-family: 'Noto Sans JP' !important;
-}
-
-h2,
-h3 {
-    font-family: 'Noto Sans JP' !important;
 }
 
 h2 {
@@ -96,7 +89,6 @@ h3 {
 }
 
 label {
-    font-family: 'Noto Sans JP' !important;
     font-size: 12px;
 }
 

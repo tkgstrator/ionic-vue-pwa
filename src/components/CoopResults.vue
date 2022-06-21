@@ -91,19 +91,8 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
-
 ion-label {
   margin: 4px 0;
-}
-
-#app {
-  font-family: 'Noto Sans JP' !important;
-}
-
-h2,
-h3 {
-  font-family: 'Noto Sans JP' !important;
 }
 
 h2 {
@@ -116,7 +105,6 @@ h3 {
 }
 
 label {
-  font-family: 'Noto Sans JP' !important;
   font-size: 12px;
 }
 
