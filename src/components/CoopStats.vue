@@ -1,10 +1,11 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
-import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter, IonSegment, IonSegmentButton, IonListHeader } from '@ionic/vue';
+import { IonList, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter, IonSegment, IonSegmentButton, IonListHeader } from '@ionic/vue';
 import dayjs from 'dayjs';
 import { useRoute } from 'vue-router';
 import { EventType, WaterLevel } from './@types/splatnet2';
-import { ShiftStats, StatsIkura, WaveStatsType } from './@types/response.d';
+import { ShiftStats, WaveStatsType } from './@types/response.d';
+import CoopStatsWave from './CoopStatsWave.vue';
 
 export default defineComponent({
   components: {
@@ -15,6 +16,7 @@ export default defineComponent({
     IonLabel,
     IonSegment,
     IonSegmentButton,
+    CoopStatsWave
   },
   setup() {
     const ionRouter = useIonRouter();
@@ -64,7 +66,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-content fullscreen="true">
+  <ion-content fullscreen>
     <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>

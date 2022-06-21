@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: "/schedules/:start_time",
-        component: () => import("@/views/Slide.vue"),
+        component: () => import("@/views/Stats.vue"),
       },
       {
         path: "/ranking",

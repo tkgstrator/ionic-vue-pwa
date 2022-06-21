@@ -162,11 +162,11 @@ ion-label {
 }
 
 h2 {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 h3 {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 label {

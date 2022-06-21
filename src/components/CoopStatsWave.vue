@@ -1,8 +1,7 @@
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue';
-import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter, IonSegment, IonSegmentButton, IonListHeader } from '@ionic/vue';
-import { EventType } from './@types/splatnet2';
-import { StatsIkura, WaveStatsType } from './@types/response';
+import { defineComponent } from 'vue';
+import { IonItem, IonLabel, IonListHeader } from '@ionic/vue';
+import { WaveStatsType } from './@types/response';
 
 export default defineComponent({
   components: {
@@ -91,5 +90,14 @@ ion-label {
     color: yellow;
     font-weight: bold;
   }
+}
+
+ion-list-header {
+  font-size: 14px !important;
+  min-height: 20px;
+}
+
+ion-label {
+  font-size: 15px !important;
 }
 </style>

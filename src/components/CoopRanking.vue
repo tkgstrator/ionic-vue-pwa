@@ -156,9 +156,12 @@ export default defineComponent({
       </ion-segment-button>
     </ion-segment>
     <ion-list scrollable>
-      <ion-item v-for="player in players" :key="player.nsaid">
+      <ion-item v-for="(player, index) in players" :key="player.nsaid">
         <ion-label>
           <section class="coop-ranking">
+            <div class="coop-ranking-summary-player-rank">
+              <ion-label>{{ index + 1 }}</ion-label>
+            </div>
             <div class="coop-ranking-summary-thumbnail">
               <ion-icon class="coop-player-verified" :icon="ribbonSharp" v-if="player.max.grade_point != null">
               </ion-icon>
@@ -253,6 +256,11 @@ label {
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
+}
+
+.coop-ranking-summary-player-rank {
+  width: 10%;
+  font-weight: bold;
 }
 
 .coop-ranking-summary-thumbnail {
