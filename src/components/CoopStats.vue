@@ -3,17 +3,9 @@ import { defineComponent, Ref, ref } from 'vue';
 import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter, IonSegment, IonSegmentButton, IonListHeader } from '@ionic/vue';
 import dayjs from 'dayjs';
 import { useRoute } from 'vue-router';
-import { EventType, WaterLevel } from 'types/enum.d';
-import { ShiftStats, WaveStatsType } from 'types/response.d';
+import { EventType, WaterLevel } from './@types/splatnet2';
+import { ShiftStats, StatsIkura, WaveStatsType } from './@types/response.d';
 import CoopStatsWave from './CoopStatsWave.vue';
-
-const StageType: { [name: number]: string } = {
-  5000: "https://app.splatoon2.nintendo.net/images/coop_stage/65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png",
-  5001: "https://app.splatoon2.nintendo.net/images/coop_stage/e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png",
-  5002: "https://app.splatoon2.nintendo.net/images/coop_stage/6d68f5baa75f3a94e5e9bfb89b82e7377e3ecd2c.png",
-  5003: "https://app.splatoon2.nintendo.net/images/coop_stage/e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png",
-  5004: "https://app.splatoon2.nintendo.net/images/coop_stage/50064ec6e97aac91e70df5fc2cfecf61ad8615fd.png",
-};
 
 export default defineComponent({
   components: {
@@ -30,16 +22,18 @@ export default defineComponent({
     const ionRouter = useIonRouter();
     const route = useRoute();
     const { start_time } = route.params;
-    const stats: Ref<ShiftStats> = ref<ShiftStats>();
+    const stats: Ref<ShiftStats | undefined> = ref();
+    const total: Ref<number> = ref(0)
     const waterLevel: Ref<WaterLevel> = ref<WaterLevel>(WaterLevel.NORMAL);
     console.log(`SERVER: ${process.env.VUE_APP_SERVER_URL}`);
     console.log(`API: ${process.env.VUE_APP_SERVER_API_VER}`);
     const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${start_time}`;
-    fetch(url).then(response => response.json()).then(response => {
+    fetch(url).then(response => response.json()).then((response: ShiftStats) => {
       stats.value = response;
+      total.value = response.waves.global.map((value: WaveStatsType) => value.count).reduce((a, b) => a + b);
     });
 
-    return { stats, StageType, StageName, WeaponType, ionRouter, WaterLevel, EventType, waterLevel };
+    return { stats, ionRouter, WaterLevel, EventType, waterLevel, total };
   },
   methods: {
     onRefresh(event: CustomEvent) {
@@ -48,9 +42,6 @@ export default defineComponent({
         event.detail.complete();
       }, 1500);
     },
-    weaponURL(weapon_id: number): string {
-      return `https://app.splatoon2.nintendo.net/images/weapons/${weapon_id}`;
-    },
     navigation(start_time: string) {
       const schedule_id = dayjs(start_time).unix();
       this.ionRouter.push(`/schedules/${schedule_id}`)
@@ -58,14 +49,17 @@ export default defineComponent({
     changeWaterLevel(event: CustomEvent) {
       console.log(event);
     },
-    score(eventType: EventType, waterLevel: WaterLevel): WaveStatsType | null {
+    score(eventType: EventType, waterLevel: WaterLevel): WaveStatsType | undefined {
+      if (this.stats === undefined) {
+        return undefined;
+      }
       const eventId: number = Object.values(EventType).indexOf(eventType);
       const waterId: number = Object.values(WaterLevel).indexOf(waterLevel);
-      // const stats: WaveStatsType | undefined = this.stats.waves.global.find((value) {
-      //   return value.water_level == waterId && value.event_type == eventId;
-      // })
-      // console.log(stats);
-      return null;
+      const stats: WaveStatsType | undefined = this.stats.waves.global.find((value) => {
+        return value.water_level == waterId && value.event_type == eventId;
+      })
+
+      return stats;
     }
   },
 });
@@ -87,10 +81,10 @@ export default defineComponent({
         <ion-label>Low</ion-label>
       </ion-segment-button>
     </ion-segment>
-    <ion-list scrollable mode="ios" v-if="stats !== undefined">
-      <CoopStatsWave />
-      <!-- <template v-for="eventType in Object.values(EventType)">
-</template> -->
+    <ion-list scrollable mode="ios" v-if="stats">
+      <template v-for="eventType in Object.values(EventType)" :key="eventType">
+        <CoopStatsWave :eventType="eventType" :score="score(eventType, waterLevel)" :total="total" />
+      </template>
     </ion-list>
   </ion-content>
 </template>
