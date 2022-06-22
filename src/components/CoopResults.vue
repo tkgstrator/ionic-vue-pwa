@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
 import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel } from '@ionic/vue';
+import { useI18n } from 'vue-i18n'
 
 interface JobResult {
   failure_reason?: string
@@ -36,23 +37,55 @@ interface Result {
 
 export default defineComponent({
   components: {
-    // IonCheckbox,
-    // IonInput,
     IonItem,
-    // IonItemOption,
-    // IonItemOptions,
-    // IonItemSliding,
     IonList,
     IonRefresher,
     IonRefresherContent,
     IonContent,
-    IonLabel
-    // IonRadio,
-    // IonToggle
+    IonLabel,
   },
   setup() {
+    // const locale = localStorage.getItem("locale") ?? "ja"
+
+    // const { t } = useI18n({
+    //   locale: locale, messages: {
+    //     en: {
+    //       water_level: {
+    //         HT: "HT",
+    //         NT: "NT",
+    //         LT: "LT",
+    //       },
+    //       event_type: {
+    //         WATER_LEVELS: "-",
+    //         RUSH: "Rush",
+    //         GEYSER: "Goldie Seeking",
+    //         GRILLER: "Griller",
+    //         RALLY: "The Mothership",
+    //         FOG: "Fog",
+    //         MISSILE: "Cohock Charge",
+    //       },
+    //     },
+    //     ja: {
+    //       water_level: {
+    //         HT: "満潮",
+    //         NT: "通常",
+    //         LT: "干潮",
+    //       },
+    //       event_type: {
+    //         WATER_LEVELS: "-",
+    //         RUSH: "ラッシュ",
+    //         GEYSER: "キンシャケ探し",
+    //         GRILLER: "グリル発進",
+    //         RALLY: "ハコビヤ襲来",
+    //         FOG: "霧",
+    //         MISSILE: "ドスコイ大量発生",
+    //       },
+    //     },
+    //   }
+    // })
+    const { t } = useI18n()
     const results: Ref<Result[]> = ref<Result[]>([]);
-    return { results };
+    return { results, t };
   },
   mounted: function () {
     this.onReload();
@@ -78,11 +111,11 @@ export default defineComponent({
     getWaterLevel(water_level: number): string {
       switch (water_level) {
         case 0:
-          return "LT"
+          return this.t("water_level.LT")
         case 1:
-          return "NT"
+          return this.t("water_level.NT")
         case 2:
-          return "HT"
+          return this.t("water_level.HT")
         default:
           return "NT"
       }
@@ -90,19 +123,19 @@ export default defineComponent({
     getEventType(event_type: number): string {
       switch (event_type) {
         case 0:
-          return "-"
+          return this.t("event_type.WATER_LEVELS")
         case 1:
-          return "Rush"
+          return this.t("event_type.RUSH")
         case 2:
-          return "Goldie Seeking"
+          return this.t("event_type.GEYSER")
         case 3:
-          return "Griller"
+          return this.t("event_type.GRILLER")
         case 4:
-          return "The Mothership"
+          return this.t("event_type.RALLY")
         case 5:
-          return "Fog"
+          return this.t("event_type.FOG")
         case 6:
-          return "Cohock Charge"
+          return this.t("event_type.MISSILE")
         default:
           return "-"
       }

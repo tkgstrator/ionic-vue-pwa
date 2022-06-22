@@ -18,7 +18,7 @@
           <ion-label>Ranking</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="home" href="/home">
+        <ion-tab-button tab="home" href="/settings">
           <ion-icon :icon="cog" />
           <ion-label>Settings</ion-label>
         </ion-tab-button>
