@@ -40,23 +40,20 @@ export default defineComponent({
   },
   setup() {
     const results: Ref<Result[]> = ref<Result[]>([]);
-
-    console.log(`SERVER: ${process.env.VUE_APP_SERVER_URL}`);
-    console.log(`API: ${process.env.VUE_APP_SERVER_API_VER}`);
-    const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/results`;
-    fetch(url).then(response => response.json()).then(response => {
-      results.value = response.results;
-    });
-
     return { results };
   },
+  mounted: function () {
+    this.onReload();
+  },
   methods: {
-    onRefresh(event: CustomEvent) {
+    async onReload() {
       const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/results`;
       fetch(url).then(response => response.json()).then(response => {
         this.results = response.results;
-        event.detail.complete();
       });
+    },
+    onRefresh(event: CustomEvent) {
+      this.onReload().then(() => event.detail.complete());
     }
   },
 });
