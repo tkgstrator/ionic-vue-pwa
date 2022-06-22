@@ -158,10 +158,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 ion-label {
-  font-size: 0.8rem !important;
-  font-family: "Noto Sans JP" !important;
-  margin: 0 auto !important;
-
   &.salmon_id {
     color: grey;
     font-size: 12px !important;
@@ -187,13 +183,13 @@ ion-label {
 
   &.golden_ikura_num {
     font-size: 0.9rem !important;
-    color: yellow;
+    color: #e5f100;
     font-weight: bold;
   }
 
   &.ikura_num {
     font-size: 0.9rem !important;
-    color: red;
+    color: #f5873f;
     font-weight: bold;
   }
 
@@ -206,7 +202,6 @@ ion-label {
 
 
 .coop-result {
-  max-width: 440px;
   margin: 0 auto;
 }
 

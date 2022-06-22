@@ -18,6 +18,18 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+ion-item {
+  min-width: 340px;
+  max-width: 440px !important;
+  margin: 0 auto;
+}
+
+ion-label {
+  font-size: 0.8rem !important;
+  font-family: "Noto Sans JP" !important;
+  margin: 0 auto !important;
+}
+
 * {
   font-family: "Noto Sans JP";
 }

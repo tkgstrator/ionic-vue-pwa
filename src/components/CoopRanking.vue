@@ -254,7 +254,7 @@ label {
   position: relative;
   display: flex;
   width: 100%;
-  margin: 0 auto;
+  margin: 4px auto;
   box-sizing: border-box;
 }
 
