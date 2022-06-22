@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router';
 import { EventType, WaterLevel } from './@types/splatnet2';
 import { ShiftStats, WaveStatsType } from './@types/response.d';
 import CoopStatsWave from './CoopStatsWave.vue';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   components: {
@@ -19,6 +20,7 @@ export default defineComponent({
     CoopStatsWave
   },
   setup() {
+    const { t } = useI18n()
     const ionRouter = useIonRouter();
     const route = useRoute();
     const { start_time } = route.params;
@@ -33,7 +35,7 @@ export default defineComponent({
       total.value = response.waves.global.map((value: WaveStatsType) => value.count).reduce((a, b) => a + b);
     });
 
-    return { stats, ionRouter, WaterLevel, EventType, waterLevel, total };
+    return { stats, ionRouter, WaterLevel, EventType, waterLevel, total, t };
   },
   methods: {
     onRefresh(event: CustomEvent) {
@@ -47,7 +49,7 @@ export default defineComponent({
       this.ionRouter.push(`/schedules/${schedule_id}`)
     },
     changeWaterLevel(event: CustomEvent) {
-      console.log(event);
+      console.log(event.detail);
     },
     score(eventType: EventType, waterLevel: WaterLevel): WaveStatsType | undefined {
       if (this.stats === undefined) {
@@ -70,16 +72,12 @@ export default defineComponent({
     <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-segment mode="md" @ionChange="changeWaterLevel($event)" :value="waterLevel" v-model="waterLevel">
-      <ion-segment-button :value="WaterLevel.HIGH">
-        <ion-label>High</ion-label>
-      </ion-segment-button>
-      <ion-segment-button :value="WaterLevel.NORMAL">
-        <ion-label>Normal</ion-label>
-      </ion-segment-button>
-      <ion-segment-button :value="WaterLevel.LOW">
-        <ion-label>Low</ion-label>
-      </ion-segment-button>
+    <ion-segment mode="md" v-on:ion-change="changeWaterLevel($event)" :value="waterLevel" v-model="waterLevel">
+      <template v-for="water_level in WaterLevel" :key="water_level">
+        <ion-segment-button :value="water_level">
+          <ion-label>{{ t(`water_level.${water_level}`) }}</ion-label>
+        </ion-segment-button>
+      </template>
     </ion-segment>
     <ion-list scrollable mode="ios" v-if="stats">
       <template v-for="eventType in Object.values(EventType)" :key="eventType">

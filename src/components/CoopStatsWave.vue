@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue';
 import { IonItem, IonLabel, IonListHeader } from '@ionic/vue';
 import { WaveStatsType } from './@types/response';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   components: {
@@ -10,7 +11,8 @@ export default defineComponent({
     IonLabel
   },
   setup() {
-    return {};
+    const { t } = useI18n()
+    return { t };
   },
   props: {
     'eventType': String,
@@ -24,7 +26,7 @@ export default defineComponent({
 </script>
 
 <template v-if="true">
-  <ion-list-header>{{ eventType }}</ion-list-header>
+  <ion-list-header>{{ t(`event_type.${eventType}`) }}</ion-list-header>
   <ion-item>
     <div class="coop-stats-wave-list">
       <ul>

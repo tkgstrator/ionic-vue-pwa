@@ -1,5 +1,5 @@
 export enum EventType {
-  NONE = "NONE",
+  NONE = "WATER_LEVELS",
   RUSH = "RUSH",
   GEYSER = "GEYSER",
   GRILLER = "GRILLER",
@@ -9,7 +9,7 @@ export enum EventType {
 }
 
 export enum WaterLevel {
-  LOW = "LOW",
-  NORMAL = "NORMAL",
-  HIGH = "HIGH",
+  LOW = "LT",
+  NORMAL = "NT",
+  HIGH = "HT",
 }
