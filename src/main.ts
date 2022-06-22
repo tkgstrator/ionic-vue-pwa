@@ -74,6 +74,18 @@ const message = {
       settings: "Settings",
       home: "Home",
     },
+    rank: {
+      mode: {
+        sum: "Total",
+        max: "Best",
+        avg: "Average",
+      },
+      type: {
+        worked: "Worked",
+        golden: "Golden",
+        power: "Power",
+      },
+    },
   },
   ja: {
     water_level: {
@@ -112,6 +124,18 @@ const message = {
       ranking: "ランキング",
       settings: "設定",
       home: "ホーム",
+    },
+    rank: {
+      mode: {
+        sum: "合計",
+        max: "最高",
+        avg: "平均",
+      },
+      type: {
+        worked: "バイト",
+        golden: "金イクラ",
+        power: "イクラ",
+      },
     },
   },
 };

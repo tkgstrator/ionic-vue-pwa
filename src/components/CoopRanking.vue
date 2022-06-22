@@ -5,6 +5,7 @@ import { ribbonSharp } from 'ionicons/icons';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import duration from 'dayjs/plugin/duration';
+import { useI18n } from 'vue-i18n';
 
 interface Player {
   nsaid: string
@@ -26,15 +27,15 @@ interface Rank {
 }
 
 enum RankType {
-  GOLDEN = "GOLDEN",
-  POWER = "POWER",
-  WORKED = "WORKED"
+  GOLDEN = "golden",
+  POWER = "power",
+  WORKED = "worked"
 }
 
 enum RankMode {
-  TOTAL = "TOTAL",
-  BEST = "BEST",
-  AVG = "AVG"
+  TOTAL = "sum",
+  BEST = "max",
+  AVG = "avg"
 }
 
 
@@ -59,6 +60,7 @@ export default defineComponent({
     // IonToggle
   },
   setup() {
+    const { t } = useI18n()
     const players: Ref<Player[]> = ref<Player[]>([]);
     const rankType: Ref<RankType> = ref<RankType>(RankType.WORKED);
     const rankMode: Ref<RankMode> = ref<RankMode>(RankMode.TOTAL);
@@ -74,7 +76,7 @@ export default defineComponent({
     dayjs.extend(utc)
 
     return {
-      players, ribbonSharp, RankType, RankMode, rankMode, rankType, dayjs, utc, duration,
+      players, ribbonSharp, RankType, RankMode, rankMode, rankType, dayjs, utc, duration, t
     };
   },
   methods: {
@@ -133,27 +135,19 @@ export default defineComponent({
     <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-segment mode="md" @ionChange="segmentChanged($event)" :value="rankMode" v-model="rankMode">
-      <ion-segment-button :value="RankMode.TOTAL">
-        <ion-label>Total</ion-label>
-      </ion-segment-button>
-      <ion-segment-button :value="RankMode.BEST">
-        <ion-label>Best</ion-label>
-      </ion-segment-button>
-      <ion-segment-button :value="RankMode.AVG">
-        <ion-label>Avg</ion-label>
-      </ion-segment-button>
+    <ion-segment mode="md" v-on:ion-change="segmentChanged($event)" :value="rankMode" v-model="rankMode">
+      <template v-for="mode in Object.values(RankMode)" :key="mode">
+        <ion-segment-button :value="mode">
+          <ion-label>{{ t(`rank.mode.${mode}`) }}</ion-label>
+        </ion-segment-button>
+      </template>
     </ion-segment>
-    <ion-segment mode="md" @ionChange="segmentChanged($event)" :value="rankType" v-model="rankType">
-      <ion-segment-button :value="RankType.WORKED">
-        <ion-label>Worked</ion-label>
-      </ion-segment-button>
-      <ion-segment-button :value="RankType.GOLDEN">
-        <ion-label>Golden</ion-label>
-      </ion-segment-button>
-      <ion-segment-button :value="RankType.POWER">
-        <ion-label>Power</ion-label>
-      </ion-segment-button>
+    <ion-segment mode="md" v-on:ion-change="segmentChanged($event)" :value="rankType" v-model="rankType">
+      <template v-for="type in Object.values(RankType)" :key="type">
+        <ion-segment-button :value="type">
+          <ion-label>{{ t(`rank.type.${type}`) }}</ion-label>
+        </ion-segment-button>
+      </template>
     </ion-segment>
     <ion-list scrollable>
       <ion-item v-for="(player, index) in players" :key="player.nsaid">
