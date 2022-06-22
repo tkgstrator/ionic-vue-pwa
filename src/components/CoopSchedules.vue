@@ -2,6 +2,7 @@
 import { defineComponent, Ref, ref } from 'vue';
 import { IonButton, IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter } from '@ionic/vue';
 import dayjs from 'dayjs';
+import { useI18n } from 'vue-i18n';
 
 interface Schedule {
   start_time: string
@@ -97,6 +98,7 @@ export default defineComponent({
     IonImg,
   },
   setup() {
+    const { t } = useI18n()
     const ionRouter = useIonRouter();
     const schedules: Ref<Schedule[]> = ref<Schedule[]>([]);
 
@@ -107,7 +109,7 @@ export default defineComponent({
       schedules.value = response
     });
 
-    return { schedules, StageType, StageName, WeaponType, ionRouter };
+    return { schedules, StageType, StageName, WeaponType, ionRouter, t };
   },
   methods: {
     onRefresh(event: CustomEvent) {
@@ -139,7 +141,7 @@ export default defineComponent({
             <section class="coop-schedule">
               <div class="coop-schedule-summary">
                 <h3>{{ schedule.start_time }}</h3>
-                <h2>{{ StageName[schedule.stage_id] }}</h2>
+                <h2>{{ t(`stage_name.${schedule.stage_id}`) }}</h2>
               </div>
               <div class="coop-schedule-weapon-list">
                 <ul>

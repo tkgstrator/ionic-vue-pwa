@@ -62,6 +62,17 @@ const message = {
       lang: "Languages",
       en: "English",
       ja: "Japanese",
+      zh: "Chinese",
+    },
+    text: {
+      cancel: "Cancel",
+    },
+    tabs: {
+      results: "Results",
+      schedules: "Schedules",
+      ranking: "Ranking",
+      settings: "Settings",
+      home: "Home",
     },
   },
   ja: {
@@ -90,6 +101,17 @@ const message = {
       lang: "言語",
       en: "英語",
       ja: "日本語",
+      zh: "中国語",
+    },
+    text: {
+      cancel: "キャンセル",
+    },
+    tabs: {
+      results: "リザルト",
+      schedules: "スケジュール",
+      ranking: "ランキング",
+      settings: "設定",
+      home: "ホーム",
     },
   },
 };
@@ -103,7 +125,7 @@ const i18n = createI18n({
   messages: message,
   fallbackLocale: locale,
   fallbackRoot: true,
-  availableLocales: ["en", "ja"],
+  availableLocales: ["en", "ja", "zh"],
 });
 
 const app = createApp(App).use(IonicVue).use(router).use(i18n);

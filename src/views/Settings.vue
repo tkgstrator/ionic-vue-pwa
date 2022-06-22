@@ -8,10 +8,13 @@
     <ion-content>
       <ion-list>
         <ion-item>
-          <ion-label>{{ t("languages.lang") }}</ion-label>
-          <ion-toggle slot="end" v-bind:model-value="langToggle" name="langToggle"
-            v-on:ion-change="toggleLocale($event)">
-          </ion-toggle>
+          <ion-label>{{ t('languages.lang') }}</ion-label>
+          <ion-select interface="action-sheet" :placeholder="t(`languages.${lang}`)" mode="ios"
+            :cancel-text="t('text.cancel')" v-on:ion-change="onChange($event)">
+            <template v-for="locale in availableLocales" :key="locale">
+              <ion-select-option :value="locale">{{ t(`languages.${locale}`) }}</ion-select-option>
+            </template>
+          </ion-select>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -20,24 +23,22 @@
 
 <script lang="ts">
 import { defineComponent, ref, Ref } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonLabel, IonItem, IonToggle, IonList, IonContent } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonLabel, IonItem, IonList, IonContent, IonSelect, IonSelectOption } from '@ionic/vue';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'SettingView',
-  components: { IonHeader, IonToolbar, IonTitle, IonPage, IonLabel, IonItem, IonToggle, IonList, IonContent },
+  components: { IonHeader, IonToolbar, IonTitle, IonPage, IonItem, IonList, IonContent, IonSelect, IonSelectOption, IonLabel },
   setup() {
-    const localeText: string = localStorage.getItem("locale") ?? "en"
-    const langToggle: Ref<boolean> = ref(localeText == "en");
+    const lang: string = localStorage.getItem("locale") ?? "en"
     const { t, availableLocales, locale } = useI18n()
-    return { langToggle, t, locale }
-  },
-  mounted() {
-    console.log("mounted")
+    return {
+      t, locale, lang, availableLocales
+    }
   },
   methods: {
-    toggleLocale(event: CustomEvent) {
-      this.locale = event.detail.checked ? "en" : "ja"
+    onChange(event: CustomEvent) {
+      this.locale = event.detail.value
       localStorage.setItem("locale", this.locale);
     }
   }
