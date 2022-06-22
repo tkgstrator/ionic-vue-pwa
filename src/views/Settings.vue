@@ -57,6 +57,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 * {
-  font-family: "Noto Sans JP";
+  font-family: "Noto Sans JP" !important;
+}
+
+ion-label {
+  font-family: "Noto Sans JP" !important;
 }
 </style>

@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
         redirect: "/home",
       },
       {
-        path: "/home",
+        path: "/results",
         component: () => import("@/views/Home.vue"),
       },
       {
@@ -37,7 +37,11 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: "/settings",
-        component: () => import("@/views/Settings.vue"),
+        component: () => import("@/views/MyPageMenu.vue"),
+      },
+      {
+        path: "/home",
+        component: () => import("@/views/MyPageMenu.vue"),
       },
     ],
   },
