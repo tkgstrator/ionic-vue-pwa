@@ -62,6 +62,21 @@ export default defineComponent({
       })
 
       return stats;
+    },
+    isAvailable(eventType: EventType) {
+      if (eventType == EventType.MISSILE && this.waterLevel != WaterLevel.LOW) {
+        return false;
+      }
+      if (eventType == EventType.RUSH && this.waterLevel == WaterLevel.LOW) {
+        return false;
+      }
+      if (eventType == EventType.GEYSER && this.waterLevel == WaterLevel.LOW) {
+        return false;
+      }
+      if (eventType == EventType.GRILLER && this.waterLevel == WaterLevel.LOW) {
+        return false;
+      }
+      return true;
     }
   },
 });
@@ -81,7 +96,8 @@ export default defineComponent({
     </ion-segment>
     <ion-list scrollable mode="ios" v-if="stats">
       <template v-for="eventType in Object.values(EventType)" :key="eventType">
-        <CoopStatsWave :eventType="eventType" :score="score(eventType, waterLevel)" :total="total" />
+        <CoopStatsWave v-if="isAvailable(eventType)" :eventType="eventType" :score="score(eventType, waterLevel)"
+          :total="total" />
       </template>
     </ion-list>
   </ion-content>
