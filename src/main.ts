@@ -51,6 +51,18 @@ const message = {
       FOG: "Fog",
       MISSILE: "Cohock Charge",
     },
+    stage_name: {
+      5000: "Spawning Grounds",
+      5001: "Marooner's Bay",
+      5002: "Lost Outpost",
+      5003: "Salmonid Smokeyard",
+      5004: "Ruins of Ark Polaris",
+    },
+    languages: {
+      lang: "Languages",
+      en: "English",
+      ja: "Japanese",
+    },
   },
   ja: {
     water_level: {
@@ -67,15 +79,29 @@ const message = {
       FOG: "霧",
       MISSILE: "ドスコイ大量発生",
     },
+    stage_name: {
+      5000: "シェケナダム",
+      5001: "難破船ドン・ブラコ",
+      5002: "海上集落シャケト場",
+      5003: "トキシラズいぶし工房",
+      5004: "朽ちた箱舟 ポラリス",
+    },
+    languages: {
+      lang: "言語",
+      en: "英語",
+      ja: "日本語",
+    },
   },
 };
 
+const locale: string = localStorage.getItem("locale") ?? "en";
+
 const i18n = createI18n({
   legacy: false,
-  locale: "en",
+  locale: locale,
   allowComposition: true,
   messages: message,
-  fallbackLocale: "en",
+  fallbackLocale: locale,
   fallbackRoot: true,
   availableLocales: ["en", "ja"],
 });
