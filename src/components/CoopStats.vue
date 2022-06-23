@@ -8,30 +8,31 @@ import { BossCount, ShiftStats, WaveStatsType } from './@types/response.d';
 import CoopStatsWave from './CoopStatsWave.vue';
 import { useI18n } from 'vue-i18n';
 import CoopStatsBossType from './CoopStatsBossType.vue';
+import CoopStatsGlobal from './CoopStatsGlobal.vue';
 
 enum StatsType {
+  GLOBAL = "GLOBAL",
   SALMONID = 'SALMONID',
   EGGS = 'EGGS'
 }
 
 export default defineComponent({
   components: {
-    IonList,
+    // IonList,
     IonRefresher,
     IonRefresherContent,
     IonContent,
     IonLabel,
     IonSegment,
     IonSegmentButton,
-    CoopStatsWave,
-    CoopStatsBossType
+    CoopStatsGlobal
   },
   setup() {
     const { t } = useI18n()
     const ionRouter = useIonRouter();
     const route = useRoute();
     const { start_time } = route.params;
-    const stats: Ref<ShiftStats | undefined> = ref();
+    const shiftstats: Ref<ShiftStats | undefined> = ref();
     const total: Ref<number> = ref(0)
     const waterLevel: Ref<WaterLevel> = ref<WaterLevel>(WaterLevel.NORMAL);
     console.log(`SERVER: ${process.env.VUE_APP_SERVER_URL}`);
@@ -39,11 +40,11 @@ export default defineComponent({
     const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${start_time}`;
     fetch(url).then(response => response.json()).then((response: ShiftStats) => {
       console.log(response)
-      stats.value = response;
+      shiftstats.value = response;
       total.value = response.waves.global.map((value: WaveStatsType) => value.count).reduce((a, b) => a + b);
     });
 
-    return { stats, ionRouter, WaterLevel, EventType, SalmonidType, StatsType, waterLevel, total, t };
+    return { shiftstats, ionRouter, WaterLevel, EventType, SalmonidType, StatsType, waterLevel, total, t };
   },
   methods: {
     onRefresh(event: CustomEvent) {
@@ -60,12 +61,12 @@ export default defineComponent({
       console.log(event.detail);
     },
     score(eventType: EventType, waterLevel: WaterLevel): WaveStatsType | undefined {
-      if (this.stats === undefined) {
+      if (this.shiftstats === undefined) {
         return undefined;
       }
       const eventId: number = Object.values(EventType).indexOf(eventType);
       const waterId: number = Object.values(WaterLevel).indexOf(waterLevel);
-      const stats: WaveStatsType | undefined = this.stats.waves.global.find((value) => {
+      const stats: WaveStatsType | undefined = this.shiftstats.waves.global.find((value) => {
         return value.water_level == waterId && value.event_type == eventId;
       })
 
@@ -102,24 +103,10 @@ export default defineComponent({
         </ion-segment-button>
       </template>
     </ion-segment>
-    <ion-list scrollable mode="ios">
-      <template v-for="(salmonidType, index) in Object.values(SalmonidType)" :key="salmonidType">
-        <CoopStatsBossType :salmonid="salmonidType" :data="stats?.stats.boss_counts[index]" />
-      </template>
-      <ion-segment mode="md" v-on:ion-change="changeWaterLevel($event)" :value="waterLevel" v-model="waterLevel">
-        <template v-for="water_level in WaterLevel" :key="water_level">
-          <ion-segment-button :value="water_level">
-            <ion-label>{{ t(`water_level.${water_level}`) }}</ion-label>
-          </ion-segment-button>
-        </template>
-      </ion-segment>
-      <template v-for="eventType in Object.values(EventType)" :key="eventType">
-        <CoopStatsWave v-if="isAvailable(eventType)" :eventType="eventType" :score="score(eventType, waterLevel)"
-          :total="total" />
-      </template>
-    </ion-list>
+    <CoopStatsGlobal :stats="shiftstats?.stats" />
   </ion-content>
 </template>
+
 <style lang="scss" scoped>
 ion-label {
   margin: 4px 0;

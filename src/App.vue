@@ -33,4 +33,34 @@ ion-label {
 * {
   font-family: "Noto Sans JP";
 }
+
+.num {
+  &::before {
+    content: "x";
+    padding-right: 2px;
+  }
+}
+
+.prob {
+  color: grey !important;
+
+  &::after {
+    content: "%";
+    padding-left: 2px;
+  }
+}
+
+ion-label {
+  font-size: 0.8rem !important;
+
+  +.ikura {
+    color: red !important;
+    font-weight: bold;
+  }
+
+  +.golden-ikura {
+    color: yellow !important;
+    font-weight: bold;
+  }
+}
 </style>

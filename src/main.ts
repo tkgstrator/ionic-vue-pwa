@@ -55,6 +55,7 @@ const message = {
       MISSILE: "Cohock Charge",
     },
     stats_type: {
+      GLOBAL: "Global",
       SALMONID: "Salmonids",
       EGGS: "Eggs",
     },
@@ -73,6 +74,10 @@ const message = {
     },
     text: {
       cancel: "Cancel",
+      job_num: "Shifts Worked",
+      ikura_num: "Power Eggs",
+      golden_ikura_num: "Golden Eggs",
+      failure_wave: "Failure in Wave %{id}",
     },
     tabs: {
       results: "Results",
@@ -121,6 +126,7 @@ const message = {
       MISSILE: "ドスコイ大量発生",
     },
     stats_type: {
+      GLOBAL: "総合",
       SALMONID: "オオモノ",
       EGGS: "イクラ",
     },
@@ -139,6 +145,10 @@ const message = {
     },
     text: {
       cancel: "キャンセル",
+      job_num: "バイト回数",
+      ikura_num: "イクラ",
+      golden_ikura_num: "金イクラ",
+      failure_wave: "WAVE %{id} 失敗",
     },
     tabs: {
       results: "リザルト",
