@@ -51,6 +51,10 @@ const message = {
       FOG: "Fog",
       MISSILE: "Cohock Charge",
     },
+    stats_type: {
+      SALMONID: "Salmonids",
+      EGGS: "Eggs",
+    },
     stage_name: {
       5000: "Spawning Grounds",
       5001: "Marooner's Bay",
@@ -73,6 +77,17 @@ const message = {
       ranking: "Ranking",
       settings: "Settings",
       home: "Home",
+    },
+    salmonid: {
+      GOLDIE: "Goldie",
+      BOMBER: "Steelhead",
+      TWINS: "Flyfish",
+      SHIELD: "Shield",
+      SNAKE: "Steel Eel",
+      TOWER: "Tower",
+      MAWS: "Maws",
+      DOZER: "Griller",
+      ROCKET: "Drizzler",
     },
     rank: {
       mode: {
@@ -102,6 +117,10 @@ const message = {
       FOG: "霧",
       MISSILE: "ドスコイ大量発生",
     },
+    stats_type: {
+      SALMONID: "オオモノ",
+      EGGS: "イクラ",
+    },
     stage_name: {
       5000: "シェケナダム",
       5001: "難破船ドン・ブラコ",
@@ -124,6 +143,17 @@ const message = {
       ranking: "ランキング",
       settings: "設定",
       home: "ホーム",
+    },
+    salmonid: {
+      GOLDIE: "キンシャケ",
+      BOMBER: "バクダン",
+      TWINS: "カタパッド",
+      SHIELD: "テッパン",
+      SNAKE: "ヘビ",
+      TOWER: "タワー",
+      MAWS: "モグラ",
+      DOZER: "グリル",
+      ROCKET: "コウモリ",
     },
     rank: {
       mode: {

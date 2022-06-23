@@ -48,6 +48,38 @@ export interface ShiftStats {
   single: SingleStats;
   total: TotalStats;
   waves: WaveStats;
+  stats: LegacyStats;
+}
+
+export interface BossCount {
+  appearances: number;
+  defeated: number;
+}
+
+export interface LegacyStats {
+  job_result: {
+    is_clear: {
+      count: number;
+    };
+    is_failure: {
+      count: number;
+      failure_reason: {
+        wipe_out: number[];
+        time_limit: number[];
+      };
+    };
+    ikura_num: {
+      sum: number;
+      avg: number;
+      sd: number;
+    };
+    golden_ikura_num: {
+      sum: number;
+      avg: number;
+      sd: number;
+    };
+  };
+  boss_counts: BossCount[];
 }
 
 export interface Schedule {

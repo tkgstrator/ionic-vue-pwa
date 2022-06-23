@@ -25,7 +25,7 @@ export default defineComponent({
 });
 </script>
 
-<template v-if="true">
+<template>
   <ion-list-header>{{ t(`event_type.${eventType}`) }}</ion-list-header>
   <ion-item>
     <div class="coop-stats-wave-list">
@@ -38,7 +38,6 @@ export default defineComponent({
         </li>
       </ul>
     </div>
-    <!-- <ion-img></ion-img> -->
   </ion-item>
 </template>
 
@@ -97,6 +96,8 @@ ion-label {
 ion-list-header {
   font-size: 14px !important;
   min-height: 20px;
+  max-width: 440px;
+  margin: 0 auto;
 }
 
 ion-label {

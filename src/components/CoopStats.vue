@@ -3,10 +3,16 @@ import { defineComponent, Ref, ref } from 'vue';
 import { IonList, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter, IonSegment, IonSegmentButton, IonListHeader } from '@ionic/vue';
 import dayjs from 'dayjs';
 import { useRoute } from 'vue-router';
-import { EventType, WaterLevel } from './@types/splatnet2';
-import { ShiftStats, WaveStatsType } from './@types/response.d';
+import { EventType, WaterLevel, SalmonidType } from './@types/splatnet2';
+import { BossCount, ShiftStats, WaveStatsType } from './@types/response.d';
 import CoopStatsWave from './CoopStatsWave.vue';
 import { useI18n } from 'vue-i18n';
+import CoopStatsBossType from './CoopStatsBossType.vue';
+
+enum StatsType {
+  SALMONID = 'SALMONID',
+  EGGS = 'EGGS'
+}
 
 export default defineComponent({
   components: {
@@ -17,7 +23,8 @@ export default defineComponent({
     IonLabel,
     IonSegment,
     IonSegmentButton,
-    CoopStatsWave
+    CoopStatsWave,
+    CoopStatsBossType
   },
   setup() {
     const { t } = useI18n()
@@ -31,11 +38,12 @@ export default defineComponent({
     console.log(`API: ${process.env.VUE_APP_SERVER_API_VER}`);
     const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${start_time}`;
     fetch(url).then(response => response.json()).then((response: ShiftStats) => {
+      console.log(response)
       stats.value = response;
       total.value = response.waves.global.map((value: WaveStatsType) => value.count).reduce((a, b) => a + b);
     });
 
-    return { stats, ionRouter, WaterLevel, EventType, waterLevel, total, t };
+    return { stats, ionRouter, WaterLevel, EventType, SalmonidType, StatsType, waterLevel, total, t };
   },
   methods: {
     onRefresh(event: CustomEvent) {
@@ -87,14 +95,24 @@ export default defineComponent({
     <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-segment mode="md" v-on:ion-change="changeWaterLevel($event)" :value="waterLevel" v-model="waterLevel">
-      <template v-for="water_level in WaterLevel" :key="water_level">
-        <ion-segment-button :value="water_level">
-          <ion-label>{{ t(`water_level.${water_level}`) }}</ion-label>
+    <ion-segment mode="md">
+      <template v-for="statsType in Object.values(StatsType)" :key="statsType">
+        <ion-segment-button :value="statsType">
+          <ion-label>{{ t(`stats_type.${statsType}`) }}</ion-label>
         </ion-segment-button>
       </template>
     </ion-segment>
-    <ion-list scrollable mode="ios" v-if="stats">
+    <ion-list scrollable mode="ios">
+      <template v-for="(salmonidType, index) in Object.values(SalmonidType)" :key="salmonidType">
+        <CoopStatsBossType :salmonid="salmonidType" :data="stats?.stats.boss_counts[index]" />
+      </template>
+      <ion-segment mode="md" v-on:ion-change="changeWaterLevel($event)" :value="waterLevel" v-model="waterLevel">
+        <template v-for="water_level in WaterLevel" :key="water_level">
+          <ion-segment-button :value="water_level">
+            <ion-label>{{ t(`water_level.${water_level}`) }}</ion-label>
+          </ion-segment-button>
+        </template>
+      </ion-segment>
       <template v-for="eventType in Object.values(EventType)" :key="eventType">
         <CoopStatsWave v-if="isAvailable(eventType)" :eventType="eventType" :score="score(eventType, waterLevel)"
           :total="total" />

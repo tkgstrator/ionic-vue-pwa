@@ -123,6 +123,7 @@ export default defineComponent({
     },
     navigation(start_time: string) {
       const schedule_id = dayjs(start_time).unix();
+      // this.ionRouter.forward('/schedule/' + schedule_id);
       this.ionRouter.push(`/schedules/${schedule_id}`)
     }
   },
@@ -136,7 +137,7 @@ export default defineComponent({
     </ion-refresher>
     <ion-list>
       <template v-for="schedule in schedules" :key="schedule.start_time">
-        <ion-item button @click="navigation(schedule.start_time)">
+        <ion-item button v-on:click="navigation(schedule.start_time)" mode="md">
           <ion-label>
             <section class="coop-schedule">
               <div class="coop-schedule-summary">

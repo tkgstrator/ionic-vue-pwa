@@ -13,3 +13,15 @@ export enum WaterLevel {
   NORMAL = "NT",
   HIGH = "HT",
 }
+
+export enum SalmonidType {
+  GOLDIE = "GOLDIE",
+  BOMBER = "BOMBER",
+  TWINS = "TWINS",
+  SHIELD = "SHIELD",
+  SNAKE = "SNAKE",
+  TOWER = "TOWER",
+  MAWS = "MAWS",
+  DOZER = "DOZER",
+  ROCKET = "ROCKET",
+}
