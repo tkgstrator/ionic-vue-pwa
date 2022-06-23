@@ -32,6 +32,7 @@ ion-label {
 
 * {
   font-family: "Noto Sans JP";
+  color: #ccc;
 }
 
 .num {
@@ -53,13 +54,13 @@ ion-label {
 ion-label {
   font-size: 0.8rem !important;
 
-  +.ikura {
-    color: red !important;
+  &.ikura {
+    color: #f5873f !important;
     font-weight: bold;
   }
 
-  +.golden-ikura {
-    color: yellow !important;
+  &.golden-ikura {
+    color: #e5f100 !important;
     font-weight: bold;
   }
 }

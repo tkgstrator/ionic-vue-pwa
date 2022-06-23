@@ -72,6 +72,11 @@ const message = {
       ja: "Japanese",
       zh: "Chinese",
     },
+    total: {
+      total: "Total",
+      night_less: "NightLess",
+      night: "Night",
+    },
     text: {
       cancel: "Cancel",
       job_num: "Shifts Worked",
@@ -142,6 +147,11 @@ const message = {
       en: "英語",
       ja: "日本語",
       zh: "中国語",
+    },
+    total: {
+      total: "総合",
+      night_less: "夜",
+      night: "昼",
     },
     text: {
       cancel: "キャンセル",

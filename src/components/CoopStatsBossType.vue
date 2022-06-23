@@ -1,127 +1,96 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonItem, IonLabel, IonListHeader, IonProgressBar } from '@ionic/vue';
-import { BossCount } from './@types/response';
+import { IonItem, IonLabel, IonList, IonProgressBar, IonListHeader } from '@ionic/vue';
+import { BossCount, LegacyStats, ShiftStats } from './@types/response';
 import { useI18n } from 'vue-i18n';
+import { SalmonidType } from './@types/splatnet2';
 
 export default defineComponent({
   components: {
-    IonListHeader,
+    IonList,
     IonItem,
     IonLabel,
-    IonProgressBar
+    IonProgressBar,
+    IonListHeader
   },
   setup() {
     const { t } = useI18n()
-    return { t };
+    return { SalmonidType, t };
   },
   props: {
-    'salmonid': String,
-    'data': Object as () => BossCount
+    'stats': Object as () => LegacyStats
   },
-  methods: {},
-});
+  methods: {
+    getBossCount(boss_id: number): { appearance: number, defeated: number, prob: number } {
+      if (this.stats === undefined) {
+        return { appearance: 0, defeated: 0, prob: 0 }
+      }
+      return {
+        appearance: this.stats.boss_counts[boss_id].appearances,
+        defeated: this.stats.boss_counts[boss_id].defeated,
+        prob: this.stats.boss_counts[boss_id].defeated / this.stats.boss_counts[boss_id].appearances
+      }
+    }
+  },
+})
 </script>
 
 <template>
-  <ion-list-header>{{ t(`salmonid.${salmonid}`) }}</ion-list-header>
-  <ion-item>
-    <div class="coop-stats-salmonid-list">
-      <section>
-        <div class="coop-stats-defeated-rate">
-          <ion-progress-bar :value="data?.defeated / data?.appearances" buffer="1.0">
-          </ion-progress-bar>
-          <ion-label class="prob">{{ (data?.defeated / data?.appearances * 100).toFixed(3) }}</ion-label>
-        </div>
-        <ul>
-          <li class="coop-stats-salmonid-list-item">
-            <ion-label class="num">{{ data?.defeated }}</ion-label>
-          </li>
-          <li class="coop-stats-salmonid-list-item">
-            <ion-label class="num">{{ data?.appearances }}</ion-label>
-          </li>
-        </ul>
-      </section>
-    </div>
-  </ion-item>
+  <ion-list>
+    <ion-list-header>{{ t("stats_type.SALMONID") }}</ion-list-header>
+    <template v-for="(salmonId, index) in Object.values(SalmonidType)" :key="salmonId">
+      <ion-item>
+        <section>
+          <div class="coop-stats-progress-bar">
+            <ion-label class="coop-stats-key">{{ t(`salmonid.${salmonId}`) }}</ion-label>
+            <ion-progress-bar :value="getBossCount(index).prob">
+            </ion-progress-bar>
+            <ion-label class="coop-stats-key prob">{{ (getBossCount(index).prob * 100).toFixed(3) }}</ion-label>
+          </div>
+          <div class="coop-stats-value-list">
+            <ion-label class="coop-stats-value num">{{ getBossCount(index).defeated }}</ion-label>
+            <ion-label class="coop-stats-value num">{{ getBossCount(index).appearance }}</ion-label>
+          </div>
+        </section>
+      </ion-item>
+    </template>
+  </ion-list>
 </template>
 
 <style lang="scss" scoped>
 section {
-  display: flex;
-}
-
-.coop-stats-salmonid-list {
   width: 100%;
+  display: flex;
 
-  ul {
-    width: 40%;
-    // display: block;
-    // width: 100%;
-    padding: 0;
-    margin: 0 auto;
-    // padding-left: 40%;
-    // max-width: 200px;
-    // right: 0; // justify-content: right;
-  }
-}
-
-.coop-stats-defeated-rate {
-  width: 60%;
-  margin-top: 10px; // padding: 10 auto;
-
-  ion-label {
-    font-size: 0.8rem !important;
-    color: grey;
+  .coop-stats-key {
+    width: 70%;
+    margin-left: 4px !important;
   }
 
-  // top: 16px;
-}
+  .coop-stats-progress-bar {
+    width: 70%;
+  }
 
-li {
-  &.coop-stats-salmonid-list-item {
-    // display: inline;
-    list-style: none;
+  .coop-stats-value-list {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    margin-right: 0 !important;
+    height: 100% !important;
+    width: 30%;
     text-align: right;
-    width: 100%;
-    justify-content: right;
+  }
+
+  .coop-stats-value {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    margin-right: 0 !important;
+    height: 100% !important;
+    font-size: 1rem !important;
   }
 }
 
-.num {
-  &::before {
-    content: "x";
-    padding-right: 2px;
-  }
-}
-
-.prob {
-  &::after {
-    content: "%";
-    padding-left: 2px;
-  }
-}
-
-ion-label {
-  &.ikura {
-    color: red;
-    font-weight: bold;
-  }
-
-  &.golden-ikura {
-    color: yellow;
-    font-weight: bold;
-  }
-}
-
-ion-list-header {
-  font-size: 14px !important;
-  min-height: 20px;
-  max-width: 440px;
-  margin: 0 auto;
-}
-
-ion-label {
-  font-size: 15px !important;
+ion-list {
+  padding: 0 !important;
 }
 </style>
+

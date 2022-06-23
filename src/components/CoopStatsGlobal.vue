@@ -1,13 +1,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonItem, IonLabel, IonListHeader, IonProgressBar } from '@ionic/vue';
+import { IonItem, IonLabel, IonList, IonProgressBar, IonListHeader } from '@ionic/vue';
 import { LegacyStats } from './@types/response';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   components: {
-    // IonListHeader,
+    IonListHeader,
+    IonProgressBar,
     IonLabel,
+    IonItem,
+    IonList
   },
   setup() {
     const { t } = useI18n()
@@ -54,6 +57,7 @@ export default defineComponent({
 
 <template>
   <ion-list>
+    <ion-list-header>{{ t("total.total") }}</ion-list-header>
     <ion-item>
       <section>
         <div class="coop-stats-progress-bar">
@@ -113,11 +117,8 @@ section {
     margin-bottom: auto !important;
     margin-right: 0 !important;
     height: 100% !important;
+    font-size: 1rem !important;
   }
-}
-
-ion-progress-bar {
-  // margin: 6px;
 }
 
 ion-list {

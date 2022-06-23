@@ -5,10 +5,10 @@ import dayjs from 'dayjs';
 import { useRoute } from 'vue-router';
 import { EventType, WaterLevel, SalmonidType } from './@types/splatnet2';
 import { BossCount, ShiftStats, WaveStatsType } from './@types/response.d';
-import CoopStatsWave from './CoopStatsWave.vue';
 import { useI18n } from 'vue-i18n';
-import CoopStatsBossType from './CoopStatsBossType.vue';
 import CoopStatsGlobal from './CoopStatsGlobal.vue';
+import CoopStatsBossType from './CoopStatsBossType.vue';
+import CoopStatsWave from './CoopStatsWave.vue';
 
 enum StatsType {
   GLOBAL = "GLOBAL",
@@ -18,20 +18,22 @@ enum StatsType {
 
 export default defineComponent({
   components: {
-    // IonList,
     IonRefresher,
     IonRefresherContent,
     IonContent,
     IonLabel,
     IonSegment,
     IonSegmentButton,
-    CoopStatsGlobal
+    CoopStatsGlobal,
+    CoopStatsBossType,
+    CoopStatsWave
   },
   setup() {
     const { t } = useI18n()
     const ionRouter = useIonRouter();
     const route = useRoute();
     const { start_time } = route.params;
+    const statsType: Ref<StatsType> = ref(StatsType.GLOBAL)
     const shiftstats: Ref<ShiftStats | undefined> = ref();
     const total: Ref<number> = ref(0)
     const waterLevel: Ref<WaterLevel> = ref<WaterLevel>(WaterLevel.NORMAL);
@@ -44,7 +46,7 @@ export default defineComponent({
       total.value = response.waves.global.map((value: WaveStatsType) => value.count).reduce((a, b) => a + b);
     });
 
-    return { shiftstats, ionRouter, WaterLevel, EventType, SalmonidType, StatsType, waterLevel, total, t };
+    return { shiftstats, statsType, ionRouter, WaterLevel, EventType, SalmonidType, StatsType, waterLevel, total, t };
   },
   methods: {
     onRefresh(event: CustomEvent) {
@@ -86,6 +88,9 @@ export default defineComponent({
         return false;
       }
       return true;
+    },
+    onStatsTypeChanged(event: CustomEvent) {
+      this.statsType = event.detail.value
     }
   },
 });
@@ -96,14 +101,18 @@ export default defineComponent({
     <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-segment mode="md">
+    <ion-segment mode="md" @ionChange="onStatsTypeChanged($event)" :value="statsType">
       <template v-for="statsType in Object.values(StatsType)" :key="statsType">
         <ion-segment-button :value="statsType">
           <ion-label>{{ t(`stats_type.${statsType}`) }}</ion-label>
         </ion-segment-button>
       </template>
     </ion-segment>
-    <CoopStatsGlobal :stats="shiftstats?.stats" />
+    <template v-if="shiftstats !== undefined">
+      <CoopStatsGlobal :stats="shiftstats.stats" v-show="statsType == StatsType.GLOBAL" />
+      <CoopStatsBossType :stats="shiftstats.stats" v-show="statsType == StatsType.SALMONID" />
+      <CoopStatsWave :stats="shiftstats.waves" :total="shiftstats.total" v-show="statsType == StatsType.EGGS" />
+    </template>
   </ion-content>
 </template>
 
