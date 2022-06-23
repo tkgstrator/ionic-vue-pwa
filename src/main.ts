@@ -6,8 +6,10 @@ import "./registerServiceWorker";
 
 // Above the createApp() line
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
-
 import { IonicVue } from "@ionic/vue";
+
+import VueGtag from "vue-gtag-next";
+import Ads from "vue-google-adsense";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/vue/css/core.css";
@@ -31,6 +33,7 @@ import "./theme/variables.css";
 /* Theme fonts */
 import "./assets/sass/style.scss";
 import { createI18n } from "vue-i18n";
+import { VueWrapper } from "@vue/test-utils";
 
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);
@@ -182,7 +185,14 @@ const i18n = createI18n({
   availableLocales: ["en", "ja", "zh"],
 });
 
-const app = createApp(App).use(IonicVue).use(router).use(i18n);
+const app = createApp(App)
+  .use(IonicVue)
+  .use(router)
+  .use(i18n)
+  .use(VueGtag, { property: { id: "G-ZTVD4X4NVR", router } })
+  .use(Ads.Adsense)
+  .use(Ads.InArticleAdsense)
+  .use(Ads.InFeedAdsense);
 
 router.isReady().then(() => {
   app.mount("#app");
