@@ -34,25 +34,21 @@ ion-list {
   padding: 0 !important;
 }
 
-.coop-schedule {
-  width: 100%;
-}
-
-.coop-schedule-sumamry {
-  width: 70%;
+.coop-schedule-summary {
+  width: 40%;
 }
 
 .coop-schedule-weapon-list {
-  // width: 100%;
+  width: 60%;
 
   ul {
+    width: 100%;
     display: flex;
   }
 
   li {
-    list-style: none;
     width: 25%;
-    max-width: 45px;
+    list-style: none;
   }
 }
 
