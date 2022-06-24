@@ -2,6 +2,9 @@
   <ion-page>
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
+      <ion-header class="paypal-footer">
+        <div id="paypal-button-container-P-5YR614358D8229313MAAAVNA"></div>
+      </ion-header>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="/results" href="/results">
           <ion-icon :icon="planet" />
@@ -29,13 +32,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
+import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, IonHeader } from '@ionic/vue';
 import { planet, search, diamond, cog, list } from 'ionicons/icons';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'TabsPage',
-  components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
+  components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet, IonHeader },
   setup() {
     const { t } = useI18n()
     return {

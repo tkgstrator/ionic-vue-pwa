@@ -29,10 +29,41 @@
     />
     <link rel="manifest" href="manifest.json" />
 
+    <meta name="theme-color" content="black-translucent"/
     <!-- add to homescreen for ios -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Ionic App" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Salmon Stats" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <script
+      src="https://www.paypal.com/sdk/js?client-id=Ad950Aot5hYfU49X5APIhZxFNH8XiMEEhwDUPz7zt7OrAFAmrYmk5Z94WaDiwFjYhPy5ieWGdZoLpStW&vault=true&intent=subscription"
+      data-sdk-integration-source="button-factory"
+    ></script>
+    <script>
+      paypal
+        .Buttons({
+          style: {
+            shape: "rect",
+            color: "gold",
+            layout: "horizontal",
+            label: "subscribe",
+            tagline: false,
+            height: 35,
+          },
+          createSubscription: function (data, actions) {
+            return actions.subscription.create({
+              /* Creates the subscription */
+              plan_id: "P-5YR614358D8229313MAAAVNA",
+            });
+          },
+          onApprove: function (data, actions) {
+            alert(data.subscriptionID); // You can add optional success message for the subscriber here
+          },
+        })
+        .render("#paypal-button-container-P-5YR614358D8229313MAAAVNA"); // Renders the PayPal button
+    </script>
   </head>
 
   <body>
