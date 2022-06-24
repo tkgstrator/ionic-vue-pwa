@@ -48,8 +48,8 @@ export default defineComponent({
             <ion-label class="coop-stats-key prob">{{ (getBossCount(index).prob * 100).toFixed(3) }}</ion-label>
           </div>
           <div class="coop-stats-value-list">
-            <ion-label class="coop-stats-value num">{{ getBossCount(index).defeated }}</ion-label>
-            <ion-label class="coop-stats-value num">{{ getBossCount(index).appearance }}</ion-label>
+            <ion-label class="num">{{ getBossCount(index).defeated }}</ion-label>
+            <ion-label class="num">{{ getBossCount(index).appearance }}</ion-label>
           </div>
         </section>
       </ion-item>
@@ -58,39 +58,6 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-section {
-  width: 100%;
-  display: flex;
-
-  .coop-stats-key {
-    width: 70%;
-    margin-left: 4px !important;
-  }
-
-  .coop-stats-progress-bar {
-    width: 70%;
-  }
-
-  .coop-stats-value-list {
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-    margin-right: 0 !important;
-    height: 100% !important;
-    width: 30%;
-    text-align: right;
-  }
-
-  .coop-stats-value {
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-    margin-right: 0 !important;
-    height: 100% !important;
-    font-size: 1rem !important;
-  }
-}
-
-ion-list {
-  padding: 0 !important;
-}
+@import "../theme/styles.scss";
 </style>
 

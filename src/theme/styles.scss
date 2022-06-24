@@ -1,0 +1,35 @@
+section {
+  width: 100%;
+  display: flex;
+
+  .coop-stats-key {
+    width: 70%;
+    margin-left: 4px !important;
+  }
+
+  .coop-stats-progress-bar {
+    width: 70%;
+  }
+
+  .coop-stats-value {
+    width: 30%;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    margin-right: 0 !important;
+    height: 100% !important;
+    text-align: right;
+  }
+
+  .coop-stats-value-list {
+    width: 30%;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    margin-right: 0 !important;
+    height: 100% !important;
+    text-align: right;
+  }
+}
+
+ion-list {
+  padding: 0 !important;
+}

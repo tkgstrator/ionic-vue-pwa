@@ -21,7 +21,7 @@ export default defineComponent({
 ion-item {
   min-width: 340px;
   max-width: 440px !important;
-  margin: 0 auto;
+  margin: 6px auto;
 }
 
 ion-label {

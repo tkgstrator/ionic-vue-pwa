@@ -150,8 +150,8 @@ const message = {
     },
     total: {
       total: "総合",
-      night_less: "夜",
-      night: "昼",
+      night_less: "昼",
+      night: "夜",
     },
     text: {
       cancel: "キャンセル",

@@ -99,29 +99,5 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-section {
-  width: 100%;
-  display: flex;
-
-  .coop-stats-key {
-    width: 70%;
-    margin-left: 4px !important;
-  }
-
-  .coop-stats-progress-bar {
-    width: 70%;
-  }
-
-  .coop-stats-value {
-    margin-top: auto !important;
-    margin-bottom: auto !important;
-    margin-right: 0 !important;
-    height: 100% !important;
-    font-size: 1rem !important;
-  }
-}
-
-ion-list {
-  padding: 0 !important;
-}
+@import "../theme/styles.scss";
 </style>
