@@ -2,38 +2,7 @@
 import { defineComponent, Ref, ref } from 'vue';
 import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel } from '@ionic/vue';
 import { useI18n } from 'vue-i18n'
-
-interface JobResult {
-  failure_reason?: string
-  failure_wave?: number
-  is_clear: boolean
-}
-
-interface Player {
-  nsaid: string
-  name: string
-  grade_point?: number
-}
-
-interface Wave {
-  event_type: number
-  water_level: number
-  golden_ikura_num: number
-  golden_ikura_pop_num: number
-  ikura_num: number
-  quota_num: number
-}
-
-interface Result {
-  salmon_id: number
-  job_result: JobResult
-  golden_ikura_num: number
-  ikura_num: number
-  no_night_waves: boolean
-  danger_rate: number
-  play_time: string
-  waves: Wave[]
-}
+import { Result } from './@types/response';
 
 export default defineComponent({
   components: {
@@ -45,44 +14,6 @@ export default defineComponent({
     IonLabel,
   },
   setup() {
-    // const locale = localStorage.getItem("locale") ?? "ja"
-
-    // const { t } = useI18n({
-    //   locale: locale, messages: {
-    //     en: {
-    //       water_level: {
-    //         HT: "HT",
-    //         NT: "NT",
-    //         LT: "LT",
-    //       },
-    //       event_type: {
-    //         WATER_LEVELS: "-",
-    //         RUSH: "Rush",
-    //         GEYSER: "Goldie Seeking",
-    //         GRILLER: "Griller",
-    //         RALLY: "The Mothership",
-    //         FOG: "Fog",
-    //         MISSILE: "Cohock Charge",
-    //       },
-    //     },
-    //     ja: {
-    //       water_level: {
-    //         HT: "満潮",
-    //         NT: "通常",
-    //         LT: "干潮",
-    //       },
-    //       event_type: {
-    //         WATER_LEVELS: "-",
-    //         RUSH: "ラッシュ",
-    //         GEYSER: "キンシャケ探し",
-    //         GRILLER: "グリル発進",
-    //         RALLY: "ハコビヤ襲来",
-    //         FOG: "霧",
-    //         MISSILE: "ドスコイ大量発生",
-    //       },
-    //     },
-    //   }
-    // })
     const { t } = useI18n()
     const results: Ref<Result[]> = ref<Result[]>([]);
     return { results, t };

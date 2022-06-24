@@ -33,3 +33,31 @@ section {
 ion-list {
   padding: 0 !important;
 }
+
+.coop-schedule {
+  width: 100%;
+}
+
+.coop-schedule-sumamry {
+  width: 70%;
+}
+
+.coop-schedule-weapon-list {
+  // width: 100%;
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    list-style: none;
+    width: 25%;
+    max-width: 45px;
+  }
+}
+
+ion-label {
+  .datetime {
+    color: grey;
+  }
+}

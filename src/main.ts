@@ -35,6 +35,11 @@ import "./assets/sass/style.scss";
 import { createI18n } from "vue-i18n";
 import { VueWrapper } from "@vue/test-utils";
 
+/* Dayjs */
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);
 
@@ -192,6 +197,11 @@ const message = {
     },
   },
 };
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault(dayjs.tz.guess());
+console.log(dayjs.tz.guess());
 
 const locale: string = localStorage.getItem("locale") ?? "en";
 

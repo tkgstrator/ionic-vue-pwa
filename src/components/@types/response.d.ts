@@ -89,3 +89,35 @@ export interface Schedule {
   rare_weapon?: number;
   weapon_list: number[];
 }
+
+interface JobResult {
+  failure_reason?: string;
+  failure_wave?: number;
+  is_clear: boolean;
+}
+
+interface Player {
+  nsaid: string;
+  name: string;
+  grade_point?: number;
+}
+
+interface Wave {
+  event_type: number;
+  water_level: number;
+  golden_ikura_num: number;
+  golden_ikura_pop_num: number;
+  ikura_num: number;
+  quota_num: number;
+}
+
+interface Result {
+  salmon_id: number;
+  job_result: JobResult;
+  golden_ikura_num: number;
+  ikura_num: number;
+  no_night_waves: boolean;
+  danger_rate: number;
+  play_time: string;
+  waves: Wave[];
+}

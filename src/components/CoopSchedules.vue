@@ -109,7 +109,7 @@ export default defineComponent({
       schedules.value = response
     });
 
-    return { schedules, StageType, StageName, WeaponType, ionRouter, t };
+    return { schedules, StageType, StageName, WeaponType, ionRouter, t, dayjs };
   },
   methods: {
     onRefresh(event: CustomEvent) {
@@ -141,8 +141,10 @@ export default defineComponent({
           <ion-label>
             <section class="coop-schedule">
               <div class="coop-schedule-summary">
-                <h3>{{ schedule.start_time }}</h3>
-                <h2>{{ t(`stage_name.${schedule.stage_id}`) }}</h2>
+                <ion-label class="datetime">{{ dayjs(schedule.start_time).tz().format("YYYY/MM/DD HH:mm:ss") }}
+                  <!-- <ion-label class="datetime">{{ dayjs.tz(schedule.start_time).format("YYYY/MM/DD HH:mm:ss") }} -->
+                </ion-label>
+                <ion-label>{{ t(`stage_name.${schedule.stage_id}`) }}</ion-label>
               </div>
               <div class="coop-schedule-weapon-list">
                 <ul>
@@ -160,59 +162,5 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-ion-label {
-  margin: 4px 0;
-}
-
-h2 {
-  font-size: 14px;
-}
-
-h3 {
-  font-size: 12px;
-}
-
-label {
-  font-size: 12px;
-}
-
-.coop-schedule {
-  position: relative;
-  display: flex;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.coop-schedule-summary {
-  width: 40%;
-}
-
-.coop-schedule-weapon-list {
-  width: 60%;
-  max-width: 240px;
-
-  ul {
-    display: flex;
-    justify-content: right;
-    // align-items: right;
-    margin: 8px auto;
-    width: 100%;
-  }
-}
-
-li {
-  &.coop-schedule-weapon-list-item {
-    list-style: none;
-    display: inline;
-    width: 25%;
-    max-width: 60px;
-
-    &:not(:last-child) {
-      margin-right: 3px;
-    }
-  }
-
-}
+@import "../theme/styles.scss";
 </style>
