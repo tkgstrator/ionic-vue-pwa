@@ -36,6 +36,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Stats.vue"),
       },
       {
+        path: "/schedules/:start_time/:nightless",
+        component: () => import("@/views/Ranking.vue"),
+      },
+      {
         path: "/ranking",
         component: () => import("@/views/Ranks.vue"),
       },

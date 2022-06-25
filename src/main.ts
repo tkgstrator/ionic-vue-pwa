@@ -79,10 +79,14 @@ const message = {
     },
     total: {
       total: "Total",
-      night_less: "NightLess",
+      night_less: "Nightless",
       night: "Night",
     },
     text: {
+      version: {
+        app: "App Version",
+        api: "Server Version",
+      },
       cancel: "Cancel",
       job_num: "Shifts Worked",
       ikura_num: "Power Eggs",
@@ -159,6 +163,10 @@ const message = {
       night: "夜",
     },
     text: {
+      version: {
+        app: "アプリバージョン",
+        api: "サーバーバージョン",
+      },
       cancel: "キャンセル",
       job_num: "バイト回数",
       ikura_num: "イクラ",

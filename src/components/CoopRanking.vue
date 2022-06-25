@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
-import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, IonCheckbox, IonRadio, IonIcon, IonSegmentButton, IonSegment } from '@ionic/vue';
+import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, IonIcon, IonSegmentButton, IonSegment } from '@ionic/vue';
 import { ribbonSharp } from 'ionicons/icons';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -196,7 +196,6 @@ export default defineComponent({
             </div>
           </section>
         </ion-label>
-        <!-- <ion-label>{{ result.salmon_id }}</ion-label> -->
       </ion-item>
     </ion-list>
   </ion-content>

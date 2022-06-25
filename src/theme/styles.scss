@@ -30,6 +30,16 @@ section {
   }
 }
 
+ion-label {
+  &.num {
+    font-size: 1rem !important;
+  }
+}
+
+p {
+  font-size: 0.8rem !important;
+}
+
 ion-list {
   padding: 0 !important;
 }
@@ -56,4 +66,9 @@ ion-label {
   .datetime {
     color: grey;
   }
+}
+
+ion-list-header {
+  max-width: 440px !important;
+  margin: 0 auto;
 }

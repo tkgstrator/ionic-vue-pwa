@@ -1,8 +1,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonItem, IonLabel, IonList, IonProgressBar, IonListHeader } from '@ionic/vue';
+import { IonItem, IonLabel, IonList, IonProgressBar, IonListHeader, useIonRouter } from '@ionic/vue';
 import { TotalStats, TotalStatsType, WaveStats, WaveStatsType } from './@types/response';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import { EventType, WaterLevel } from './@types/splatnet2';
 
 export default defineComponent({
@@ -15,7 +16,10 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    return { EventType, WaterLevel, t };
+    const route = useRoute()
+    const { start_time } = route.params
+    const ionRouter = useIonRouter();
+    return { EventType, WaterLevel, ionRouter, start_time, t };
   },
   props: {
     'stats': Object as () => WaveStats,
@@ -63,7 +67,7 @@ export default defineComponent({
   <ion-list>
     <ion-list-header>{{ t("stats_type.GLOBAL") }}</ion-list-header>
     <template v-for="nightLess in [false, true]" :key="nightLess">
-      <ion-item>
+      <ion-item button v-on:click="ionRouter.push(`${start_time}/${nightLess}`)" mode="md">
         <section>
           <div class="coop-stats-progress-bar">
             <ion-label class="coop-stats-key">{{ nightLess ? t("total.night_less") : t("total.night") }}</ion-label>

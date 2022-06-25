@@ -64,4 +64,26 @@ ion-label {
     font-weight: bold;
   }
 }
+
+#paypal-button-container-P-5YR614358D8229313MAAAVNA {
+  width: 100%;
+  max-width: 390px;
+  max-height: 35px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+.buttons-container {
+  // background-color: transparent !important;
+}
+
+ion-header {
+  background-color: var(--ion-item-background);
+}
+
+body {
+  .dom-ready {
+    background-color: #121212 !important;
+  }
+}
 </style>

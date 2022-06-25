@@ -121,3 +121,16 @@ interface Result {
   play_time: string;
   waves: Wave[];
 }
+
+interface TotalRank {
+  golden_ikura_num: number;
+  rank: number;
+  members: string[];
+}
+
+interface Ranking {
+  total: {
+    night: TotalRank[];
+    nightless: TotalRank[];
+  };
+}
