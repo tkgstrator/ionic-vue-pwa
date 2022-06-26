@@ -3,7 +3,7 @@ import { defineComponent, Ref, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel } from '@ionic/vue';
 import { useI18n } from 'vue-i18n'
-import { TotalRank, Ranking } from './@types/response';
+import { TotalRank, Ranking, WeaponRank } from './@types/response';
 
 export default defineComponent({
   components: {
@@ -16,7 +16,7 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    const results: Ref<TotalRank[]> = ref<TotalRank[]>([]);
+    const results: Ref<WeaponRank[]> = ref<WeaponRank[]>([]);
     return { t, results };
   },
   mounted: function () {
@@ -26,41 +26,12 @@ export default defineComponent({
     async onReload() {
       const route = useRoute()
       const { start_time } = route.params
-      const waterLevel: number = (() => {
-        if (route.query.water_level === null) {
-          return 0
-        }
-        return parseInt(route.query.water_level as string)
-      })()
-      const eventType: number = (() => {
-        if (route.query.event_type === null) {
-          return 0
-        }
-        return parseInt(route.query.event_type as string)
-      })()
-      const nightless: boolean | null = (() => {
-        if (route.params.nightless === undefined) {
-          return null
-        }
-        return route.params.nightless === 'nightless'
-      })()
-      console.log(eventType, waterLevel, nightless);
       const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/waves/${start_time}`;
       const headers = {
         "cache-control": "force-cache; max-age=600",
       }
       fetch(url, { headers: headers }).then(response => response.json()).then((response: Ranking) => {
-        switch (nightless) {
-          case true:
-            this.results = response.total[1];
-            break
-          case false:
-            this.results = response.total[0];
-            break
-          default:
-            this.results = response.waves[waterLevel][eventType];
-            break
-        }
+        this.results = response.weapons ?? [];
       });
     },
     onRefresh(event: CustomEvent) {
@@ -83,14 +54,11 @@ export default defineComponent({
               <ion-label>{{ result.rank }}</ion-label>
             </div>
             <div class="coop-ranking-summary-team-members">
-              <ul>
-                <li v-for="member in result.names" :key="member">
-                  <ion-label class="member">{{ member }}</ion-label>
-                </li>
-              </ul>
+              <ion-label class="member name">{{ result.name }}</ion-label>
+              <ion-label class="count">{{ t(`text.waves`) }} {{ result.waves }}</ion-label>
             </div>
             <div class="coop-ranking-summary-score">
-              <span class="golden-ikura num golden-ikura">{{ result.golden_ikura_num }}</span>
+              <span class="golden-ikura num">{{ result.supplied_count }}</span>
             </div>
           </section>
         </ion-label>
@@ -101,6 +69,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "../theme/styles.scss";
+
+ion-label {
+  .count {
+    font-size: 0.8rem;
+    color: var(--ion-color-primary);
+  }
+}
 
 .coop-ranking-summary-team-rank {
   width: 10%;

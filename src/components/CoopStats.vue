@@ -9,10 +9,12 @@ import { useI18n } from 'vue-i18n';
 import CoopStatsGlobal from './CoopStatsGlobal.vue';
 import CoopStatsBossType from './CoopStatsBossType.vue';
 import CoopStatsWave from './CoopStatsWave.vue';
+import CoopStatsWeapons from './CoopStatsWeapons.vue';
 
 enum StatsType {
   GLOBAL = "GLOBAL",
   SALMONID = 'SALMONID',
+  WEAPONS = 'WEAPONS',
   EGGS = 'EGGS'
 }
 
@@ -26,7 +28,8 @@ export default defineComponent({
     IonSegmentButton,
     CoopStatsGlobal,
     CoopStatsBossType,
-    CoopStatsWave
+    CoopStatsWave,
+    CoopStatsWeapons
   },
   setup() {
     const { t } = useI18n()
@@ -91,6 +94,9 @@ export default defineComponent({
     },
     onStatsTypeChanged(event: CustomEvent) {
       this.statsType = event.detail.value
+    },
+    isRandomRotation(statsType: StatsType): boolean {
+      return true
     }
   },
 });
@@ -111,6 +117,7 @@ export default defineComponent({
     <template v-if="shiftstats !== undefined">
       <CoopStatsGlobal :stats="shiftstats.stats" v-show="statsType == StatsType.GLOBAL" />
       <CoopStatsBossType :stats="shiftstats.stats" v-show="statsType == StatsType.SALMONID" />
+      <CoopStatsWeapons v-show="statsType == StatsType.WEAPONS" />
       <CoopStatsWave v-show="statsType == StatsType.EGGS" />
     </template>
   </ion-content>

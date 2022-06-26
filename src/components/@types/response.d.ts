@@ -129,7 +129,16 @@ interface TotalRank {
   names: string[];
 }
 
+interface WeaponRank {
+  rank: number;
+  waves: number;
+  supplied_count: number;
+  nsaid: string;
+  name: string;
+}
+
 interface Ranking {
   total: TotalRank[][];
   waves: TotalRank[][][];
+  weapons?: WeaponRank[];
 }

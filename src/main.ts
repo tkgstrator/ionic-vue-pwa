@@ -76,6 +76,7 @@ const message = {
     stats_type: {
       GLOBAL: "Global",
       SALMONID: "Salmonids",
+      WEAPONS: "Weapons",
       EGGS: "Eggs",
     },
     stage_name: {
@@ -101,6 +102,7 @@ const message = {
         app: "App Version",
         api: "Server Version",
       },
+      waves: "Waves",
       cancel: "Cancel",
       job_num: "Shifts Worked",
       ikura_num: "Power Eggs",
@@ -156,6 +158,7 @@ const message = {
     stats_type: {
       GLOBAL: "総合",
       SALMONID: "オオモノ",
+      WEAPONS: "支給ブキ",
       EGGS: "イクラ",
     },
     stage_name: {
@@ -181,6 +184,7 @@ const message = {
         app: "アプリバージョン",
         api: "サーバーバージョン",
       },
+      waves: "WAVE数",
       cancel: "キャンセル",
       job_num: "バイト回数",
       ikura_num: "イクラ",
