@@ -111,7 +111,7 @@ export default defineComponent({
     <template v-if="shiftstats !== undefined">
       <CoopStatsGlobal :stats="shiftstats.stats" v-show="statsType == StatsType.GLOBAL" />
       <CoopStatsBossType :stats="shiftstats.stats" v-show="statsType == StatsType.SALMONID" />
-      <CoopStatsWave :stats="shiftstats.waves" :total="shiftstats.total" v-show="statsType == StatsType.EGGS" />
+      <CoopStatsWave v-show="statsType == StatsType.EGGS" />
     </template>
   </ion-content>
 </template>

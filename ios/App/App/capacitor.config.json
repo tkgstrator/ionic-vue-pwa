@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "ionic-typescript-pwa-template",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

@@ -2,6 +2,7 @@
 import { defineComponent, Ref, ref } from 'vue';
 import { IonButton, IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter } from '@ionic/vue';
 import dayjs from 'dayjs';
+import { createAnimation } from '@ionic/vue';
 import { useI18n } from 'vue-i18n';
 
 interface Schedule {
@@ -123,7 +124,6 @@ export default defineComponent({
     },
     navigation(start_time: string) {
       const schedule_id = dayjs(start_time).unix();
-      // this.ionRouter.forward('/schedule/' + schedule_id);
       this.ionRouter.push(`/schedules/${schedule_id}`)
     }
   },
@@ -142,7 +142,6 @@ export default defineComponent({
             <section class="coop-schedule">
               <div class="coop-schedule-summary">
                 <ion-label class="datetime">{{ dayjs(schedule.start_time).tz().format("YYYY/MM/DD HH:mm:ss") }}
-                  <!-- <ion-label class="datetime">{{ dayjs.tz(schedule.start_time).format("YYYY/MM/DD HH:mm:ss") }} -->
                 </ion-label>
                 <ion-label>{{ t(`stage_name.${schedule.stage_id}`) }}</ion-label>
               </div>

@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "/",
-        redirect: "/settings",
+        redirect: "/results",
       },
       {
         path: "/results",
@@ -32,11 +32,15 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Schedules.vue"),
       },
       {
-        path: "/schedules/:start_time",
+        path: "/schedules/:start_time/",
         component: () => import("@/views/Stats.vue"),
       },
       {
         path: "/schedules/:start_time/:nightless",
+        component: () => import("@/views/Ranking.vue"),
+      },
+      {
+        path: "/schedules/:start_time/waves",
         component: () => import("@/views/Ranking.vue"),
       },
       {

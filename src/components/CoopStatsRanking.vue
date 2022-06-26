@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, useIonRouter } from '@ionic/vue';
+import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel } from '@ionic/vue';
 import { useI18n } from 'vue-i18n'
 import { TotalRank, Ranking } from './@types/response';
 
@@ -17,25 +17,47 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const results: Ref<TotalRank[]> = ref<TotalRank[]>([]);
-    return { results, t };
+    return { t, results };
   },
   mounted: function () {
     this.onReload();
   },
   methods: {
     async onReload() {
-      const route = useRoute();
-      const parameters = {
-        "start_time": route.params.start_time.toString(),
-        "golden_ikura_num": "120"
-      }
-      const nightless = Boolean(JSON.parse(route.params.nightless.toLocaleString()));
-
-      const query = new URLSearchParams(parameters);
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/waves?${query}`;
+      const route = useRoute()
+      const { start_time } = route.params
+      const waterLevel: number = (() => {
+        if (route.query.water_level === null) {
+          return 0
+        }
+        return parseInt(route.query.water_level as string)
+      })()
+      const eventType: number = (() => {
+        if (route.query.event_type === null) {
+          return 0
+        }
+        return parseInt(route.query.event_type as string)
+      })()
+      const nightless: boolean | null = (() => {
+        if (route.params.nightless === undefined) {
+          return null
+        }
+        return route.params.nightless === 'nightless'
+      })()
+      console.log(eventType, waterLevel, nightless);
+      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/waves/${start_time}`;
       fetch(url).then(response => response.json()).then((response: Ranking) => {
-        this.results = nightless ? response.total.nightless : response.total.night
-        console.log(this.results)
+        switch (nightless) {
+          case true:
+            this.results = response.total[1];
+            break
+          case false:
+            this.results = response.total[0];
+            break
+          default:
+            this.results = response.waves[waterLevel][eventType];
+            break
+        }
       });
     },
     onRefresh(event: CustomEvent) {
@@ -46,12 +68,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-content fullscreen="true">
+  <ion-content fullscreen>
     <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-list scrollable class="coop-result-list">
-      <ion-item v-for="result in results" :key="result.members.toString()" class="coop-result">
+      <ion-item v-for="result in results" :key="result.rank" class="coop-result">
         <ion-label>
           <section class="coop-ranking">
             <div class="coop-ranking-summary-team-rank">
@@ -59,8 +81,8 @@ export default defineComponent({
             </div>
             <div class="coop-ranking-summary-team-members">
               <ul>
-                <li v-for="member in result.members" :key="member">
-                  <ion-label class="coop-stats-key member">{{ member }}</ion-label>
+                <li v-for="member in result.names" :key="member">
+                  <ion-label class="member">{{ member }}</ion-label>
                 </li>
               </ul>
             </div>

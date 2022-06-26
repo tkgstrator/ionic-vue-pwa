@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import { ComponentPublicInstance, createApp, ref, Ref } from "vue";
 import App from "./App.vue";
 import router from "./router";
 // Added by the CLI
@@ -6,7 +6,7 @@ import "./registerServiceWorker";
 
 // Above the createApp() line
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
-import { IonicVue } from "@ionic/vue";
+import { createGesture, IonicVue } from "@ionic/vue";
 
 import VueGtag from "vue-gtag-next";
 import Ads from "vue-google-adsense";
@@ -39,6 +39,20 @@ import { VueWrapper } from "@vue/test-utils";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+
+/* Disable Swipe Back */
+const DisableSwipeBackDirective = {
+  beforeMount(el: Ref<any>) {
+    const gesture = createGesture({
+      el: el.value,
+      threshold: 0,
+      gestureName: "goback-swipe",
+      gesturePriority: 40.5,
+      onMove: () => console.log(),
+    });
+    gesture.enable(true);
+  },
+};
 
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);
@@ -79,7 +93,7 @@ const message = {
     },
     total: {
       total: "Total",
-      night_less: "Nightless",
+      nightless: "Nightless",
       night: "Night",
     },
     text: {
@@ -159,7 +173,7 @@ const message = {
     },
     total: {
       total: "総合",
-      night_less: "昼",
+      nightless: "昼",
       night: "夜",
     },
     text: {
@@ -224,13 +238,17 @@ const i18n = createI18n({
 });
 
 const app = createApp(App)
-  .use(IonicVue)
+  .use(IonicVue, {
+    rippleEffect: true,
+    mode: "md",
+  })
   .use(router)
   .use(i18n)
   .use(VueGtag, { property: { id: "G-ZTVD4X4NVR", router } })
   .use(Ads.Adsense)
   .use(Ads.InArticleAdsense)
-  .use(Ads.InFeedAdsense);
+  .use(Ads.InFeedAdsense)
+  .directive("disable-swipe-back", DisableSwipeBackDirective);
 
 router.isReady().then(() => {
   app.mount("#app");

@@ -126,11 +126,10 @@ interface TotalRank {
   golden_ikura_num: number;
   rank: number;
   members: string[];
+  names: string[];
 }
 
 interface Ranking {
-  total: {
-    night: TotalRank[];
-    nightless: TotalRank[];
-  };
+  total: TotalRank[][];
+  waves: TotalRank[][][];
 }
