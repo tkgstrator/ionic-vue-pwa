@@ -25,10 +25,9 @@ export default defineComponent({
       [[], [], [], [], [], [], []],
       [[], [], [], [], [], [], []],
     ]);
-    console.log(waves.value)
     return { EventType, WaterLevel, ionRouter, start_time, totals, waves, t };
   },
-  beforeMount() {
+  created() {
     this.onReload();
   },
   methods: {
@@ -37,8 +36,27 @@ export default defineComponent({
       fetch(url).then(response => response.json()).then((response: Ranking) => {
         this.totals = response.total;
         this.waves = response.waves
+        console.log(this.waves)
       });
-    }
+    },
+    getTotalGoldenIkuraNum(nightLess: number): number {
+      const total: TotalRank[] = this.totals[nightLess]
+      return total.length === 0 ? 0 : total[0].golden_ikura_num
+    },
+    getGoldenIkuraNum(event_type: EventType, water_level: WaterLevel): number | null {
+      const eventId: number = Object.values(EventType).indexOf(event_type);
+      const waterId: number = 2 - Object.values(WaterLevel).indexOf(water_level);
+
+      const wave: TotalRank[] = this.waves[waterId][eventId];
+
+      if (wave === null) {
+        return null;
+      }
+      if (wave.length === 0) {
+        return 0;
+      }
+      return wave[0].golden_ikura_num;
+    },
   }
 })
 </script>
@@ -47,7 +65,7 @@ export default defineComponent({
   <ion-list>
     <ion-list-header>{{ t("stats_type.GLOBAL") }}</ion-list-header>
     <template v-for="(type, index) in ['night', 'nightless']" :key="type">
-      <ion-item button v-on:click="ionRouter.push(`${start_time}/${type}`)" mode="md" v-if="totals[index].length !== 0">
+      <ion-item button v-on:click="ionRouter.push(`${start_time}/${type}`)" mode="md">
         <section>
           <div class="coop-stats-progress-bar">
             <ion-label class="coop-stats-key">{{ t(`total.${type}`) }}</ion-label>
@@ -56,17 +74,18 @@ export default defineComponent({
             <ion-label class="coop-stats-key prob">{{ }}</ion-label>
           </div>
           <div class="coop-stats-value-list">
-            <ion-label class="num golden-ikura">{{ totals[index][0].golden_ikura_num }}</ion-label>
+            <ion-label class="num golden-ikura">{{ getTotalGoldenIkuraNum(index) }}</ion-label>
             <ion-label class="num ikura">{{ }}</ion-label>
           </div>
         </section>
       </ion-item>
     </template>
-    <template v-for="(waterLevel, waterId) in Object.values(WaterLevel)" :key="waterId">
+    <template v-for="(waterLevel, waterId) in Object.values(WaterLevel).reverse()" :key="waterId">
       <ion-list-header>{{ t(`water_level.${waterLevel}`) }}</ion-list-header>
       <template v-for="(eventType, eventId) in Object.values(EventType)" :key="eventId">
-        <ion-item button v-on:click="ionRouter.push(`${start_time}/waves?event_type=${eventId}&water_level=${waterId}`)"
-          v-if="waves[waterId][eventId] !== null">
+        <ion-item button
+          v-on:click="ionRouter.push(`${start_time}/waves?event_type=${eventId}&water_level=${2 - waterId}`)"
+          v-if="getGoldenIkuraNum(eventType, waterLevel)">
           <section>
             <div class="coop-stats-progress-bar">
               <ion-label class="coop-stats-key">{{ t(`event_type.${eventType}`) }}</ion-label>
@@ -74,8 +93,7 @@ export default defineComponent({
               </ion-label>
             </div>
             <div class="coop-stats-value-list">
-              <ion-label class="num golden-ikura">{{ waves[waterId][eventId] === null ? null :
-                  waves[waterId][eventId][0].golden_ikura_num
+              <ion-label class="num golden-ikura">{{ getGoldenIkuraNum(eventType, waterLevel)
               }}</ion-label>
               <ion-label class="num ikura">{{ }}</ion-label>
             </div>
