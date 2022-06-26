@@ -45,7 +45,7 @@ export default defineComponent({
     },
     getGoldenIkuraNum(event_type: EventType, water_level: WaterLevel): number | null {
       const eventId: number = Object.values(EventType).indexOf(event_type);
-      const waterId: number = 2 - Object.values(WaterLevel).indexOf(water_level);
+      const waterId: number = Object.values(WaterLevel).indexOf(water_level);
 
       const wave: TotalRank[] = this.waves[waterId][eventId];
 

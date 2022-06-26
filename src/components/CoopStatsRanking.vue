@@ -30,7 +30,7 @@ export default defineComponent({
         if (route.query.water_level === null) {
           return 0
         }
-        return 2 - parseInt(route.query.water_level as string)
+        return parseInt(route.query.water_level as string)
       })()
       const eventType: number = (() => {
         if (route.query.event_type === null) {
