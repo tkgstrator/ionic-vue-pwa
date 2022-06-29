@@ -26,12 +26,13 @@ export default defineComponent({
     async onReload() {
       const route = useRoute()
       const { start_time } = route.params
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/waves/${start_time}`;
+      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/weapons/${start_time}`;
       const headers = {
         "cache-control": "force-cache; max-age=600",
       }
-      fetch(url, { headers: headers }).then(response => response.json()).then((response: Ranking) => {
-        this.results = response.weapons ?? [];
+      fetch(url, { headers: headers }).then(response => response.json()).then((response: WeaponRank[]) => {
+        console.log(response)
+        this.results = response;
       });
     },
     onRefresh(event: CustomEvent) {
