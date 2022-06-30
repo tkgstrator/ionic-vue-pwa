@@ -1,9 +1,10 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, Ref } from 'vue';
 import { IonItem, IonLabel, IonList, IonProgressBar, IonListHeader } from '@ionic/vue';
-import { BossCount, LegacyStats, ShiftStats } from './@types/response';
+import { BossResult, LegacyStats } from './@types/response';
 import { useI18n } from 'vue-i18n';
 import { SalmonidType } from './@types/splatnet2';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   components: {
@@ -15,22 +16,32 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    return { SalmonidType, t };
+    const results: Ref<BossResult[]> = ref<BossResult[]>([])
+    return { SalmonidType, results, t };
   },
-  props: {
-    'stats': Object as () => LegacyStats
+  mounted: function () {
+    console.log("BossView Mounted")
+    this.onLoad()
+  },
+  created: function () {
+    console.log("BossView Created")
   },
   methods: {
-    getBossCount(boss_id: number): { appearance: number, defeated: number, prob: number } {
-      if (this.stats === undefined) {
-        return { appearance: 0, defeated: 0, prob: 0 }
+    async onLoad() {
+      const route = useRoute()
+      const { start_time } = route.params
+      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${start_time}`;
+      const headers = {
+        "cache-control": "force-cache; max-age=600",
       }
-      return {
-        appearance: this.stats.boss_counts[boss_id].appearances,
-        defeated: this.stats.boss_counts[boss_id].defeated,
-        prob: this.stats.boss_counts[boss_id].defeated / this.stats.boss_counts[boss_id].appearances
-      }
-    }
+      fetch(url, { headers: headers }).then(response => response.json()).then((response: LegacyStats) => {
+        this.results = response.boss_results;
+        console.log(this.results)
+      });
+    },
+    onRefresh(event: CustomEvent) {
+      this.onLoad().then(() => event.detail.complete());
+    },
   },
 })
 </script>
@@ -41,16 +52,21 @@ export default defineComponent({
     <template v-for="(salmonId, index) in Object.values(SalmonidType)" :key="salmonId">
       <ion-item>
         <section>
-          <div class="coop-stats-progress-bar">
-            <ion-label class="coop-stats-key">{{ t(`salmonid.${salmonId}`) }}</ion-label>
-            <ion-progress-bar :value="getBossCount(index).prob">
-            </ion-progress-bar>
-            <ion-label class="coop-stats-key prob">{{ (getBossCount(index).prob * 100).toFixed(3) }}</ion-label>
-          </div>
-          <div class="coop-stats-value-list">
-            <ion-label class="num">{{ getBossCount(index).defeated }}</ion-label>
-            <ion-label class="num">{{ getBossCount(index).appearance }}</ion-label>
-          </div>
+          <template v-if="results[index]">
+            <div class="coop-stats-progress-bar">
+              <ion-label class="coop-stats-key">{{ t(`salmonid.${salmonId}`) }}</ion-label>
+              <ion-progress-bar :value="results[index].boss_kill_counts / results[index].boss_counts">
+              </ion-progress-bar>
+              <ion-label class="coop-stats-key prob">{{ (100 * results[index].boss_kill_counts /
+                  results[index].boss_counts).toFixed(3)
+              }}
+              </ion-label>
+            </div>
+            <div class="coop-stats-value-list">
+              <ion-label class="num">{{ results[index].boss_kill_counts }}</ion-label>
+              <ion-label class="num">{{ results[index].boss_counts }}</ion-label>
+            </div>
+          </template>
         </section>
       </ion-item>
     </template>

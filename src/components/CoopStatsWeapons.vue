@@ -3,7 +3,7 @@ import { defineComponent, Ref, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel } from '@ionic/vue';
 import { useI18n } from 'vue-i18n'
-import { TotalRank, Ranking, WeaponRank } from './@types/response';
+import { WeaponRank } from './@types/response';
 
 export default defineComponent({
   components: {
@@ -20,7 +20,10 @@ export default defineComponent({
     return { t, results };
   },
   mounted: function () {
-    this.onReload();
+    console.log("WeaponView Mounted")
+  },
+  created: function () {
+    console.log("WeaponView Created")
   },
   methods: {
     async onReload() {
@@ -56,10 +59,10 @@ export default defineComponent({
             </div>
             <div class="coop-ranking-summary-team-members">
               <ion-label class="member name">{{ result.name }}</ion-label>
-              <ion-label class="count">{{ t(`text.waves`) }} {{ result.waves }}</ion-label>
+              <ion-label class="count">{{ t(`text.shifts_worked`) }} {{ result.shifts_worked }}</ion-label>
             </div>
             <div class="coop-ranking-summary-score">
-              <span class="golden-ikura num">{{ result.supplied_count }}</span>
+              <span class="golden-ikura num">{{ result.supplied_weapon_counts }}</span>
             </div>
           </section>
         </ion-label>

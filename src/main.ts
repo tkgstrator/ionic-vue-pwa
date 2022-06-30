@@ -74,9 +74,10 @@ const message = {
       MISSILE: "Cohock Charge",
     },
     stats_type: {
-      GLOBAL: "Global",
-      SALMONID: "Salmonids",
+      GLOBAL: "Stats",
+      SALMONID: "Boss",
       WEAPONS: "Weapons",
+      GRADE: "Grade",
       EGGS: "Eggs",
     },
     stage_name: {
@@ -102,6 +103,7 @@ const message = {
         app: "App Version",
         api: "Server Version",
       },
+      shifts_worked: "Shifts Worked",
       waves: "Waves",
       cancel: "Cancel",
       job_num: "Shifts Worked",
@@ -156,9 +158,10 @@ const message = {
       MISSILE: "ドスコイ大量発生",
     },
     stats_type: {
-      GLOBAL: "総合",
+      GLOBAL: "統計",
       SALMONID: "オオモノ",
-      WEAPONS: "支給ブキ",
+      WEAPONS: "ブキ",
+      GRADE: "評価",
       EGGS: "イクラ",
     },
     stage_name: {
@@ -184,6 +187,7 @@ const message = {
         app: "アプリバージョン",
         api: "サーバーバージョン",
       },
+      shifts_worked: "バイト回数",
       waves: "WAVE数",
       cancel: "キャンセル",
       job_num: "バイト回数",

@@ -3,7 +3,7 @@ import { defineComponent, Ref, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel } from '@ionic/vue';
 import { useI18n } from 'vue-i18n'
-import { TotalRank, Ranking } from './@types/response';
+import { TotalRank, Ranking, WaveResult } from './@types/response';
 
 export default defineComponent({
   components: {
@@ -16,14 +16,14 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    const results: Ref<TotalRank[]> = ref<TotalRank[]>([]);
+    const results: Ref<WaveResult[]> = ref<WaveResult[]>([]);
     return { t, results };
   },
   mounted: function () {
-    this.onReload();
+    this.onLoad();
   },
   methods: {
-    async onReload() {
+    async onLoad() {
       const route = useRoute()
       const { start_time } = route.params
       const waterLevel: number = (() => {
@@ -45,26 +45,16 @@ export default defineComponent({
         return route.params.nightless === 'nightless'
       })()
       console.log(eventType, waterLevel, nightless);
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/waves/${start_time}`;
+      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/waves/${start_time}?water_level=${waterLevel}&event_type=${eventType}`;
       const headers = {
         "cache-control": "force-cache; max-age=600",
       }
-      fetch(url, { headers: headers }).then(response => response.json()).then((response: Ranking) => {
-        switch (nightless) {
-          case true:
-            this.results = response.total[1];
-            break
-          case false:
-            this.results = response.total[0];
-            break
-          default:
-            this.results = response.waves[waterLevel][eventType];
-            break
-        }
+      fetch(url, { headers: headers }).then(response => response.json()).then((response: WaveResult[]) => {
+        this.results = response;
       });
     },
     onRefresh(event: CustomEvent) {
-      this.onReload().then(() => event.detail.complete());
+      this.onLoad().then(() => event.detail.complete());
     },
   },
 });

@@ -1,85 +1,42 @@
-interface StatsIkura {
-  ikura_num: number;
+export interface LegacyStats {
+  job_results: {
+    is_clear: number;
+    is_failure: number;
+    failure_waves: FailureWave[];
+  };
+  wave_results: WaveResult[][];
+  boss_results: BossResult[];
+  weapon_results: WeaponResult[];
+  grade_results: GradeResult[];
+}
+
+export interface WeaponResult {
+  nsaid: string;
+  name: string;
+  shifts_worked: number;
+  supplied_weapon_counts: number;
+  rank: number;
+}
+
+export interface BossResult {
+  boss_counts: number;
+  boss_kill_counts: number;
+  boss_counts_max: number;
+  boss_kill_counts_max: number;
+}
+
+interface WaveResult {
   golden_ikura_num: number;
-}
-
-interface StatsType {
-  max: StatsIkura;
-  min: StatsIkura;
-  avg: StatsIkura;
-  count: number;
-}
-
-interface WaveStatsType extends StatsType {
-  max: StatsIkura;
-  min: StatsIkura;
-  avg: StatsIkura;
+  ikura_num: number;
   count: number;
   event_type: number;
   water_level: number;
 }
 
-interface TotalStatsType extends StatsType {
-  max: StatsIkura;
-  min: StatsIkura;
-  avg: StatsIkura;
-  count: number;
-  no_night_waves: boolean;
-}
-
-export interface WaveStats {
-  global: WaveStatsType[];
-  player?: WaveStatsType[];
-}
-
-export interface TotalStats {
-  global: TotalStatsType[];
-  player?: TotalStatsType[];
-}
-
-export interface SingleStats {
-  crew?: StatsType;
-  global: StatsType;
-  player?: StatsType;
-  team?: StatsType;
-}
-
-export interface ShiftStats {
-  single: SingleStats;
-  total: TotalStats;
-  waves: WaveStats;
-  stats: LegacyStats;
-}
-
-export interface BossCount {
-  appearances: number;
-  defeated: number;
-}
-
-export interface LegacyStats {
-  job_result: {
-    is_clear: {
-      count: number;
-    };
-    is_failure: {
-      count: number;
-      failure_reason: {
-        wipe_out: number[];
-        time_limit: number[];
-      };
-    };
-    ikura_num: {
-      sum: number;
-      avg: number;
-      sd: number;
-    };
-    golden_ikura_num: {
-      sum: number;
-      avg: number;
-      sd: number;
-    };
-  };
-  boss_counts: BossCount[];
+interface FailureWave {
+  failure_wave: number;
+  time_limit: number;
+  wipe_out: number;
 }
 
 export interface Schedule {
@@ -91,9 +48,9 @@ export interface Schedule {
 }
 
 interface JobResult {
-  failure_reason?: string;
-  failure_wave?: number;
-  is_clear: boolean;
+  is_clear: number;
+  is_failure: number;
+  failure_waves: FailureWave[];
 }
 
 interface Player {
@@ -131,8 +88,16 @@ interface TotalRank {
 
 interface WeaponRank {
   rank: number;
-  waves: number;
-  supplied_count: number;
+  shifts_worked: number;
+  supplied_weapon_counts: number;
+  nsaid: string;
+  name: string;
+}
+
+export interface GradeResult {
+  rank: number;
+  shifts_worked: number;
+  grade_point_max: number;
   nsaid: string;
   name: string;
 }
