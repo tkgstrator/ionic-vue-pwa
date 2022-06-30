@@ -1,9 +1,7 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
-import { IonRefresher, IonContent, IonRefresherContent, IonLabel, useIonRouter, IonSegment, IonSegmentButton } from '@ionic/vue';
-import dayjs from 'dayjs';
-import { useRoute } from 'vue-router';
-import { EventType, WaterLevel, SalmonidType } from './@types/splatnet2';
+import { IonRefresher, IonContent, IonRefresherContent, IonLabel, IonSegment, IonSegmentButton } from '@ionic/vue';
+import { WaterLevel } from './@types/splatnet2';
 import { useI18n } from 'vue-i18n';
 import CoopStatsGlobal from './CoopStatsGlobal.vue';
 import CoopStatsBossType from './CoopStatsBossType.vue';
@@ -30,7 +28,8 @@ export default defineComponent({
     CoopStatsGlobal,
     CoopStatsBossType,
     CoopStatsGrade,
-    CoopStatsWave
+    CoopStatsWave,
+    CoopStatsWeapons
   },
   setup() {
     const { t } = useI18n()
@@ -70,7 +69,7 @@ export default defineComponent({
     <CoopStatsGlobal v-show="statsType == StatsType.GLOBAL" />
     <CoopStatsBossType v-show="statsType == StatsType.SALMONID" />
     <CoopStatsGrade v-show="statsType == StatsType.GRADE" />
-    <!-- <CoopStatsWeapons v-show="statsType == StatsType.WEAPONS" /> -->
+    <CoopStatsWeapons v-show="statsType == StatsType.WEAPONS" />
     <CoopStatsWave v-show="statsType == StatsType.EGGS" />
   </ion-content>
 </template>
