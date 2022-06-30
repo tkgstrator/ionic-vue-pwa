@@ -66,7 +66,7 @@ export default defineComponent({
         <template v-for="(eventType, eventId) in Object.values(EventType)" :key="eventId">
           <template v-if="waves[2 - waterId][eventId]">
             <ion-item button
-              v-on:click="ionRouter.push(`${start_time}/waves?event_type=${eventId}&water_level=${waterId}`)">
+              v-on:click="ionRouter.push(`${start_time}/waves?event_type=${eventId}&water_level=${2 - waterId}`)">
               <section>
                 <div class="coop-stats-progress-bar">
                   <ion-label class="coop-stats-key">{{ t(`event_type.${eventType}`) }}</ion-label>
