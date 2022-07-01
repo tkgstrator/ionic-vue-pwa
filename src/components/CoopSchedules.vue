@@ -148,7 +148,7 @@ export default defineComponent({
               <div class="coop-schedule-weapon-list">
                 <ul>
                   <li class="coop-schedule-weapon-list-item" v-for="weapon_id in schedule.weapon_list" :key="weapon_id">
-                    <ion-img :src="WeaponType[weapon_id]"></ion-img>
+                    <ion-img class="weapon" :src="WeaponType[weapon_id]"></ion-img>
                   </li>
                 </ul>
               </div>

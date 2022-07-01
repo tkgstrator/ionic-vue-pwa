@@ -184,6 +184,8 @@ ion-list {
 
 .coop-schedule-weapon-list {
   width: 60%;
+  max-width: 200px;
+  margin-left: auto;
 
   ul {
     width: 100%;
@@ -210,8 +212,20 @@ ul {
   }
 }
 
+ion-header {
+  background: var(--ion-item-background);
+}
+
+ion-toolbar {
+  max-width: 600px !important;
+  margin: 0 auto;
+}
+
+.header-md::after {
+  background-image: initial;
+}
 ion-list-header {
-  max-width: 440px !important;
+  max-width: 600px !important;
   margin: 0 auto;
 }
 
@@ -222,10 +236,29 @@ ion-img {
     border-radius: 50%;
     clip-path: circle(50%);
   }
+
+  &.weapon {
+    max-width: 50px;
+    max-height: 50px;
+  }
 }
 
 .coop-player-verified {
   position: absolute;
   color: yellow;
   z-index: 1;
+}
+
+#paypal-button-container-P-5YR614358D8229313MAAAVNA {
+  width: 100%;
+  max-width: 390px;
+  max-height: 35px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+ion-item {
+  min-width: 340px;
+  max-width: 600px !important;
+  margin: 6px auto;
 }
