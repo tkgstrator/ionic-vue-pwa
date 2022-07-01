@@ -69,11 +69,11 @@ export default defineComponent({
       <ion-item v-for="result in results" :key="result.rank" class="coop-result">
         <ion-label>
           <section class="coop-ranking">
-            <div class="coop-ranking-summary-team-rank">
+            <div class="coop-ranking-summary-rank">
               <ion-label>{{ result.rank }}</ion-label>
             </div>
             <div class="coop-ranking-summary-team-members">
-              <ul>
+              <ul class="coop-ranking-members">
                 <li v-for="member in result.names" :key="member">
                   <ion-label class="member">{{ member }}</ion-label>
                 </li>
@@ -92,47 +92,47 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "../theme/styles.scss";
 
-.coop-ranking-summary-team-rank {
-  width: 10%;
-  font-weight: bold;
-}
+// .coop-ranking-summary-team-rank {
+//   width: 10%;
+//   font-weight: bold;
+// }
 
-.coop-ranking-summary-team-members {
-  width: 80%;
+// .coop-ranking-summary-team-members {
+//   width: 80%;
 
-  ul {
-    // display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    column-count: 2
-  }
+//   ul {
+//     // display: flex;
+//     flex-direction: row;
+//     flex-wrap: wrap;
+//     justify-content: flex-start;
+//     align-items: center;
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//     column-count: 2
+//   }
 
-  li {
-    font-weight: bold;
-  }
-}
+//   li {
+//     font-weight: bold;
+//   }
+// }
 
-.coop-ranking-summary-score {
-  text-align: right;
-  width: 10%;
-}
+// .coop-ranking-summary-score {
+//   text-align: right;
+//   width: 10%;
+// }
 
-.coop-stats-key {
-  margin: 0 !important;
-  padding: 0 !important;
-}
+// .coop-stats-key {
+//   margin: 0 !important;
+//   padding: 0 !important;
+// }
 
-span {
-  font-size: 14px;
+// span {
+//   font-size: 14px;
 
-  &.golden-ikura {
-    color: #ffd700;
-    font-weight: bold;
-  }
-}
+//   &.golden-ikura {
+//     color: #ffd700;
+//     font-weight: bold;
+//   }
+// }
 </style>

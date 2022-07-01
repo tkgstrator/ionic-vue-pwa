@@ -1,14 +1,18 @@
+* {
+  font-family: "Noto Sans JP" !important;
+}
+
 section {
   width: 100%;
   display: flex;
 
   .coop-stats-key {
     width: 70%;
-    margin-left: 4px !important;
   }
 
   .coop-stats-progress-bar {
     width: 70%;
+    margin: 10px 0;
   }
 
   .coop-stats-value {
@@ -28,11 +32,136 @@ section {
     height: 100% !important;
     text-align: right;
   }
+
+  .coop-result-job-result {
+    width: 15%;
+  }
+
+  .coop-result-job-waves {
+    padding-left: 6px;
+    width: 70%;
+    display: flex;
+    font-size: 0.85rem;
+
+    .coop-result-job-waves-golden-ikura {
+      padding-right: 6px;
+    }
+  }
+
+  .coop-result-job-detail {
+    width: 15%;
+    text-align: right;
+  }
+
+  .coop-ranking-summary-rank {
+    width: 10%;
+  }
+
+  .coop-ranking-summary-player {
+    padding-left: 6px;
+    width: 80%;
+  }
+
+  .coop-ranking-summary-score {
+    width: 10%;
+    text-align: right;
+  }
+
+  .coop-ranking-summary-team-members {
+    width: 85%;
+  }
+
+  .coop-ranking-summary-score {
+    width: 10%;
+    text-align: right;
+  }
+
+  .coop-ranking-summary-thumbnail {
+    padding: 0 5px;
+  }
+
+  .coop-ranking-scores-list {
+    text-align: right;
+  }
 }
 
 ion-label {
+  .count {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
   &.num {
     font-size: 1rem !important;
+  }
+
+  &.salmon_id {
+    font-size: 0.7rem !important;
+    color: grey !important;
+  }
+
+  &.job_clear {
+    font-size: 0.85rem !important;
+    color: #39e464 !important;
+    font-weight: bold;
+  }
+
+  &.job_failure {
+    font-size: 0.85rem !important;
+    color: #ff7500 !important;
+    font-weight: bold;
+  }
+
+  &.danger_rate {
+    font-size: 0.75rem !important;
+    &::after {
+      content: "%";
+    }
+  }
+
+  &.golden_ikura_num {
+    font-size: 0.9rem !important;
+    color: var(--ion-color-yellow) !important;
+    font-weight: bold;
+  }
+
+  &.ikura_num {
+    font-size: 0.9rem !important;
+    color: var(--ion-color-red) !important;
+    font-weight: bold;
+  }
+
+  &.num {
+    &::before {
+      content: "x";
+    }
+  }
+
+  &.datetime {
+    font-size: 0.75rem !important;
+    color: grey !important;
+  }
+
+  &.stage-name {
+    font-size: 0.8rem !important;
+  }
+
+  &.prob {
+    font-size: 0.8rem !important;
+    color: grey !important;
+
+    &::after {
+      content: "%";
+    }
+  }
+
+  &.member {
+    font-size: 0.8rem !important;
+  }
+
+  &.nsaid {
+    font-size: 0.8rem !important;
+    color: grey !important;
   }
 }
 
@@ -62,13 +191,36 @@ ion-list {
   }
 }
 
-ion-label {
-  .datetime {
-    color: grey;
+ul {
+  margin: 6px 0 !important;
+  list-style: none;
+
+  &.coop-ranking-members {
+    list-style: none;
+    column-count: 2;
+  }
+
+  .coop-ranking-scores-list {
+    list-style: none;
   }
 }
 
 ion-list-header {
   max-width: 440px !important;
   margin: 0 auto;
+}
+
+ion-img {
+  &.coop-player-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    clip-path: circle(50%);
+  }
+}
+
+.coop-player-verified {
+  position: absolute;
+  color: yellow;
+  z-index: 1;
 }

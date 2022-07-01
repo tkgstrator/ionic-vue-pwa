@@ -18,6 +18,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import "theme/styles.scss";
+</style>
+<!-- <style lang="scss">
 ion-item {
   min-width: 340px;
   max-width: 440px !important;
@@ -86,4 +89,4 @@ body {
     background-color: #121212 !important;
   }
 }
-</style>
+</style> -->

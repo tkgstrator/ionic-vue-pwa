@@ -47,11 +47,11 @@ export default defineComponent({
     <ion-item v-for="result in results" :key="result.rank" class="coop-result">
       <ion-label>
         <section class="coop-ranking">
-          <div class="coop-ranking-summary-team-rank">
+          <div class="coop-ranking-summary-rank">
             <ion-label>{{ result.rank }}</ion-label>
           </div>
-          <div class="coop-ranking-summary-team-members">
-            <ion-label class="member name">{{ result.name }}</ion-label>
+          <div class="coop-ranking-summary-player">
+            <ion-label class="name">{{ result.name }}</ion-label>
             <ion-label class="count">{{ t(`text.shifts_worked`) }} {{ result.shifts_worked }}</ion-label>
           </div>
           <div class="coop-ranking-summary-score">
@@ -65,55 +65,4 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "../theme/styles.scss";
-
-ion-label {
-  .count {
-    font-size: 0.8rem;
-    color: var(--ion-color-primary);
-  }
-}
-
-.coop-ranking-summary-team-rank {
-  width: 10%;
-  font-weight: bold;
-}
-
-.coop-ranking-summary-team-members {
-  width: 80%;
-
-  ul {
-    // display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    column-count: 2
-  }
-
-  li {
-    font-weight: bold;
-  }
-}
-
-.coop-ranking-summary-score {
-  text-align: right;
-  width: 10%;
-}
-
-.coop-stats-key {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-span {
-  font-size: 14px;
-
-  &.golden-ikura {
-    color: #ffd700;
-    font-weight: bold;
-  }
-}
 </style>

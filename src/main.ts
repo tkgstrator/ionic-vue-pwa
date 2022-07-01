@@ -33,7 +33,6 @@ import "./theme/variables.css";
 /* Theme fonts */
 import "./assets/sass/style.scss";
 import { createI18n } from "vue-i18n";
-import { VueWrapper } from "@vue/test-utils";
 
 /* Dayjs */
 import dayjs from "dayjs";

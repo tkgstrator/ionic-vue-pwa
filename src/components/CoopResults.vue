@@ -25,7 +25,7 @@ export default defineComponent({
     async onReload() {
       const parameters = {
         "offset": "0",
-        "limit": "200",
+        "limit": "25",
         "include_details": false.toString(),
         "order": false.toString()
       }
@@ -120,89 +120,6 @@ export default defineComponent({
   </ion-content>
 </template>
 
-<style lang="scss" scoped>
-ion-label {
-  &.salmon_id {
-    color: grey;
-    font-size: 12px !important;
-  }
-
-  &.job_clear {
-    color: #39e464;
-    font-weight: bold;
-  }
-
-  &.job_failure {
-    color: #ff7500;
-    font-weight: bold;
-  }
-
-  &.danger_rate {
-    font-size: 0.75rem !important;
-
-    &::after {
-      content: "%";
-    }
-  }
-
-  &.golden_ikura_num {
-    font-size: 0.9rem !important;
-    color: #e5f100;
-    font-weight: bold;
-  }
-
-  &.ikura_num {
-    font-size: 0.9rem !important;
-    color: #f5873f;
-    font-weight: bold;
-  }
-
-  &.num {
-    &::before {
-      content: "x";
-    }
-  }
-}
-
-
-.coop-result {
-  margin: 0 auto;
-}
-
-.coop-result-summary {
-  position: relative;
-  display: flex;
-  width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.coop-result-job-result {
-  width: 20%;
-  min-width: 60px;
-  padding: 2px 4px;
-}
-
-.coop-result-job-waves {
-  width: 100%;
-  display: flex;
-  padding: 2px 4px;
-
-  .coop-result-job-waves-golden-ikura {
-    // width: 100%;
-    padding-right: 10px;
-    text-align: right;
-  }
-}
-
-.coop-result-job-detail {
-  width: 14%;
-  padding: 2px 4px;
-  text-align: right;
-}
-
-.wave-information {
-  margin-left: 4px;
-  margin-right: 4px;
-}
+<style lang="scss">
+@import "../theme/styles.scss";
 </style>

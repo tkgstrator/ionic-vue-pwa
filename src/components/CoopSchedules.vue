@@ -143,7 +143,7 @@ export default defineComponent({
               <div class="coop-schedule-summary">
                 <ion-label class="datetime">{{ dayjs(schedule.start_time).tz().format("YYYY/MM/DD HH:mm:ss") }}
                 </ion-label>
-                <ion-label>{{ t(`stage_name.${schedule.stage_id}`) }}</ion-label>
+                <ion-label class="stage-name">{{ t(`stage_name.${schedule.stage_id}`) }}</ion-label>
               </div>
               <div class="coop-schedule-weapon-list">
                 <ul>

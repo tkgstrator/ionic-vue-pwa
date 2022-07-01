@@ -153,7 +153,7 @@ export default defineComponent({
       <ion-item v-for="(player, index) in players" :key="player.nsaid">
         <ion-label>
           <section class="coop-ranking">
-            <div class="coop-ranking-summary-player-rank">
+            <div class="coop-ranking-summary-rank">
               <ion-label>{{ index + 1 }}</ion-label>
             </div>
             <div class="coop-ranking-summary-thumbnail">
@@ -162,22 +162,22 @@ export default defineComponent({
               <ion-img class="coop-player-thumbnail" :src="player.thumbnail_url"></ion-img>
             </div>
             <div class="coop-ranking-summary-player">
-              <h3>{{ player.nsaid }}</h3>
-              <h2>{{ player.nickname }}</h2>
+              <ion-label class="nsaid">{{ player.nsaid }}</ion-label>
+              <ion-label>{{ player.nickname }}</ion-label>
             </div>
             <div class="coop-ranking-scores-list" v-if="!(rankMode == RankMode.BEST && rankType == RankType.WORKED)">
               <ul>
                 <li class="coop-ranking-scores-list-item">
-                  <label class="golden-ikura"></label>
-                  <span class="num">{{ rankMode == RankMode.AVG ?
+                  <ion-label class="golden-ikura"></ion-label>
+                  <ion-label class="num">{{ rankMode == RankMode.AVG ?
                       value(player).golden_ikura_num.toFixed(3) : value(player).golden_ikura_num
-                  }}</span>
+                  }}</ion-label>
                 </li>
                 <li class="coop-ranking-scores-list-item">
-                  <label class="ikura"></label>
-                  <span class="num">{{ rankMode == RankMode.AVG ? value(player).ikura_num.toFixed(3) :
+                  <ion-label class="ikura"></ion-label>
+                  <ion-label class="num">{{ rankMode == RankMode.AVG ? value(player).ikura_num.toFixed(3) :
                       value(player).ikura_num
-                  }}</span>
+                  }}</ion-label>
                 </li>
               </ul>
             </div>
@@ -201,102 +201,103 @@ export default defineComponent({
   </ion-content>
 </template>
 
-<style lang="scss" scoped>
-ion-label {
-  margin: 4px 0;
-}
+// <style lang="scss" scoped>
+// ion-label {
+//   margin: 4px 0;
+// }
 
-h2 {
-  font-size: 12px;
-}
+// h2 {
+//   font-size: 12px;
+// }
 
-h3 {
-  color: gray;
-  font-size: 11px;
-}
+// h3 {
+//   color: gray;
+//   font-size: 11px;
+// }
 
-span {
-  font-size: 14px;
+// span {
+//   font-size: 14px;
 
-  &.num {
-    &::before {
-      content: 'x';
-      padding-right: 2px;
-    }
-  }
-}
+//   &.num {
+//     &::before {
+//       content: 'x';
+//       padding-right: 2px;
+//     }
+//   }
+// }
 
 
-label {
-  font-size: 12px;
+// label {
+//   font-size: 12px;
 
-  &.golden-ikura {
-    position: relative;
-    box-sizing: border-box;
-    color: #ffd700;
-    width: 100%;
+//   &.golden-ikura {
+//     position: relative;
+//     box-sizing: border-box;
+//     color: #ffd700;
+//     width: 100%;
 
-  }
+//   }
 
-  &.ikura {
-    color: #00ff00;
-  }
-}
+//   &.ikura {
+//     color: #00ff00;
+//   }
+// }
 
-.coop-ranking {
-  position: relative;
-  display: flex;
-  width: 100%;
-  margin: 4px auto;
-  box-sizing: border-box;
-}
+// .coop-ranking {
+//   position: relative;
+//   display: flex;
+//   width: 100%;
+//   margin: 4px auto;
+//   box-sizing: border-box;
+// }
 
-.coop-ranking-summary-player-rank {
-  width: 10%;
-  font-weight: bold;
-}
+// .coop-ranking-summary-player-rank {
+//   width: 10%;
+//   font-weight: bold;
+// }
 
-.coop-ranking-summary-thumbnail {
-  width: 18%;
-}
+// .coop-ranking-summary-thumbnail {
+//   width: 18%;
+// }
 
-.coop-ranking-summary-player {
-  width: 30%;
-}
+// .coop-ranking-summary-player {
+//   width: 30%;
+// }
 
-ion-img {
-  &.coop-player-thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    clip-path: circle(50%);
-  }
-}
+// ion-img {
+//   &.coop-player-thumbnail {
+//     width: 50px;
+//     height: 50px;
+//     border-radius: 50%;
+//     clip-path: circle(50%);
+//   }
+// }
 
-.coop-player-verified {
-  position: absolute;
-  color: yellow;
-  z-index: 1;
-}
+// .coop-player-verified {
+//   position: absolute;
+//   color: yellow;
+//   z-index: 1;
+// }
 
-.coop-ranking-scores-list {
-  width: 52%;
+// .coop-ranking-scores-list {
+//   width: 52%;
 
-  ul {
-    padding: 0;
-    margin: 0;
-    // text-align: right;
-    width: 100%;
-  }
-}
+//   ul {
+//     padding: 0;
+//     margin: 0;
+//     // text-align: right;
+//     width: 100%;
+//   }
+// }
 
-li {
-  list-style: none;
+// li {
+//   list-style: none;
 
-  &.coop-ranking-scores-list-item {
-    text-align: right;
-    list-style: none;
-    display: block;
-  }
-}
+//   &.coop-ranking-scores-list-item {
+//     text-align: right;
+//     list-style: none;
+//     display: block;
+//   }
+// }
+// 
 </style>

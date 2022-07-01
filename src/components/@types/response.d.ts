@@ -29,8 +29,10 @@ interface WaveResult {
   golden_ikura_num: number;
   ikura_num: number;
   count: number;
-  event_type: number;
-  water_level: number;
+  event_type?: number;
+  water_level?: number;
+  rank?: number;
+  names?: string[];
 }
 
 interface FailureWave {
