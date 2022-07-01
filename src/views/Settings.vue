@@ -1,3 +1,54 @@
+<script lang="ts">
+import { defineComponent, ref, Ref } from 'vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonLabel, IonItem, IonList, IonContent, IonSelect, IonSelectOption, IonListHeader } from '@ionic/vue';
+import { useI18n } from 'vue-i18n';
+
+interface Version {
+  version: string
+  author: string
+}
+
+interface Result {
+  version: string
+}
+
+interface Lookup {
+  results: Result[]
+}
+
+
+export default defineComponent({
+  name: 'SettingView',
+  components: { IonHeader, IonToolbar, IonTitle, IonPage, IonItem, IonList, IonContent, IonSelect, IonSelectOption, IonLabel, IonListHeader },
+  setup() {
+    const apiVersion: Ref<string> = ref("")
+    const appiOSVersion: Ref<string> = ref("")
+    const appMdVersion: Ref<string> = ref("")
+    const appVersion: string = process.env.VUE_APP_VERSION
+    const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/versions`;
+    fetch(url).then(response => response.json()).then((response: Version) => {
+      apiVersion.value = response.version
+    });
+
+    // const url = "https://itunes.apple.com/lookup?id=1558344150"
+    fetch("https://itunes.apple.com/lookup?id=1558344150").then(response => response.json()).then((response: Lookup) => {
+      appiOSVersion.value = response.results[0].version
+    });
+    const lang: string = localStorage.getItem("locale") ?? "en"
+    const { t, availableLocales, locale } = useI18n()
+    return {
+      t, locale, lang, availableLocales, apiVersion, appVersion, appiOSVersion, appMdVersion,
+    }
+  },
+  methods: {
+    onChange(event: CustomEvent) {
+      this.locale = event.detail.value
+      localStorage.setItem("locale", this.locale);
+    }
+  }
+});
+</script>
+
 <template>
   <ion-page>
     <ion-header>
@@ -24,6 +75,30 @@
           <ion-label slot="start">{{ t('text.version.api') }}</ion-label>
           <ion-label slot="end" class="version">{{ apiVersion }}</ion-label>
         </ion-item>
+        <ion-list-header>{{ t("text.uploader") }}</ion-list-header>
+        <ion-item>
+          <p class="description">TIn order to upload results to Salmon Stats, you will need to use the following app,
+            which is compatible with both iPhone and Android.
+          </p>
+        </ion-item>
+        <ion-item button>
+          <ion-avatar slot="start">
+            <img
+              src="https://is5-ssl.mzstatic.com/image/thumb/Purple116/v4/82/91/9b/82919b7d-2047-432c-4e87-313111198045/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/434x0w.webp" />
+          </ion-avatar>
+          <ion-label slot="start" color="danger"><a
+              href="itms-beta://testflight.apple.com/join/dVMPIN8o">Salmonia3/iOS</a></ion-label>
+          <ion-label slot="end" class="version">{{ appiOSVersion }}</ion-label>
+        </ion-item>
+        <ion-item button>
+          <ion-avatar slot="start">
+            <img
+              src="https://is5-ssl.mzstatic.com/image/thumb/Purple116/v4/82/91/9b/82919b7d-2047-432c-4e87-313111198045/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/434x0w.webp" />
+          </ion-avatar>
+          <ion-label slot="start" color="danger"><a
+              href="https://github.com/SalmonStats/sinclair/releases">Sinclair/Android</a></ion-label>
+          <ion-label slot="end" class="version">0.0.4</ion-label>
+        </ion-item>
         <ion-item>
           <p class="description">Salmon Stats is an open-source Splatoon 2 Salmon Run statistics website developed by
             <a href="https://twitter.com/tkgling">@tkgling</a>. All of
@@ -33,46 +108,12 @@
             applications, website, tool as long as they are based on <a
               href="https://choosealicense.com/licenses/mit">MIT License</a>.
           </p>
+
         </ion-item>
       </ion-list>
     </ion-content>
   </ion-page>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonLabel, IonItem, IonList, IonContent, IonSelect, IonSelectOption } from '@ionic/vue';
-import { useI18n } from 'vue-i18n';
-
-interface Version {
-  version: string
-  author: string
-}
-
-export default defineComponent({
-  name: 'SettingView',
-  components: { IonHeader, IonToolbar, IonTitle, IonPage, IonItem, IonList, IonContent, IonSelect, IonSelectOption, IonLabel },
-  setup() {
-    const apiVersion: Ref<string> = ref("")
-    const appVersion: string = process.env.VUE_APP_VERSION
-    const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/versions`;
-    fetch(url).then(response => response.json()).then((response: Version) => {
-      apiVersion.value = response.version
-    });
-    const lang: string = localStorage.getItem("locale") ?? "en"
-    const { t, availableLocales, locale } = useI18n()
-    return {
-      t, locale, lang, availableLocales, apiVersion, appVersion
-    }
-  },
-  methods: {
-    onChange(event: CustomEvent) {
-      this.locale = event.detail.value
-      localStorage.setItem("locale", this.locale);
-    }
-  }
-});
-</script>
 
 <style lang="scss" scoped>
 @import "../theme/styles.scss";

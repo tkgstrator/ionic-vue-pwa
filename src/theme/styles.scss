@@ -224,13 +224,23 @@ ion-toolbar {
 .header-md::after {
   background-image: initial;
 }
+
 ion-list-header {
   max-width: 600px !important;
   margin: 0 auto;
+  font-weight: 400;
+  font-size: 1.3rem;
 }
 
 ion-img {
   &.coop-player-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    clip-path: circle(50%);
+  }
+
+  &.app-icon {
     width: 50px;
     height: 50px;
     border-radius: 50%;
