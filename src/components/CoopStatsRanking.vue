@@ -91,48 +91,4 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "../theme/styles.scss";
-
-// .coop-ranking-summary-team-rank {
-//   width: 10%;
-//   font-weight: bold;
-// }
-
-// .coop-ranking-summary-team-members {
-//   width: 80%;
-
-//   ul {
-//     // display: flex;
-//     flex-direction: row;
-//     flex-wrap: wrap;
-//     justify-content: flex-start;
-//     align-items: center;
-//     list-style: none;
-//     padding: 0;
-//     margin: 0;
-//     column-count: 2
-//   }
-
-//   li {
-//     font-weight: bold;
-//   }
-// }
-
-// .coop-ranking-summary-score {
-//   text-align: right;
-//   width: 10%;
-// }
-
-// .coop-stats-key {
-//   margin: 0 !important;
-//   padding: 0 !important;
-// }
-
-// span {
-//   font-size: 14px;
-
-//   &.golden-ikura {
-//     color: #ffd700;
-//     font-weight: bold;
-//   }
-// }
 </style>
