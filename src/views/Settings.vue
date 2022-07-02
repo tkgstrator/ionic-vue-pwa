@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref, Ref } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonLabel, IonItem, IonList, IonContent, IonSelect, IonSelectOption, IonListHeader } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonLabel, IonItem, IonList, IonContent, IonSelect, IonToggle, IonSelectOption, IonListHeader, IonAvatar } from '@ionic/vue';
 import { useI18n } from 'vue-i18n';
 
 interface Version {
@@ -19,32 +19,39 @@ interface Lookup {
 
 export default defineComponent({
   name: 'SettingView',
-  components: { IonHeader, IonToolbar, IonTitle, IonPage, IonItem, IonList, IonContent, IonSelect, IonSelectOption, IonLabel, IonListHeader },
+  components: { IonHeader, IonToolbar, IonTitle, IonPage, IonToggle, IonItem, IonList, IonContent, IonSelect, IonSelectOption, IonLabel, IonAvatar, IonListHeader },
   setup() {
     const apiVersion: Ref<string> = ref("")
-    const appiOSVersion: Ref<string> = ref("")
+    const appiOSVersion: Ref<string> = ref("1.0.6")
     const appMdVersion: Ref<string> = ref("")
     const appVersion: string = process.env.VUE_APP_VERSION
     const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/versions`;
     fetch(url).then(response => response.json()).then((response: Version) => {
       apiVersion.value = response.version
     });
-
-    // const url = "https://itunes.apple.com/lookup?id=1558344150"
-    fetch("https://itunes.apple.com/lookup?id=1558344150").then(response => response.json()).then((response: Lookup) => {
-      appiOSVersion.value = response.results[0].version
-    });
+    const checked = false
     const lang: string = localStorage.getItem("locale") ?? "en"
     const { t, availableLocales, locale } = useI18n()
     return {
-      t, locale, lang, availableLocales, apiVersion, appVersion, appiOSVersion, appMdVersion,
+      t, locale, lang, availableLocales, apiVersion, appVersion, appiOSVersion, appMdVersion, checked
     }
+  },
+  watch: {
+    checked: function (check: boolean) {
+      console.log("Checked")
+    }
+  },
+  create() {
+    console.log("created")
   },
   methods: {
     onChange(event: CustomEvent) {
       this.locale = event.detail.value
       localStorage.setItem("locale", this.locale);
-    }
+    },
+    onChangeTheme(event: CustomEvent) {
+      console.log(event.detail.checked)
+    },
   }
 });
 </script>
@@ -58,15 +65,21 @@ export default defineComponent({
     </ion-header>
     <ion-content>
       <ion-list>
+        <ion-list-header>{{ t("text.appearances") }}</ion-list-header>
         <ion-item>
-          <ion-label>{{ t('languages.lang') }}</ion-label>
-          <ion-select interface="action-sheet" :placeholder="t(`languages.${lang}`)" mode="ios"
+          <ion-label slot="start">{{ t("appearances.darkMode") }}</ion-label>
+          <ion-toggle slot="end" v-on:ion-change="onChangeTheme($event)">{{ t('text.version.app') }}</ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label slot="start">{{ t('languages.lang') }}</ion-label>
+          <ion-select slot="end" interface="action-sheet" :placeholder="t(`languages.${lang}`)" mode="ios"
             :cancel-text="t('text.cancel')" v-on:ion-change="onChange($event)">
             <template v-for="locale in availableLocales" :key="locale">
               <ion-select-option :value="locale">{{ t(`languages.${locale}`) }}</ion-select-option>
             </template>
           </ion-select>
         </ion-item>
+        <ion-list-header>{{ t("text.version.version") }}</ion-list-header>
         <ion-item>
           <ion-label slot="start">{{ t('text.version.app') }}</ion-label>
           <ion-label slot="end" class="version">{{ appVersion }}</ion-label>
@@ -77,7 +90,7 @@ export default defineComponent({
         </ion-item>
         <ion-list-header>{{ t("text.uploader") }}</ion-list-header>
         <ion-item>
-          <p class="description">TIn order to upload results to Salmon Stats, you will need to use the following app,
+          <p class="description">In order to upload results to Salmon Stats, you will need to use the following app,
             which is compatible with both iPhone and Android.
           </p>
         </ion-item>

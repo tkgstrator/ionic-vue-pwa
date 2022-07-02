@@ -97,11 +97,16 @@ const message = {
       nightless: "Nightless",
       night: "Night",
     },
+    appearances: {
+      darkMode: "Dark Mode",
+    },
     text: {
       version: {
         app: "App Version",
         api: "Server Version",
+        version: "Version",
       },
+      appearances: "Appearances",
       uploader: "Uploader",
       shifts_worked: "Shifts Worked",
       waves: "Waves",
@@ -182,11 +187,16 @@ const message = {
       nightless: "昼",
       night: "夜",
     },
+    appearances: {
+      darkMode: "ダークモード",
+    },
     text: {
       version: {
         app: "アプリバージョン",
         api: "サーバーバージョン",
+        version: "バージョン",
       },
+      appearances: "外観",
       uploader: "アップローダー",
       shifts_worked: "バイト回数",
       waves: "WAVE数",

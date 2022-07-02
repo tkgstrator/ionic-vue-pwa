@@ -234,6 +234,10 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-red: #f5873f;
 
     --ion-card-background: #1e1e1e;
+    --ion-color-result-clear: #39e464;
+    --ion-color-result-failure: #ff7500;
+    --ion-color-result-golden-ikura: #fff046;
+    --ion-color-result-ikura: #ff7500;
   }
 }
 
@@ -396,5 +400,9 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-red: #f5873f;
 
     --ion-card-background: #d1d1d1;
+    --ion-color-result-clear: #0c9c30;
+    --ion-color-result-failure: #f52222;
+    --ion-color-result-golden-ikura: #eee21d;
+    --ion-color-result-ikura: #f52222;
   }
 }

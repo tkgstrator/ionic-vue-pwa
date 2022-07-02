@@ -102,13 +102,13 @@ ion-label {
 
   &.job_clear {
     font-size: 0.85rem !important;
-    color: #39e464 !important;
+    color: var(--ion-color-result-clear) !important;
     font-weight: bold;
   }
 
   &.job_failure {
     font-size: 0.85rem !important;
-    color: #ff7500 !important;
+    color: var(--ion-color-result-failure) !important;
     font-weight: bold;
   }
 
@@ -121,13 +121,13 @@ ion-label {
 
   &.golden_ikura_num {
     font-size: 0.9rem !important;
-    color: var(--ion-color-yellow) !important;
+    color: var(--ion-color-result-golden-ikura) !important;
     font-weight: bold;
   }
 
   &.ikura_num {
     font-size: 0.9rem !important;
-    color: var(--ion-color-red) !important;
+    color: var(--ion-color-result-ikura) !important;
     font-weight: bold;
   }
 
