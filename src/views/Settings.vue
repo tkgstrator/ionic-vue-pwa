@@ -32,23 +32,20 @@ export default defineComponent({
     fetch(url).then(response => response.json()).then((response: Version) => {
       apiVersion.value = response.version
     });
-    const checked = false
     const lang: string = localStorage.getItem("locale") ?? "en"
     const { t, availableLocales, locale } = useI18n()
 
-    const toggleValue: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const toggleValue: boolean = (() => {
+      console.log("Local", localStorage.getItem("color-scheme"))
+      // ローカルに保存されていなければ現在のデバイスの設定を取得
+      const colorScheme: string = localStorage.getItem("color-scheme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      console.log(colorScheme)
+      return colorScheme === 'dark'
+    })()
 
     return {
       t, locale, lang, availableLocales, apiVersion, appVersion, appiOSVersion, appMdVersion, toggleValue
     }
-  },
-  watch: {
-    checked: function (check: boolean) {
-      console.log("Checked")
-    }
-  },
-  created() {
-    console.log("created")
   },
   methods: {
     onChange(event: CustomEvent) {
@@ -56,8 +53,10 @@ export default defineComponent({
       localStorage.setItem("locale", this.locale);
     },
     onChangeTheme(event: CustomEvent) {
-      console.log(event.detail.checked)
+      localStorage.setItem("color-scheme", event.detail.checked ? 'dark' : 'light');
+      // ダークモードとライトモード切り替え
       document.body.classList.toggle('dark', event.detail.checked);
+      document.body.classList.toggle('light', !event.detail.checked);
     },
   }
 });
