@@ -5,27 +5,51 @@ import Navigation from "../views/Navigation.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/home",
-  },
-  {
-    path: "/",
     component: Navigation,
     children: [
       {
-        path: "",
-        redirect: "/home",
+        path: "/",
+        redirect: "/results",
       },
       {
-        path: "home",
-        component: () => import("@/views/Tab1Page.vue"),
+        path: "/results",
+        component: () => import("@/views/Home.vue"),
       },
       {
-        path: "schedules",
-        component: () => import("@/views/Tab2Page.vue"),
+        path: "/results/:salmon_id",
+        component: () => import("@/views/Result.vue"),
       },
       {
-        path: "ranks",
-        component: () => import("@/views/Tab3Page.vue"),
+        path: "/players/:player_id",
+        component: () => import("@/views/Players.vue"),
+      },
+      {
+        path: "/search",
+        component: () => import("@/views/Search.vue"),
+      },
+      {
+        path: "/schedules",
+        component: () => import("@/views/Schedules.vue"),
+      },
+      {
+        path: "/schedules/:start_time/",
+        component: () => import("@/views/Stats.vue"),
+      },
+      {
+        path: "/schedules/:start_time/:nightless",
+        component: () => import("@/views/Ranking.vue"),
+      },
+      {
+        path: "/schedules/:start_time/waves",
+        component: () => import("@/views/Ranking.vue"),
+      },
+      {
+        path: "/ranking",
+        component: () => import("@/views/Ranks.vue"),
+      },
+      {
+        path: "/settings",
+        component: () => import("@/views/Settings.vue"),
       },
     ],
   },
