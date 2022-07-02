@@ -66,11 +66,11 @@ export default defineComponent({
         </ion-segment-button>
       </template>
     </ion-segment>
-    <CoopStatsGlobal v-show="statsType == StatsType.GLOBAL" />
-    <CoopStatsBossType v-show="statsType == StatsType.SALMONID" />
-    <CoopStatsGrade v-show="statsType == StatsType.GRADE" />
-    <CoopStatsWeapons v-show="statsType == StatsType.WEAPONS" />
-    <CoopStatsWave v-show="statsType == StatsType.EGGS" />
+    <CoopStatsGlobal v-if="statsType == StatsType.GLOBAL" />
+    <CoopStatsBossType v-if="statsType == StatsType.SALMONID" />
+    <CoopStatsGrade v-if="statsType == StatsType.GRADE" />
+    <CoopStatsWeapons v-if="statsType == StatsType.WEAPONS" />
+    <CoopStatsWave v-if="statsType == StatsType.EGGS" />
   </ion-content>
 </template>
 
