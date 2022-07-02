@@ -16,6 +16,9 @@ interface Lookup {
   results: Result[]
 }
 
+interface HTMLElementEvent<T extends HTMLElement> extends Event {
+  target: T;
+}
 
 export default defineComponent({
   name: 'SettingView',
@@ -32,8 +35,11 @@ export default defineComponent({
     const checked = false
     const lang: string = localStorage.getItem("locale") ?? "en"
     const { t, availableLocales, locale } = useI18n()
+
+    const toggleValue: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches
+
     return {
-      t, locale, lang, availableLocales, apiVersion, appVersion, appiOSVersion, appMdVersion, checked
+      t, locale, lang, availableLocales, apiVersion, appVersion, appiOSVersion, appMdVersion, toggleValue
     }
   },
   watch: {
@@ -41,7 +47,7 @@ export default defineComponent({
       console.log("Checked")
     }
   },
-  create() {
+  created() {
     console.log("created")
   },
   methods: {
@@ -51,6 +57,7 @@ export default defineComponent({
     },
     onChangeTheme(event: CustomEvent) {
       console.log(event.detail.checked)
+      document.body.classList.toggle('dark', event.detail.checked);
     },
   }
 });
@@ -68,7 +75,8 @@ export default defineComponent({
         <ion-list-header>{{ t("text.appearances") }}</ion-list-header>
         <ion-item>
           <ion-label slot="start">{{ t("appearances.darkMode") }}</ion-label>
-          <ion-toggle slot="end" v-on:ion-change="onChangeTheme($event)">{{ t('text.version.app') }}</ion-toggle>
+          <ion-toggle slot="end" v-on:ion-change="onChangeTheme($event)" :checked="toggleValue">{{ t('text.version.app')
+          }}</ion-toggle>
         </ion-item>
         <ion-item>
           <ion-label slot="start">{{ t('languages.lang') }}</ion-label>
