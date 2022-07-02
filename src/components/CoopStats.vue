@@ -1,13 +1,14 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
 import { IonRefresher, IonContent, IonRefresherContent, IonLabel, IonSegment, IonSegmentButton } from '@ionic/vue';
-import { WaterLevel } from './@types/splatnet2';
 import { useI18n } from 'vue-i18n';
 import CoopStatsGlobal from './CoopStatsGlobal.vue';
 import CoopStatsBossType from './CoopStatsBossType.vue';
 import CoopStatsWave from './CoopStatsWave.vue';
 import CoopStatsWeapons from './CoopStatsWeapons.vue';
 import CoopStatsGrade from './CoopStatsGrade.vue';
+import { LegacyStats } from './@types/response';
+import { useRoute } from 'vue-router';
 
 enum StatsType {
   GLOBAL = "GLOBAL",
@@ -33,21 +34,33 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
+    const route = useRoute()
+    const { start_time } = route.params
     const statsType: Ref<StatsType> = ref(StatsType.GLOBAL)
-    const total: Ref<number> = ref(0)
-    const waterLevel: Ref<WaterLevel> = ref<WaterLevel>(WaterLevel.NORMAL);
+    const results: Ref<LegacyStats | undefined> = ref<LegacyStats>()
 
-    return { statsType, StatsType, waterLevel, total, t };
+    return { statsType, StatsType, results, start_time, t };
+  },
+  mounted() {
+    this.onLoad()
   },
   methods: {
+    onLoad() {
+      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${this.start_time}`;
+      const headers = {
+        "cache-control": "force-cache; max-age=3600",
+      }
+      fetch(url, { headers: headers }).then(response => response.json()).then((response: LegacyStats) => {
+        this.results = response;
+      });
+    },
     onRefresh(event: CustomEvent) {
       setTimeout(() => {
-        console.log('Async operation has ended');
+        this.onLoad()
         event.detail.complete();
       }, 1500);
     },
     onStatsTypeChanged(event: CustomEvent) {
-      console.log(event.detail.value)
       this.statsType = event.detail.value
     },
   },
@@ -66,11 +79,11 @@ export default defineComponent({
         </ion-segment-button>
       </template>
     </ion-segment>
-    <CoopStatsGlobal v-if="statsType == StatsType.GLOBAL" />
-    <CoopStatsBossType v-if="statsType == StatsType.SALMONID" />
-    <CoopStatsGrade v-if="statsType == StatsType.GRADE" />
-    <CoopStatsWeapons v-if="statsType == StatsType.WEAPONS" />
-    <CoopStatsWave v-if="statsType == StatsType.EGGS" />
+    <CoopStatsGlobal :results="results?.job_results" v-if="statsType == StatsType.GLOBAL" />
+    <CoopStatsBossType :results="results?.boss_results" v-if="statsType == StatsType.SALMONID" />
+    <CoopStatsGrade :results="results?.grade_results" v-if="statsType == StatsType.GRADE" />
+    <CoopStatsWeapons :results="results?.weapon_results" v-if="statsType == StatsType.WEAPONS" />
+    <CoopStatsWave :results="results?.wave_results" v-if="statsType == StatsType.EGGS" />
   </ion-content>
 </template>
 

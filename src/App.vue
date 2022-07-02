@@ -16,7 +16,6 @@ export default defineComponent({
   },
   setup() {
     const isDarkMode: boolean = (() => {
-      console.log("Local", localStorage.getItem("color-scheme"))
       // ローカルに保存されていなければ現在のデバイスの設定を取得
       const colorScheme: string = localStorage.getItem("color-scheme") ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
       return colorScheme === 'dark'

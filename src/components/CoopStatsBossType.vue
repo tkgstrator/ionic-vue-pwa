@@ -16,32 +16,20 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    const results: Ref<BossResult[]> = ref<BossResult[]>([])
-    return { SalmonidType, results, t };
+    return { SalmonidType, t };
   },
   mounted: function () {
     console.log("BossView Mounted")
-    this.onLoad()
   },
   created: function () {
     console.log("BossView Created")
   },
-  methods: {
-    async onLoad() {
-      const route = useRoute()
-      const { start_time } = route.params
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${start_time}`;
-      const headers = {
-        "cache-control": "force-cache; max-age=600",
-      }
-      fetch(url, { headers: headers }).then(response => response.json()).then((response: LegacyStats) => {
-        this.results = response.boss_results;
-        console.log(this.results)
-      });
-    },
-    onRefresh(event: CustomEvent) {
-      this.onLoad().then(() => event.detail.complete());
-    },
+  props: {
+    results: {
+      type: Object as () => BossResult[],
+      required: true,
+      default: () => ({})
+    }
   },
 })
 </script>

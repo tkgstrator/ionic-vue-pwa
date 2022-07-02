@@ -14,29 +14,20 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    const results: Ref<GradeResult[]> = ref<GradeResult[]>([]);
-    return { t, results };
+    return { t };
   },
   mounted: function () {
     console.log("GradeView Mounted")
-    this.onLoad();
   },
   created: function () {
     console.log("GradeView Created")
   },
-  methods: {
-    async onLoad() {
-      const route = useRoute()
-      const { start_time } = route.params
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${start_time}`;
-      const headers = {
-        "cache-control": "force-cache; max-age=600",
-      }
-      fetch(url, { headers: headers }).then(response => response.json()).then((response: LegacyStats) => {
-        console.log(response)
-        this.results = response.grade_results;
-      });
-    },
+  props: {
+    results: {
+      type: Object as () => GradeResult,
+      required: true,
+      default: () => ({})
+    }
   },
 });
 </script>

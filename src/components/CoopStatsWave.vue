@@ -19,25 +19,21 @@ export default defineComponent({
     const ionRouter = useIonRouter();
     const route = useRoute()
     const { start_time } = route.params
-    const waves: Ref<WaveResult[][]> = ref<WaveResult[][]>([])
-    return { EventType, WaterLevel, ionRouter, start_time, waves, t };
+    return { EventType, WaterLevel, ionRouter, start_time, t };
   },
   mounted: function () {
     console.log("WaveView Mounted")
-    this.onLoad()
   },
   created: function () {
     console.log("WaveView Created")
   },
-  methods: {
-    onLoad() {
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${this.start_time}`;
-      fetch(url).then(response => response.json()).then((response: LegacyStats) => {
-        this.waves = response.wave_results
-        console.log(this.waves)
-      });
+  props: {
+    results: {
+      type: Object as () => WaveResult[][],
+      required: true,
+      default: () => ({})
     }
-  }
+  },
 })
 </script>
 
@@ -61,10 +57,10 @@ export default defineComponent({
       </ion-item>
     </template> -->
     <template v-for="(waterLevel, waterId) in Object.values(WaterLevel).reverse()" :key="waterId">
-      <template v-if="waves[waterId]">
+      <template v-if="results[waterId]">
         <ion-list-header>{{ t(`water_level.${waterLevel}`) }}</ion-list-header>
         <template v-for="(eventType, eventId) in Object.values(EventType)" :key="eventId">
-          <template v-if="waves[2 - waterId][eventId]">
+          <template v-if="results[2 - waterId][eventId]">
             <ion-item button
               v-on:click="ionRouter.push(`${start_time}/waves?event_type=${eventId}&water_level=${2 - waterId}`)">
               <section>
@@ -74,8 +70,8 @@ export default defineComponent({
                   </ion-label>
                 </div>
                 <div class="coop-stats-value-list">
-                  <ion-label class="num golden-ikura">{{ waves[2 - waterId][eventId].golden_ikura_num }}</ion-label>
-                  <ion-label class="num ikura">{{ waves[2 - waterId][eventId].ikura_num }}</ion-label>
+                  <ion-label class="num golden-ikura">{{ results[2 - waterId][eventId].golden_ikura_num }}</ion-label>
+                  <ion-label class="num ikura">{{ results[2 - waterId][eventId].ikura_num }}</ion-label>
                 </div>
               </section>
             </ion-item>

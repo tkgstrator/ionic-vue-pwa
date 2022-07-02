@@ -14,32 +14,20 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    const results: Ref<WeaponResult[]> = ref<WeaponResult[]>([]);
-    return { t, results };
+    return { t };
   },
   mounted: function () {
     console.log("WeaponView Mounted")
-    this.onLoad()
   },
   created: function () {
     console.log("WeaponView Created")
   },
-  methods: {
-    async onLoad() {
-      const route = useRoute()
-      const { start_time } = route.params
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/stats/${start_time}`;
-      const headers = {
-        "cache-control": "force-cache; max-age=600",
-      }
-      fetch(url, { headers: headers }).then(response => response.json()).then((response: LegacyStats) => {
-        console.log(response)
-        this.results = response.weapon_results
-      });
-    },
-    onRefresh(event: CustomEvent) {
-      this.onLoad().then(() => event.detail.complete());
-    },
+  props: {
+    results: {
+      type: Object as () => WeaponResult[],
+      required: true,
+      default: () => ({})
+    }
   },
 });
 </script>
