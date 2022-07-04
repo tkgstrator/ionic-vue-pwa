@@ -39,27 +39,12 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 
-/* Disable Swipe Back */
-const DisableSwipeBackDirective = {
-  beforeMount(el: Ref<any>) {
-    const gesture = createGesture({
-      el: el.value,
-      threshold: 0,
-      gestureName: "goback-swipe",
-      gesturePriority: 40.5,
-      onMove: () => console.log(),
-    });
-    gesture.enable(true);
-  },
-};
-
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault(dayjs.tz.guess());
-console.log(dayjs.tz.guess());
 
 const locale: string = localStorage.getItem("locale") ?? "en";
 
@@ -86,8 +71,7 @@ const app = createApp(App)
   .use(VueGtag, { property: { id: "G-ZTVD4X4NVR", router } })
   .use(Ads.Adsense)
   .use(Ads.InArticleAdsense)
-  .use(Ads.InFeedAdsense)
-  .directive("disable-swipe-back", DisableSwipeBackDirective);
+  .use(Ads.InFeedAdsense);
 
 router.isReady().then(() => {
   app.mount("#app");
