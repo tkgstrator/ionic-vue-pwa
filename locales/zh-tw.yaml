@@ -1,0 +1,92 @@
+rank_type:
+  job_num: ""
+  ikura_num: ""
+  golden_ikura_num: ""
+languages:
+  en: ""
+  ja: ""
+  zh: ""
+tabs:
+  ranking: ""
+  settings: ""
+  schedules: ""
+  results: ""
+event_type:
+  fog: ""
+  cohock_charge: ""
+  goldie_seeking: ""
+  the_mothership: ""
+  water_levels: ""
+  rush: ""
+  griller: ""
+version:
+  api: ""
+  app: ""
+  db: ""
+stage_name:
+  "5003": ""
+  "5004": ""
+  "5001": ""
+  "5002": ""
+  "5000": ""
+app:
+  appearances: ""
+  authentication: ""
+  server: ""
+  uploader: ""
+  version: ""
+  system: ""
+water_level:
+  low: ""
+  normal: ""
+  high: ""
+stats_type:
+  global: ""
+  grade_point: ""
+  eggs: ""
+  weapons: ""
+  salmon_id: ""
+salmon_id:
+  shield: ""
+  goldie: ""
+  maws: ""
+  tower: ""
+  twins: ""
+  snake: ""
+  rocket: ""
+  bomber: ""
+  dozer: ""
+messages:
+  cancel: ""
+  submit: ""
+stats:
+  golden_ikura_num: ""
+  ikura_num: ""
+  failure_wave: ""
+  job_num: ""
+server:
+  network: ""
+  system:
+    os: ""
+    dist: ""
+  uptime: ""
+  cpu: ""
+  kernel: ""
+rank_mode:
+  sum: ""
+  avg: ""
+  max: ""
+appearances:
+  languages: ""
+  dark_mode: ""
+result:
+  is_failure: ""
+  failure_reason:
+    time_limit: ""
+    wipe_out: ""
+  is_clear: ""
+authentication:
+  sign_in: ""
+  github: GitHub
+  twitter: Twitter
+  google: Google

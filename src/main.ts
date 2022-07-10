@@ -67,7 +67,7 @@ const i18n = createI18n({
   messages: {
     ja: require("/locales/ja.yaml"),
     en: require("/locales/en.yaml"),
-    zh: require("/locales/zh.yaml"),
+    zh: require("/locales/zh-cn.yaml"),
   },
   fallbackLocale: locale,
   fallbackRoot: true,

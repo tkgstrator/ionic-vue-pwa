@@ -1,0 +1,92 @@
+rank_type:
+  job_num: ""
+  ikura_num: 红蛋
+  golden_ikura_num: 金蛋
+languages:
+  en: ""
+  ja: ""
+  zh: ""
+tabs:
+  ranking: ""
+  settings: ""
+  schedules: ""
+  results: ""
+event_type:
+  fog: 雾天
+  cohock_charge: 大鲑鱼大量发生
+  goldie_seeking: 开泉
+  the_mothership: 快递
+  water_levels: "-"
+  rush: 暴走
+  griller: 烧烤架
+version:
+  api: ""
+  app: ""
+  db: ""
+stage_name:
+  "5003": ""
+  "5004": ""
+  "5001": ""
+  "5002": ""
+  "5000": ""
+app:
+  appearances: ""
+  authentication: ""
+  server: ""
+  uploader: ""
+  version: ""
+  system: ""
+water_level:
+  low: 退潮
+  normal: 普通潮
+  high: 涨潮
+stats_type:
+  global: ""
+  grade_point: ""
+  eggs: ""
+  weapons: ""
+  salmon_id: ""
+salmon_id:
+  shield: ""
+  goldie: ""
+  maws: ""
+  tower: ""
+  twins: ""
+  snake: ""
+  rocket: ""
+  bomber: ""
+  dozer: ""
+messages:
+  cancel: ""
+  submit: ""
+stats:
+  golden_ikura_num: ""
+  ikura_num: ""
+  failure_wave: ""
+  job_num: ""
+server:
+  network: ""
+  system:
+    os: ""
+    dist: ""
+  uptime: ""
+  cpu: ""
+  kernel: ""
+rank_mode:
+  sum: ""
+  avg: ""
+  max: ""
+appearances:
+  languages: ""
+  dark_mode: ""
+result:
+  is_failure: ""
+  failure_reason:
+    time_limit: ""
+    wipe_out: ""
+  is_clear: ""
+authentication:
+  sign_in: ""
+  github: GitHub
+  twitter: Twitter
+  google: Google

@@ -31,6 +31,7 @@ stage_name:
   "5000": シェケナダム
 app:
   appearances: 外観
+  authentication: 認証
   server: サーバー
   uploader: アップローダー
   version: バージョン
@@ -78,3 +79,14 @@ rank_mode:
 appearances:
   languages: 言語
   dark_mode: ダークモード
+result:
+  is_failure: Failure
+  failure_reason:
+    time_limit: 時間切れ
+    wipe_out: ゼンメツ!
+  is_clear: Clear!
+authentication:
+  sign_in: ログイン
+  github: GitHub
+  twitter: Twitter
+  google: Google
