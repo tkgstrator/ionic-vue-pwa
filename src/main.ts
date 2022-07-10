@@ -49,12 +49,12 @@ dayjs.tz.setDefault(dayjs.tz.guess());
 const locale: string = localStorage.getItem("locale") ?? "en";
 
 const i18n = createI18n({
-  legacy: false,
+  legacy: true,
   locale: locale,
   allowComposition: true,
   messages: {
-    ja: require('./locales/ja.json'),
-    en: require('./locales/en.json'),
+    ja: require("./locales/ja.json"),
+    en: require("./locales/en.json"),
   },
   fallbackLocale: locale,
   fallbackRoot: true,
