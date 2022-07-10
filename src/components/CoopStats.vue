@@ -11,11 +11,11 @@ import { LegacyStats } from './@types/response';
 import { useRoute } from 'vue-router';
 
 enum StatsType {
-  GLOBAL = "GLOBAL",
-  SALMONID = 'SALMONID',
-  WEAPONS = 'WEAPONS',
-  GRADE = 'GRADE',
-  EGGS = 'EGGS'
+  GLOBAL = "global",
+  SALMON_ID = 'salmon_id',
+  WEAPONS = 'weapons',
+  GRADE = 'grade_point',
+  EGGS = 'eggs'
 }
 
 export default defineComponent({
@@ -80,7 +80,7 @@ export default defineComponent({
       </template>
     </ion-segment>
     <CoopStatsGlobal :results="results?.job_results" v-if="statsType == StatsType.GLOBAL" />
-    <CoopStatsBossType :results="results?.boss_results" v-if="statsType == StatsType.SALMONID" />
+    <CoopStatsBossType :results="results?.boss_results" v-if="statsType == StatsType.SALMON_ID" />
     <CoopStatsGrade :results="results?.grade_results" v-if="statsType == StatsType.GRADE" />
     <CoopStatsWeapons :results="results?.weapon_results" v-if="statsType == StatsType.WEAPONS" />
     <CoopStatsWave :results="results?.wave_results" v-if="statsType == StatsType.EGGS" />

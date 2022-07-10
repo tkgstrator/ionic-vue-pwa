@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&display=swap");
+
 * {
-  font-family: "Noto Sans JP" !important;
+  // font-family: "Noto Sans JP" !important;
+  font-family: var(--ion-default-font-family) !important;
   -ms-user-select: none; /* IE 10+ */
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -222,8 +225,12 @@ ion-header {
 }
 
 ion-toolbar {
-  max-width: 600px !important;
+  max-width: calc(var(--ion-frame-max-width)) !important;
   margin: 0 auto;
+}
+
+ion-title {
+  // padding-left: 0 !important;
 }
 
 .header-md::after {
@@ -231,7 +238,7 @@ ion-toolbar {
 }
 
 ion-list-header {
-  max-width: 600px !important;
+  max-width: var(--ion-frame-max-width) !important;
   margin: 0 auto;
   font-weight: 400;
   font-size: 1.3rem;
@@ -272,8 +279,16 @@ ion-img {
   background-color: transparent;
 }
 
+ion-list {
+  min-width: 340px;
+}
+
 ion-item {
   min-width: 340px;
-  max-width: 600px !important;
+  max-width: var(--ion-frame-max-width) !important;
   margin: 6px auto;
+}
+
+ion-progress-bar {
+  max-width: calc(var(--ion-frame-max-width) * 0.5) !important;
 }

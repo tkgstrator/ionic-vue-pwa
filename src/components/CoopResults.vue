@@ -35,33 +35,33 @@ export default defineComponent({
     getWaterLevel(water_level: number): string {
       switch (water_level) {
         case 0:
-          return this.t("water_level.LT")
+          return this.t("water_level.low")
         case 1:
-          return this.t("water_level.NT")
+          return this.t("water_level.normal")
         case 2:
-          return this.t("water_level.HT")
+          return this.t("water_level.high")
         default:
-          return "NT"
+          return this.t("water_level.normal")
       }
     },
     getEventType(event_type: number): string {
       switch (event_type) {
         case 0:
-          return this.t("event_type.WATER_LEVELS")
+          return this.t("event_type.water_levels")
         case 1:
-          return this.t("event_type.RUSH")
+          return this.t("event_type.rush")
         case 2:
-          return this.t("event_type.GEYSER")
+          return this.t("event_type.goldie_seeking")
         case 3:
-          return this.t("event_type.GRILLER")
+          return this.t("event_type.griller")
         case 4:
-          return this.t("event_type.RALLY")
+          return this.t("event_type.the_mothership")
         case 5:
-          return this.t("event_type.FOG")
+          return this.t("event_type.fog")
         case 6:
-          return this.t("event_type.MISSILE")
+          return this.t("event_type.cohock_charge")
         default:
-          return "-"
+          return this.t("event_type.water_levels")
       }
     }
   },
@@ -81,7 +81,7 @@ export default defineComponent({
               <ion-label class="salmon_id">{{ result.salmon_id }}</ion-label>
               <ion-label :class="result.job_result.is_clear ? 'job_clear' : 'job_failure'">{{ result.job_result.is_clear
                   ?
-                  "Clear" : "Failure"
+                  t("result.is_clear") : t("result.is_failure")
               }}</ion-label>
               <ion-label class="danger_rate">{{ result.danger_rate.toFixed(1) }}</ion-label>
             </div>

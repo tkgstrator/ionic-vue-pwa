@@ -38,23 +38,27 @@ import { createI18n } from "vue-i18n";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import duration from "dayjs/plugin/duration";
 
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+dayjs.extend(duration);
 dayjs.tz.setDefault(dayjs.tz.guess());
 
+// 現在の設定を取得して、なければ英語に設定
 const locale: string = localStorage.getItem("locale") ?? "en";
 
 const i18n = createI18n({
-  legacy: true,
+  legacy: false,
   locale: locale,
   allowComposition: true,
   messages: {
-    ja: require("./locales/ja.json"),
-    en: require("./locales/en.json"),
+    ja: require("/locales/ja.yaml"),
+    en: require("/locales/en.yaml"),
+    zh: require("/locales/zh.yaml"),
   },
   fallbackLocale: locale,
   fallbackRoot: true,

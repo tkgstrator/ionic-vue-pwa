@@ -1,7 +1,7 @@
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { IonItem, IonLabel, IonList, IonProgressBar, IonListHeader, useIonRouter } from '@ionic/vue';
-import { LegacyStats, Ranking, TotalRank, WaveResult } from './@types/response';
+import { WaveResult } from './@types/response';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { EventType, WaterLevel } from './@types/splatnet2';
@@ -39,7 +39,7 @@ export default defineComponent({
 
 <template>
   <ion-list>
-    <ion-list-header>{{ t("stats_type.EGGS") }}</ion-list-header>
+    <ion-list-header>{{ t("stats_type.eggs") }}</ion-list-header>
     <!-- <template v-for="(type, index) in ['night', 'nightless']" :key="type">
       <ion-item button v-on:click="ionRouter.push(`${start_time}/${type}`)" mode="md">
         <section>

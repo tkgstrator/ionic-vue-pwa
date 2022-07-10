@@ -1,27 +1,27 @@
 export enum EventType {
-  NONE = "WATER_LEVELS",
-  RUSH = "RUSH",
-  GEYSER = "GEYSER",
-  GRILLER = "GRILLER",
-  RALLY = "RALLY",
-  FOG = "FOG",
-  MISSILE = "MISSILE",
+  NONE = "water_levels",
+  RUSH = "rush",
+  GEYSER = "goldie_seeking",
+  GRILLER = "griller",
+  RALLY = "the_mothership",
+  FOG = "fog",
+  MISSILE = "cohock_charge",
 }
 
 export enum WaterLevel {
-  LOW = "LT",
-  NORMAL = "NT",
-  HIGH = "HT",
+  LOW = "low",
+  NORMAL = "normal",
+  HIGH = "high",
 }
 
-export enum SalmonidType {
-  GOLDIE = "GOLDIE",
-  BOMBER = "BOMBER",
-  TWINS = "TWINS",
-  SHIELD = "SHIELD",
-  SNAKE = "SNAKE",
-  TOWER = "TOWER",
-  MAWS = "MAWS",
-  DOZER = "DOZER",
-  ROCKET = "ROCKET",
+export enum SalmonIdType {
+  GOLDIE = "goldie",
+  BOMBER = "bomber",
+  TWINS = "twins",
+  SHIELD = "shield",
+  SNAKE = "snake",
+  TOWER = "tower",
+  MAWS = "maws",
+  DOZER = "dozer",
+  ROCKET = "rocket",
 }

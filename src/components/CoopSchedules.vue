@@ -1,8 +1,7 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
-import { IonButton, IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter } from '@ionic/vue';
+import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, IonImg, useIonRouter } from '@ionic/vue';
 import dayjs from 'dayjs';
-import { createAnimation } from '@ionic/vue';
 import { useI18n } from 'vue-i18n';
 
 interface Schedules {

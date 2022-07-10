@@ -1,8 +1,7 @@
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { defineComponent } from 'vue';
 import { IonItem, IonLabel, IonList, IonProgressBar, IonListHeader } from '@ionic/vue';
-import { JobResult, LegacyStats } from './@types/response';
+import { JobResult } from './@types/response';
 import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
@@ -35,11 +34,11 @@ export default defineComponent({
 
 <template>
   <ion-list>
-    <ion-list-header>{{ t("total.total") }}</ion-list-header>
+    <ion-list-header>{{ t("stats_type.global") }}</ion-list-header>
     <ion-item>
       <section>
         <div class="coop-stats-progress-bar">
-          <ion-label class="coop-stats-key">{{ t("text.job_num") }}</ion-label>
+          <ion-label class="coop-stats-key">{{ t("stats.job_num") }}</ion-label>
           <ion-progress-bar :value="results?.is_clear / (results?.is_clear +
           results?.is_failure)">
           </ion-progress-bar>
@@ -54,7 +53,7 @@ export default defineComponent({
       <ion-item>
         <section>
           <div class="coop-stats-progress-bar">
-            <ion-label class="coop-stats-key">{{ t("text.failure_wave", { id: wave.failure_wave }) }}</ion-label>
+            <ion-label class="coop-stats-key">{{ t("stats.failure_wave", { id: wave.failure_wave }) }}</ion-label>
             <ion-progress-bar :value="((wave.time_limit + wave.wipe_out) / results?.is_failure)">
             </ion-progress-bar>
             <ion-label class="coop-stats-key prob">{{ (100 * (wave.time_limit + wave.wipe_out) /
@@ -68,13 +67,13 @@ export default defineComponent({
     </template>
     <ion-item>
       <section>
-        <ion-label class="coop-stats-key">{{ t("text.ikura_num") }}</ion-label>
+        <ion-label class="coop-stats-key">{{ t("stats.ikura_num") }}</ion-label>
         <ion-label class="coop-stats-value num ikura">{{ }}</ion-label>
       </section>
     </ion-item>
     <ion-item>
       <section>
-        <ion-label class="coop-stats-key">{{ t("text.golden_ikura_num") }}</ion-label>
+        <ion-label class="coop-stats-key">{{ t("stats.golden_ikura_num") }}</ion-label>
         <ion-label class="coop-stats-value num golden-ikura">{{ }}</ion-label>
       </section>
     </ion-item>

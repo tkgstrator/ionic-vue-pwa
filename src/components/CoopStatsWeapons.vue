@@ -36,7 +36,7 @@ export default defineComponent({
 
 <template>
   <ion-list class="coop-result-list">
-    <ion-list-header>{{ t("stats_type.GRADE") }}</ion-list-header>
+    <ion-list-header>{{ t("stats_type.weapons") }}</ion-list-header>
     <ion-item v-for="result in results" :key="result.nsaid" class="coop-result">
       <ion-label>
         <section class="coop-ranking">

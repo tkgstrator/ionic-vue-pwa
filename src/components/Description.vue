@@ -1,7 +1,23 @@
-<script lang="ts"></script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { IonLabel, IonItem, IonListHeader, IonAvatar } from '@ionic/vue';
+import { useI18n } from "vue-i18n";
+import dayjs from 'dayjs';
+
+export default defineComponent({
+  name: 'DescriptionView',
+  components: { IonListHeader, IonItem, IonLabel, IonAvatar },
+  setup() {
+    const { t } = useI18n()
+    return { t, dayjs };
+  },
+  methods: {
+  }
+});
+</script>
 
 <template>
-  <ion-list-header>{{ t("text.uploader") }}</ion-list-header>
+  <ion-list-header>{{ t("app.uploader") }}</ion-list-header>
   <ion-item>
     <p class="description">In order to upload results to Salmon Stats, you will need to use the following app,
       which is compatible with both iPhone and Android.
@@ -14,7 +30,7 @@
     </ion-avatar>
     <ion-label slot="start" color="danger"><a href="itms-beta://testflight.apple.com/join/dVMPIN8o">Salmonia3/iOS</a>
     </ion-label>
-    <ion-label slot="end" class="version">{{ appiOSVersion }}</ion-label>
+    <ion-label slot="end" class="version">1.0.6</ion-label>
   </ion-item>
   <ion-item button>
     <ion-avatar slot="start">
@@ -23,7 +39,7 @@
     </ion-avatar>
     <ion-label slot="start" color="danger"><a
         href="https://github.com/SalmonStats/sinclair/releases">Sinclair/Android</a></ion-label>
-    <ion-label slot="end" class="version">0.0.4</ion-label>
+    <ion-label slot="end" class="version">0.0.5</ion-label>
   </ion-item>
   <ion-item>
     <p class="description">Salmon Stats is an open-source Splatoon 2 Salmon Run statistics website developed by

@@ -1,23 +1,14 @@
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
+import { defineComponent } from 'vue';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonList, IonTitle } from '@ionic/vue';
 import Version from '@/components/Version.vue';
 import ServerInfo from '../components/ServerInfo.vue';
-
-interface Result {
-  version: string
-}
-
-interface Lookup {
-  results: Result[]
-}
-
-interface HTMLElementEvent<T extends HTMLElement> extends Event {
-  target: T;
-}
+import Appearances from '@/components/Appearances.vue';
+import Description from '@/components/Description.vue';
 
 export default defineComponent({
   name: 'SettingView',
-  components: { Version, ServerInfo },
+  components: { IonPage, IonHeader, IonToolbar, IonContent, IonList, IonTitle, Version, ServerInfo, Appearances, Description },
   setup() {
     return {}
   },
@@ -35,6 +26,8 @@ export default defineComponent({
     </ion-header>
     <ion-content>
       <ion-list>
+        <Appearances />
+        <Description />
         <Version />
         <ServerInfo />
       </ion-list>
@@ -44,8 +37,4 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "../theme/styles.scss";
-
-.version {
-  font-size: 1.0rem !important;
-}
 </style>

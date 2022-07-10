@@ -39,7 +39,7 @@ export default defineComponent({
         }
         return parseInt(this.event_type as string)
       })()
-      const nightless: boolean | null = (() => {
+      const night_less: boolean | null = (() => {
         if (this.nightless === undefined) {
           return null
         }

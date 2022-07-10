@@ -27,9 +27,9 @@ interface Rank {
 }
 
 enum RankType {
-  GOLDEN = "golden",
-  POWER = "power",
-  WORKED = "worked"
+  GOLDEN = "golden_ikura_num",
+  POWER = "ikura_num",
+  WORKED = "job_num"
 }
 
 enum RankMode {
@@ -41,12 +41,7 @@ enum RankMode {
 
 export default defineComponent({
   components: {
-    // IonCheckbox,
-    // IonInput,
     IonItem,
-    // IonItemOption,
-    // IonItemOptions,
-    // IonItemSliding,
     IonList,
     IonRefresher,
     IonRefresherContent,
@@ -56,8 +51,6 @@ export default defineComponent({
     IonIcon,
     IonSegmentButton,
     IonSegment,
-    // IonRadio
-    // IonToggle
   },
   setup() {
     const { t } = useI18n()
@@ -65,15 +58,10 @@ export default defineComponent({
     const rankType: Ref<RankType> = ref<RankType>(RankType.WORKED);
     const rankMode: Ref<RankMode> = ref<RankMode>(RankMode.TOTAL);
 
-    console.log(`SERVER: ${process.env.VUE_APP_SERVER_URL}`);
-    console.log(`API: ${process.env.VUE_APP_SERVER_API_VER}`);
     const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/ranks`;
     fetch(url).then(response => response.json()).then(response => {
       players.value = response
     });
-
-    dayjs.extend(duration);
-    dayjs.extend(utc)
 
     return {
       players, ribbonSharp, RankType, RankMode, rankMode, rankType, dayjs, utc, duration, t
@@ -138,14 +126,14 @@ export default defineComponent({
     <ion-segment mode="md" v-on:ion-change="segmentChanged($event)" :value="rankMode" v-model="rankMode">
       <template v-for="mode in Object.values(RankMode)" :key="mode">
         <ion-segment-button :value="mode">
-          <ion-label>{{ t(`rank.mode.${mode}`) }}</ion-label>
+          <ion-label>{{ t(`rank_mode.${mode}`) }}</ion-label>
         </ion-segment-button>
       </template>
     </ion-segment>
     <ion-segment mode="md" v-on:ion-change="segmentChanged($event)" :value="rankType" v-model="rankType">
       <template v-for="type in Object.values(RankType)" :key="type">
         <ion-segment-button :value="type">
-          <ion-label>{{ t(`rank.type.${type}`) }}</ion-label>
+          <ion-label>{{ t(`rank_type.${type}`) }}</ion-label>
         </ion-segment-button>
       </template>
     </ion-segment>

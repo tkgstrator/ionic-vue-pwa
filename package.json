@@ -61,6 +61,7 @@
     "eslint-plugin-vue": "^9.1.1",
     "jest": "^28.1.1",
     "ts-jest": "^28.0.5",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vue-cli-plugin-yaml": "^1.0.2"
   }
 }

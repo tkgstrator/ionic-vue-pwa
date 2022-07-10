@@ -1,0 +1,86 @@
+app:
+  system: System
+  server: Server
+  version: Version
+  uploader: Uploader
+  appearances: Appearances
+appearances:
+  languages: Languages
+  dark_mode: DarkMode
+messages:
+  submit: Submit
+  cancel: Cancel
+server:
+  system: &system
+    os: Operating System
+    dist: Distribution
+  cpu: CPU
+  network: Network
+  uptime: Uptime
+  kernel: Kernel
+event_type:
+  water_levels: "-"
+  rush: Rush
+  goldie_seeking: Goldie Seeking
+  griller: Griller
+  the_mothership: The Mothership
+  fog: fog
+  cohock_charge: Cohock Charge
+water_level:
+  high: HT
+  normal: NT
+  low: LT
+stage_name:
+  "5000": Spawning Grounds
+  "5001": Marooner's Bay
+  "5002": Lost Outpost
+  "5003": Salmonid Smokeyard
+  "5004": Ruins of Ark Polaris
+languages:
+  en: English
+  ja: Japanese
+  zh: Chinese
+salmon_id:
+  goldie: Goldie
+  bomber: Steelhead
+  twins: Flyfish
+  shield: Shield
+  snake: Steel Eel
+  tower: Tower
+  maws: Maws
+  dozer: Griller
+  rocket: Drizzler
+version:
+  app: App
+  db: DB
+  api: API
+stats_type:
+  global: Global
+  salmon_id: Boss
+  weapons: Weapons
+  grade_point: Grade
+  eggs: Eggs
+stats:
+  job_num: Shift Worked
+  failure_wave: Failure Wave
+  ikura_num: Power Eggs
+  golden_ikura_num: Golden Eggs
+tabs:
+  results: Results
+  schedules: Schedules
+  ranking: Ranking
+  settings: Settings
+rank_mode:
+  sum: Total
+  max: Best
+  avg: Avg
+rank_type:
+  golden_ikura_num: Golden Eggs
+  ikura_num: Power Eggs
+  job_num: Shift Worked
+result:
+  is_clear: Clear
+  is_failure: Failure
+  failure_reason:
+    time_limit: Time Up!
+    wipe_out: DEFEAT!
