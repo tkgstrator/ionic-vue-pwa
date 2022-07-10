@@ -4,6 +4,11 @@ app:
   version: Version
   uploader: Uploader
   appearances: Appearances
+  authentication: Authentication
+authentication:
+  twitter: Twitter
+  github: GitHub
+  google: Google
 appearances:
   languages: Languages
   dark_mode: DarkMode

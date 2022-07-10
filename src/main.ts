@@ -6,7 +6,7 @@ import "./registerServiceWorker";
 
 // Above the createApp() line
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
-import { createGesture, IonicVue } from "@ionic/vue";
+import { IonicVue } from "@ionic/vue";
 
 import VueGtag from "vue-gtag-next";
 import Ads from "vue-google-adsense";
@@ -32,6 +32,8 @@ import "./theme/variables.css";
 
 /* Theme fonts */
 import "./assets/sass/style.scss";
+
+/* Localized */
 import { createI18n } from "vue-i18n";
 
 /* Dayjs */
@@ -39,6 +41,13 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import duration from "dayjs/plugin/duration";
+
+/* Firebase */
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./firebase.config";
+
+const firebaseApp = initializeApp(firebaseConfig);
+export { firebaseApp };
 
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);

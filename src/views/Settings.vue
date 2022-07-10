@@ -5,10 +5,11 @@ import Version from '@/components/Version.vue';
 import ServerInfo from '../components/ServerInfo.vue';
 import Appearances from '@/components/Appearances.vue';
 import Description from '@/components/Description.vue';
+import Authentication from '../components/Authentication.vue';
 
 export default defineComponent({
   name: 'SettingView',
-  components: { IonPage, IonHeader, IonToolbar, IonContent, IonList, IonTitle, Version, ServerInfo, Appearances, Description },
+  components: { IonPage, IonHeader, IonToolbar, IonContent, IonList, IonTitle, Version, ServerInfo, Appearances, Description, Authentication },
   setup() {
     return {}
   },
@@ -26,6 +27,7 @@ export default defineComponent({
     </ion-header>
     <ion-content>
       <ion-list>
+        <Authentication />
         <Appearances />
         <Description />
         <Version />
