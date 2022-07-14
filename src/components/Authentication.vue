@@ -1,25 +1,30 @@
 <script lang="ts">
 import { defineComponent, ref, Ref } from 'vue';
 import { IonLabel, IonItem, IonListHeader, IonAvatar } from '@ionic/vue';
-import { getAuth, signInWithPopup, TwitterAuthProvider, UserCredential } from 'firebase/auth';
+import { getAuth, signInWithPopup, TwitterAuthProvider, UserCredential, UserInfo } from 'firebase/auth';
 import { useI18n } from "vue-i18n";
-
-class Twitter {
-  constructor(credential: UserCredential) {
-    this.display_name = credential.user.displayName
-    this.photoURL = credential.user.photoURL
-    this.uid = credential.user.uid
-  }
-
-  display_name: string | null
-  photoURL: string | null
-  uid: string
-}
 
 interface Account {
   nsaid: string
   name: string
   thumbnailURL: string
+}
+
+class Twitter {
+  constructor(credential: UserCredential) {
+    console.log(credential)
+    const user: UserInfo = credential.user.providerData[0]
+    this.uid = user.uid
+    this.display_name = user.displayName
+    this.photoURL = user.photoURL
+    this.screen_name = ""
+    this.accounts = []
+  }
+  screen_name: string
+  display_name: string | null
+  photoURL: string | null
+  uid: string
+  accounts: Account[]
 }
 
 export default defineComponent({
@@ -35,8 +40,24 @@ export default defineComponent({
     async signIn() {
       const provider = new TwitterAuthProvider();
       const auth = getAuth()
-      this.user = new Twitter(await signInWithPopup(auth, provider))
-      console.log(JSON.stringify(this.user))
+      console.log(auth)
+      try {
+        this.user = new Twitter(await signInWithPopup(auth, provider))
+        const headers = {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+        const parameters = JSON.stringify(this.user)
+        const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/users`;
+        const response = (await (await fetch(url, {
+          method: "POST",
+          headers: headers,
+          body: parameters
+        })).json())
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 });
