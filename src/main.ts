@@ -48,7 +48,6 @@ import { firebaseConfig } from "./firebase.config";
 
 const firebaseApp = initializeApp(firebaseConfig);
 export { firebaseApp };
-console.log(firebaseConfig);
 
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);

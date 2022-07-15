@@ -12,8 +12,9 @@ interface Account {
 
 class Twitter {
   constructor(credential: UserCredential) {
-    console.log(credential)
     const user: UserInfo = credential.user.providerData[0]
+    console.log(credential)
+    console.log(credential.user.uid, user.uid)
     this.uid = user.uid
     this.display_name = user.displayName
     this.photoURL = user.photoURL
@@ -38,10 +39,10 @@ export default defineComponent({
   },
   methods: {
     async signIn() {
-      const provider = new TwitterAuthProvider();
-      const auth = getAuth()
-      console.log(auth)
       try {
+        const provider = new TwitterAuthProvider();
+        const auth = getAuth()
+        console.log(auth, provider)
         this.user = new Twitter(await signInWithPopup(auth, provider))
         const headers = {
           'Accept': 'application/json',
