@@ -14,7 +14,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-label>
-    {{ t('message.not_found') }}
-  </ion-label>
+  <ion-item>
+    <ion-label>
+      {{ t('message.not_found') }}
+    </ion-label>
+  </ion-item>
 </template>
+
+<style lang="scss" scoped>
+@import "../theme/styles.scss";
+</style>

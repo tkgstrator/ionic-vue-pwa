@@ -340,3 +340,12 @@ ion-item {
 ion-progress-bar {
   max-width: calc(var(--ion-frame-max-width) * 0.5) !important;
 }
+
+ion-content {
+  margin: 0 auto !important;
+}
+
+ion-segment {
+  max-width: var(--ion-frame-max-width) !important;
+  margin: 0 auto !important;
+}

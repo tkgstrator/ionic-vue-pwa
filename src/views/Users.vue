@@ -19,3 +19,7 @@ export default defineComponent({
     <CoopUsers />
   </ion-page>
 </template>
+
+<style lang="scss" scoped>
+@import "../theme/styles.scss";
+</style>

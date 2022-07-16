@@ -118,22 +118,32 @@ export default defineComponent({
     <ion-avatar slot="start">
       <img src="assets/icon/paypal-logo.png" />
     </ion-avatar>
-    <ion-label slot="start">Twitter</ion-label>
+    <ion-label slot="start">Paypal</ion-label>
     <ion-label slot="end" class="version">{{ t("message.subscription") }}</ion-label>
   </ion-item>
   <ion-list-header>{{ t("app.authentication") }}</ion-list-header>
-  <ion-item button lines="full">
-    <ion-avatar slot="start">
-      <img src="assets/icon/twitter-logo.png" />
-    </ion-avatar>
-    <ion-label slot="start">Twitter</ion-label>
-    <ion-label slot="end" class="version" v-if="user.uid === undefined" v-on:click="signIn">{{
-        t("authentication.sign_in")
-    }}</ion-label>
-    <ion-label slot="end" class="version" v-if="user.uid !== undefined" v-on:click="signOut">{{
-        t("authentication.sign_out")
-    }}</ion-label>
-  </ion-item>
+  <template v-if="user.uid === undefined">
+    <ion-item button lines="full" v-on:click="signIn">
+      <ion-avatar slot="start">
+        <img src="assets/icon/twitter-logo.png" />
+      </ion-avatar>
+      <ion-label slot="start">Twitter</ion-label>
+      <ion-label slot="end" class="version">{{
+          t("authentication.sign_in")
+      }}</ion-label>
+    </ion-item>
+  </template>
+  <template v-if="user.uid !== undefined">
+    <ion-item button lines="full" v-on:click="signOut">
+      <ion-avatar slot="start">
+        <img src="assets/icon/twitter-logo.png" />
+      </ion-avatar>
+      <ion-label slot="start">Twitter</ion-label>
+      <ion-label slot="end" class="version">{{
+          t("authentication.sign_out")
+      }}</ion-label>
+    </ion-item>
+  </template>
   <template v-if="user.uid !== undefined">
     <ion-list-header>{{ t("app.accounts") }}</ion-list-header>
     <template v-for="account in accounts" :key="account.nsaid">

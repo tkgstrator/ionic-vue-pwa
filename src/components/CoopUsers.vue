@@ -127,7 +127,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-content>
+  <ion-content fullscreen>
     <ion-refresher slot="fixed" pull-factor=0.5 @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -164,3 +164,7 @@ export default defineComponent({
     <NotFound v-if="tabType === TabType.SHIFTS" />
   </ion-content>
 </template>
+
+<style lang="scss" scoped>
+@import "../theme/styles.scss";
+</style>
