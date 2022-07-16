@@ -30,6 +30,7 @@ stage_name:
   "5002": 海上集落シャケト場
   "5000": シェケナダム
 app:
+  subscription: 購読
   appearances: 外観
   authentication: 認証
   server: サーバー
@@ -93,6 +94,7 @@ authentication:
   twitter: Twitter
   google: Google
 message:
+  subscription: 購読する
   forbidden: この機能は現在インペリアルスカラー限定です
   not_found: この機能は開発中です
   new_results: %{salmon_id}件のリザルトを取得しました

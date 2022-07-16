@@ -1,78 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Salmon Stats</title>
 
-    <base href="/" />
-    <meta property="og:url" content="/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Salmon Stats" />
-    <meta
-      property="og:description"
-      content="Salmon Stats is an open-source Splatoon 2 Salmon Run statistics website."
-    />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@tkgling" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#202020" />
-    <meta
-      name="viewport"
-      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
+<head>
+  <meta charset="utf-8" />
+  <title>Salmon Stats</title>
 
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="<%= BASE_URL %>assets/icon/favicon.png"
-    />
-    <link rel="manifest" href="manifest.json" />
+  <base href="/" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Salmon Stats" />
+  <meta property="og:description" content="Salmon Stats is an open-source Splatoon 2 Salmon Run statistics website." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@tkgling" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#202020" />
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
 
-    <meta name="theme-color" content="black-translucent" />
-    <!-- add to homescreen for ios -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Salmon Stats" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7107468397673752"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://www.paypal.com/sdk/js?client-id=Ad950Aot5hYfU49X5APIhZxFNH8XiMEEhwDUPz7zt7OrAFAmrYmk5Z94WaDiwFjYhPy5ieWGdZoLpStW&vault=true&intent=subscription"
-      data-sdk-integration-source="button-factory"
-    ></script>
-    <script>
-      paypal
-        .Buttons({
-          style: {
-            shape: "rect",
-            color: "gold",
-            layout: "horizontal",
-            label: "subscribe",
-            tagline: false,
-            height: 35,
-          },
-          createSubscription: function (data, actions) {
-            return actions.subscription.create({
-              /* Creates the subscription */
-              plan_id: "P-5YR614358D8229313MAAAVNA",
-            });
-          },
-          onApprove: function (data, actions) {
-            alert(data.subscriptionID); // You can add optional success message for the subscriber here
-          },
-        })
-        .render("#paypal-button-container-P-5YR614358D8229313MAAAVNA"); // Renders the PayPal button
+  <link rel="shortcut icon" type="image/png" href="<%= BASE_URL %>assets/icon/favicon.png" />
+  <link rel="manifest" href="manifest.json" />
+
+  <meta name="theme-color" content="black-translucent" />
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Salmon Stats" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7107468397673752"
+    crossorigin="anonymous">
     </script>
-  </head>
+</head>
 
-  <body>
-    <div id="app"></div>
-  </body>
+<body>
+  <div id="app"></div>
+</body>
+
 </html>

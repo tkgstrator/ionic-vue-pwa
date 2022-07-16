@@ -79,6 +79,9 @@ export default defineComponent({
       });
       return toast.present();
     },
+    async subscription() {
+      window.location.href = "https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-5YR614358D8229313MAAAVNA"
+    },
     async signIn() {
       try {
         const provider = new TwitterAuthProvider();
@@ -110,6 +113,14 @@ export default defineComponent({
 </script>
 
 <template>
+  <ion-list-header>{{ t("app.subscription") }}</ion-list-header>
+  <ion-item button lines="full" v-on:click="subscription">
+    <ion-avatar slot="start">
+      <img src="assets/icon/paypal-logo.png" />
+    </ion-avatar>
+    <ion-label slot="start">Twitter</ion-label>
+    <ion-label slot="end" class="version">{{ t("message.subscription") }}</ion-label>
+  </ion-item>
   <ion-list-header>{{ t("app.authentication") }}</ion-list-header>
   <ion-item button lines="full">
     <ion-avatar slot="start">

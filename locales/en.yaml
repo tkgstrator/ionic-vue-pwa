@@ -30,6 +30,7 @@ stage_name:
   "5002": Lost Outpost
   "5000": Spawning Grounds
 app:
+  subscription: Subscription
   appearances: Appearances
   authentication: Authentication
   server: Server
@@ -93,6 +94,7 @@ authentication:
   twitter: Twitter
   google: Google
 message:
+  subscription: Subscribe
   forbidden: This feature is only available for Imperial Scholars
   not_found: This feature is under construction
   new_results: Get new %{salmon_id} results

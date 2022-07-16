@@ -99,7 +99,7 @@ export default defineComponent({
         .then(response => response.json())
         .then((response: User) => {
           this.user = response
-          console.log(this.user)
+          console.log("Response", this.user)
         })
         .catch((error) => {
           this.openToast()
@@ -109,7 +109,7 @@ export default defineComponent({
     async openToast() {
       const toast = await toastController.create({
         message: this.t('message.forbidden'),
-        duration: 2500
+        duration: 5000
       });
       return toast.present();
     },
