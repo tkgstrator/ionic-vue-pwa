@@ -53,7 +53,7 @@ export default defineComponent({
       <ion-item>
         <section>
           <div class="coop-stats-progress-bar">
-            <ion-label class="coop-stats-key">{{ t("stats.failure_wave", { id: wave.failure_wave }) }}</ion-label>
+            <ion-label class="coop-stats-key">{{ t("stats.failure_wave", { wave_id: wave.failure_wave }) }}</ion-label>
             <ion-progress-bar :value="((wave.time_limit + wave.wipe_out) / results?.is_failure)">
             </ion-progress-bar>
             <ion-label class="coop-stats-key prob">{{ (100 * (wave.time_limit + wave.wipe_out) /

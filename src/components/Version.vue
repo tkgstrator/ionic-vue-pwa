@@ -29,11 +29,11 @@ export default defineComponent({
 
 <template>
   <ion-list-header>{{ t("app.version") }}</ion-list-header>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t('version.app') }}</ion-label>
     <ion-label slot="end" class="version">{{ appVersion }}</ion-label>
   </ion-item>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t('version.api') }}</ion-label>
     <ion-label slot="end" class="version">{{ apiVersion }}</ion-label>
   </ion-item>

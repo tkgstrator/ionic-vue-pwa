@@ -99,10 +99,27 @@ div.item-inner {
   max-width: 200px !important;
 }
 
+:host {
+  .input-wrapper {
+    width: 0px !important;
+  }
+}
+
+::shadow {
+  .input-wrapper {
+    width: 0px !important;
+  }
+}
+
 ion-label {
   &.nickname {
     font-size: 0.95rem;
     min-width: 160px !important;
+    margin-inline-end: 0px !important;
+  }
+
+  &.results {
+    margin-left: 0px !important;
     margin-inline-end: 0px !important;
   }
 

@@ -23,7 +23,7 @@ export default defineComponent({
       which is compatible with both iPhone and Android.
     </p>
   </ion-item>
-  <ion-item button>
+  <ion-item button lines="none">
     <ion-avatar slot="start">
       <img
         src="https://is5-ssl.mzstatic.com/image/thumb/Purple116/v4/82/91/9b/82919b7d-2047-432c-4e87-313111198045/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/434x0w.webp" />
@@ -32,7 +32,7 @@ export default defineComponent({
     </ion-label>
     <ion-label slot="end" class="version">1.0.6</ion-label>
   </ion-item>
-  <ion-item button>
+  <ion-item button lines="none">
     <ion-avatar slot="start">
       <img
         src="https://is5-ssl.mzstatic.com/image/thumb/Purple116/v4/82/91/9b/82919b7d-2047-432c-4e87-313111198045/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/434x0w.webp" />

@@ -63,7 +63,7 @@ messages:
 stats:
   golden_ikura_num: Golden Eggs
   ikura_num: Power Eggs
-  failure_wave: Failure Wave
+  failure_wave: Failure Wave %{wave_id}
   job_num: Shift Worked
 server:
   network: Network
@@ -93,6 +93,8 @@ authentication:
   twitter: Twitter
   google: Google
 message:
+  forbidden: This feature is only available for Imperial Scholars
+  not_found: This feature is under construction
   new_results: Get new %{salmon_id} results
   sign_in:
     success: Paired successfully

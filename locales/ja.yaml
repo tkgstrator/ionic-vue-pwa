@@ -42,7 +42,7 @@ water_level:
   normal: 通常
   high: 満潮
 stats_type:
-  global: グローバル
+  global: 概要
   grade_point: 評価
   eggs: イクラ
   weapons: ブキ
@@ -63,7 +63,7 @@ messages:
 stats:
   golden_ikura_num: 金イクラ
   ikura_num: イクラ
-  failure_wave: 失敗WAVE
+  failure_wave: WAVE %{wave_id} 失敗
   job_num: バイト回数
 server:
   network: ネットワーク
@@ -93,6 +93,8 @@ authentication:
   twitter: Twitter
   google: Google
 message:
+  forbidden: この機能は現在インペリアルスカラー限定です
+  not_found: この機能は開発中です
   new_results: %{salmon_id}件のリザルトを取得しました
   sign_in:
     success: ログイン成功

@@ -7,18 +7,18 @@ import { useI18n } from "vue-i18n";
 interface Account {
   nsaid: string
   nickname: string
-  thumbnailURL: string
-  friendCode: string
+  thumbnail_url: string
+  friend_code: string
 }
 
 interface User {
   uid: string
   name: string
-  isFriendCodePublic: boolean
-  isImperialScholars: boolean
-  isTwitterIdPublic: boolean
-  isVerified: boolean
-  thumbnailURL: string
+  is_friend_code_public: boolean
+  is_imperial_scholars: boolean
+  is_twitter_id_public: boolean
+  is_verified: boolean
+  thumbnail_url: string
   accounts: Account[]
 }
 
@@ -27,13 +27,13 @@ class Twitter {
     const user: UserInfo = credential.user.providerData[0]
     this.uid = user.uid
     this.display_name = user.displayName
-    this.photoURL = user.photoURL
+    this.thumbnail_url = user.photoURL
     this.screen_name = ""
     this.accounts = []
   }
   screen_name: string
   display_name: string | null
-  photoURL: string | null
+  thumbnail_url: string | null
   uid: string
   accounts: Account[]
 }
@@ -96,6 +96,7 @@ export default defineComponent({
           body: parameters
         })).json())
         // レスポンスを整形して保存
+        console.log(response)
         localStorage.setItem("user", JSON.stringify(response))
         this.onLoad()
         this.openToast(this.t('message.sign_in.success'))
@@ -110,7 +111,7 @@ export default defineComponent({
 
 <template>
   <ion-list-header>{{ t("app.authentication") }}</ion-list-header>
-  <ion-item button>
+  <ion-item button lines="full">
     <ion-avatar slot="start">
       <img src="assets/icon/twitter-logo.png" />
     </ion-avatar>
@@ -125,12 +126,12 @@ export default defineComponent({
   <template v-if="user.uid !== undefined">
     <ion-list-header>{{ t("app.accounts") }}</ion-list-header>
     <template v-for="account in accounts" :key="account.nsaid">
-      <ion-item button v-on:click="navigate(account.nsaid)">
+      <ion-item button v-on:click="navigate(account.nsaid)" lines="full">
         <ion-avatar slot="start">
-          <img :src="account.thumbnailURL" />
+          <img :src="account.thumbnail_url" />
         </ion-avatar>
         <ion-label slot="start" class="nickname">{{ account.nickname }}</ion-label>
-        <ion-label slot="end" class="friend-code">{{ account.friendCode }}</ion-label>
+        <ion-label slot="end" class="friend-code">{{ account.friend_code }}</ion-label>
       </ion-item>
     </template>
   </template>

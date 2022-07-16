@@ -5,7 +5,9 @@
         <ion-title>Salmon Stats</ion-title>
       </ion-toolbar>
     </ion-header>
-    <CoopResults />
+    <ion-content>
+      <CoopResults />
+    </ion-content>
   </ion-page>
 </template>
 

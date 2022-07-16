@@ -18,24 +18,14 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonCardContent,
-  useIonRouter,
-  IonAvatar,
   IonBadge,
-  toastController
+  useIonRouter,
+  IonAvatar
 } from '@ionic/vue';
-import Overview from './Users/Overview.vue';
-import CoopResults from './CoopResults.vue';
-import NotFound from './NotFound.vue';
+import { IonNavCustomEvent } from '@ionic/core';
 
 interface User {
-  nsaid: string
   shifts_worked: number
-  is_clear: number
-  is_failure: number
-  is_friend_code_public: boolean
-  is_imperial_scholars: boolean
-  is_twitter_id_public: boolean
-  is_verified: boolean
   golden_ikura_num: number
   ikura_num: number
   kuma_point: number
@@ -70,48 +60,34 @@ export default defineComponent({
     IonItem,
     IonSegment,
     IonSegmentButton,
-    IonBadge,
+    IonBadge
     // IonCard,
     // IonCardContent,
     // IonCardHeader,
     // IonImg,
     // IonCardSubtitle,
     // IonCardTitle
-    CoopResults,
-    NotFound
   },
   setup() {
     const { t } = useI18n()
     const ionRouter = useIonRouter()
     const route = useRoute()
     const user: Ref<User | undefined> = ref<User>()
-    const tabType: Ref<TabType> = ref<TabType>(TabType.OVERVIEW)
-    const { nsaid } = route.params
-    return { t, ionRouter, user, route, tabType, TabType, nsaid }
+    const tabType: TabType = TabType.OVERVIEW
+    return { t, ionRouter, user, route, tabType, TabType }
   },
   mounted() {
     this.onLoad()
   },
   methods: {
     onLoad() {
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/players/${this.nsaid}`;
-      fetch(url)
-        .then(response => response.json())
-        .then((response: User) => {
-          this.user = response
-          console.log(this.user)
-        })
-        .catch((error) => {
-          this.openToast()
-          console.log(error)
-        })
-    },
-    async openToast() {
-      const toast = await toastController.create({
-        message: this.t('message.forbidden'),
-        duration: 2500
+      const { nsaid } = this.route.params
+      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/players/${nsaid}`;
+      fetch(url).then(response => response.json()).then((response: User) => {
+        this.user = response
+        console.log(this.user)
       });
-      return toast.present();
+
     },
     onRefresh(event: CustomEvent) {
       setTimeout(() => {
@@ -120,7 +96,7 @@ export default defineComponent({
       }, 1500);
     },
     onChanged(event: CustomEvent) {
-      this.tabType = event.detail.value as TabType
+      console.log(event)
     }
   }
 });
@@ -132,23 +108,16 @@ export default defineComponent({
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <template v-if="user !== undefined">
-      <ion-item lines="none">
+      <ion-item>
         <ion-avatar slot="start">
           <img :src="user.thumbnail_url" />
         </ion-avatar>
-        <ion-label slot="start" class="nickname">{{ user.nickname }}
+        <ion-label slot="start">{{ user.nickname }}
         </ion-label>
-        <ion-label>
-          <ul>
-            <li>
-              <ion-badge color="primary" class="user-label-item">{{ user.is_clear }}</ion-badge>
-              <ion-badge color="danger" class="user-label-item">{{ user.is_failure }}</ion-badge>
-            </li>
-            <li>
-              <ion-badge color="warning" class="user-label-item">{{ user.golden_ikura_num }}</ion-badge>
-              <ion-badge color="danger" class="user-label-item">{{ user.ikura_num }}</ion-badge>
-            </li>
-          </ul>
+        <ion-label slot="end">
+          <p>Eggs</p>
+          <ion-badge color="warning" class="user-label-item">{{ user.golden_ikura_num }}</ion-badge>
+          <ion-badge color="danger" class="user-label-item">{{ user.ikura_num }}</ion-badge>
         </ion-label>
       </ion-item>
     </template>
@@ -159,8 +128,10 @@ export default defineComponent({
         </ion-segment-button>
       </template>
     </ion-segment>
-    <NotFound v-if="tabType === TabType.OVERVIEW" />
-    <CoopResults v-if="tabType === TabType.RESULTS" :nsaid="nsaid" />
-    <NotFound v-if="tabType === TabType.SHIFTS" />
   </ion-content>
 </template>
+
+
+<style lang="scss">
+@import "../../theme/styles.scss";
+</style>

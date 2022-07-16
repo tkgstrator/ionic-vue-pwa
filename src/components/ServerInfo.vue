@@ -69,24 +69,24 @@ export default defineComponent({
 
 <template>
   <ion-list-header>{{ t("app.server") }}</ion-list-header>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t("server.system.os") }}</ion-label>
     <ion-label slot="end" class="version">{{ sys_info?.os.dist }} {{ sys_info?.os.distversion }}</ion-label>
   </ion-item>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t("server.kernel") }}</ion-label>
     <ion-label slot="end" class="version">{{ sys_info?.kernel }} </ion-label>
   </ion-item>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t("server.cpu") }}</ion-label>
     <ion-label slot="end" class="version">{{ sys_info?.cpu.type }}</ion-label>
   </ion-item>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t("server.network") }}</ion-label>
     <ion-label slot="end" class="version">{{ network }}
     </ion-label>
   </ion-item>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t("server.uptime") }}</ion-label>
     <ion-label slot="end" class="version">{{ uptime }}
     </ion-label>

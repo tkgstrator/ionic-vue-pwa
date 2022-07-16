@@ -48,12 +48,12 @@ export default defineComponent({
 
 <template>
   <ion-list-header>{{ t("app.appearances") }}</ion-list-header>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t("appearances.dark_mode") }}</ion-label>
     <ion-toggle slot="end" v-on:ion-change="onChangeTheme($event)" :checked="toggleValue">{{ t('app.version')
     }}</ion-toggle>
   </ion-item>
-  <ion-item>
+  <ion-item lines="none">
     <ion-label slot="start">{{ t("appearances.languages") }}</ion-label>
     <ion-select slot="end" interface="action-sheet" :placeholder="t(`languages.${currentLang}`)" mode="ios"
       :cancel-text="t('messages.cancel')" v-on:ion-change="onChange($event)">

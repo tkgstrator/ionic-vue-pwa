@@ -10,7 +10,6 @@ export default defineComponent({
     IonList,
     IonRefresher,
     IonRefresherContent,
-    IonContent,
     IonLabel,
   },
   setup() {
@@ -21,9 +20,20 @@ export default defineComponent({
   mounted: function () {
     this.onReload();
   },
+  props: {
+    nsaid: {
+      type: String,
+      required: false
+    },
+  },
   methods: {
     async onReload() {
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/results`;
+      console.log("Results: =>", this.nsaid)
+      const url: string = (() => {
+        return this.nsaid === undefined
+          ? `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/results`
+          : `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/results?nsaid=${this.nsaid}`
+      })()
       fetch(url).then(response => response.json()).then(response => {
         if (this.results.length !== 0) {
           const currentSalmonId: number = this.results[0].salmon_id
@@ -79,48 +89,46 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-content fullscreen="true">
-    <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-    <ion-list class="coop-result-list">
-      <ion-item v-for="result in results" :key="result.salmon_id" class="coop-result">
-        <ion-label>
-          <section class="coop-result-summary">
-            <div class="coop-result-job-result">
-              <ion-label class="salmon_id">{{ result.salmon_id }}</ion-label>
-              <ion-label :class="result.job_result.is_clear ? 'job_clear' : 'job_failure'">{{ result.job_result.is_clear
-                  ?
-                  t("result.is_clear") : t("result.is_failure")
-              }}</ion-label>
-              <ion-label class="danger_rate">{{ result.danger_rate.toFixed(1) }}</ion-label>
+  <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="coop-result-list">
+    <ion-item v-for="result in results" :key="result.salmon_id" class="coop-result">
+      <ion-label>
+        <section class="coop-result-summary">
+          <div class="coop-result-job-result">
+            <ion-label class="salmon_id">{{ result.salmon_id }}</ion-label>
+            <ion-label :class="result.job_result.is_clear ? 'job_clear' : 'job_failure'">{{ result.job_result.is_clear
+                ?
+                t("result.is_clear") : t("result.is_failure")
+            }}</ion-label>
+            <ion-label class="danger_rate">{{ result.danger_rate.toFixed(1) }}</ion-label>
+          </div>
+          <div class="coop-result-job-waves">
+            <div class="coop-result-job-waves-golden-ikura">
+              <template v-for="wave in result.waves" :key="wave">
+                <ion-label>{{
+                    ("00" + wave.golden_ikura_num).slice(-2)
+                }}/{{ wave.quota_num }}</ion-label>
+              </template>
             </div>
-            <div class="coop-result-job-waves">
-              <div class="coop-result-job-waves-golden-ikura">
-                <template v-for="wave in result.waves" :key="wave">
-                  <ion-label>{{
-                      ("00" + wave.golden_ikura_num).slice(-2)
-                  }}/{{ wave.quota_num }}</ion-label>
-                </template>
-              </div>
-              <div class="coop-result-job-waves-information">
-                <template v-for="wave in result.waves" :key="wave">
-                  <ion-label class="wave-information">{{ getWaterLevel(wave.water_level) }} {{
-                      getEventType(wave.event_type)
-                  }}</ion-label>
-                </template>
-              </div>
+            <div class="coop-result-job-waves-information">
+              <template v-for="wave in result.waves" :key="wave">
+                <ion-label class="wave-information">{{ getWaterLevel(wave.water_level) }} {{
+                    getEventType(wave.event_type)
+                }}</ion-label>
+              </template>
             </div>
-            <div class="coop-result-job-detail">
-              <ion-label class="num golden_ikura_num">{{ result.golden_ikura_num }}</ion-label>
-              <ion-label class="num ikura_num">{{ result.ikura_num }}</ion-label>
-            </div>
-          </section>
-        </ion-label>
-        <!-- <ion-label>{{ result.salmon_id }}</ion-label> -->
-      </ion-item>
-    </ion-list>
-  </ion-content>
+          </div>
+          <div class="coop-result-job-detail">
+            <ion-label class="num golden_ikura_num">{{ result.golden_ikura_num }}</ion-label>
+            <ion-label class="num ikura_num">{{ result.ikura_num }}</ion-label>
+          </div>
+        </section>
+      </ion-label>
+      <!-- <ion-label>{{ result.salmon_id }}</ion-label> -->
+    </ion-item>
+  </ion-list>
 </template>
 
 <style lang="scss">
