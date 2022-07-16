@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { IonPage, IonHeader, IonToolbar, IonTitle } from '@ionic/vue';
-import CoopPlayers from '@/components/CoopPlayers.vue';
+import CoopUsers from '@/components/CoopUsers.vue';
 
 export default defineComponent({
-  name: 'ResultView',
-  components: { CoopPlayers, IonHeader, IonToolbar, IonTitle, IonPage }
+  name: 'UsersView',
+  components: { IonHeader, IonToolbar, IonTitle, IonPage, CoopUsers }
 });
 </script>
 
@@ -13,9 +13,9 @@ export default defineComponent({
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Player</ion-title>
+        <ion-title>Salmon Stats</ion-title>
       </ion-toolbar>
     </ion-header>
-    <CoopPlayers />
+    <CoopUsers />
   </ion-page>
 </template>

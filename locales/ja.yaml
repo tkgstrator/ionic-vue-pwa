@@ -36,6 +36,7 @@ app:
   uploader: アップローダー
   version: バージョン
   system: システム
+  accounts: アカウント
 water_level:
   low: 干潮
   normal: 通常
@@ -87,6 +88,19 @@ result:
   is_clear: Clear!
 authentication:
   sign_in: ログイン
+  sign_out: ログアウト
   github: GitHub
   twitter: Twitter
   google: Google
+message:
+  new_results: %{salmon_id}件のリザルトを取得しました
+  sign_in:
+    success: ログイン成功
+    failure: ログイン失敗
+  sign_out:
+    success: ログアウト成功
+    failure: ログアウト失敗
+tab_type:
+  overview: Overview
+  results: Results
+  shifts: Shifts

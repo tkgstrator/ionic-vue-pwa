@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, Ref, ref } from 'vue';
-import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel } from '@ionic/vue';
+import { IonList, IonItem, IonRefresher, IonContent, IonRefresherContent, IonLabel, toastController } from '@ionic/vue';
 import { useI18n } from 'vue-i18n'
 import { Result } from './@types/response';
 
@@ -25,9 +25,19 @@ export default defineComponent({
     async onReload() {
       const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/results`;
       fetch(url).then(response => response.json()).then(response => {
+        if (this.results.length !== 0) {
+          const currentSalmonId: number = this.results[0].salmon_id
+          this.openToast(this.results[0].salmon_id - currentSalmonId);
+        }
         this.results = response.results;
-        console.log(this.results)
       });
+    },
+    async openToast(diff: number) {
+      const toast = await toastController.create({
+        message: this.t('message.new_results', { salmon_id: diff }),
+        duration: 2500
+      });
+      return toast.present();
     },
     onRefresh(event: CustomEvent) {
       this.onReload().then(() => event.detail.complete());

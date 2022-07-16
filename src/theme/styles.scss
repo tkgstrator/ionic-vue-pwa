@@ -95,7 +95,23 @@ section {
   }
 }
 
+div.item-inner {
+  max-width: 200px !important;
+}
+
 ion-label {
+  &.nickname {
+    font-size: 0.95rem;
+    min-width: 160px !important;
+    margin-inline-end: 0px !important;
+  }
+
+  &.friend-code {
+    font-size: 0.95rem;
+    color: var(--ion-color-text-secondary);
+    margin-inline-start: 0px !important;
+  }
+
   .count {
     font-size: 0.8rem;
     font-weight: bold;
@@ -244,6 +260,17 @@ ion-list-header {
   font-size: 1.3rem;
 }
 
+ion-card {
+  max-width: calc(var(--ion-frame-max-width) * 0.5) !important;
+  margin: 0 auto !important;
+}
+
+.user-label-item {
+  &:not(:last-child) {
+    margin-right: 4px !important;
+  }
+}
+
 ion-img {
   &.coop-player-thumbnail {
     width: 50px;
@@ -287,6 +314,10 @@ ion-item {
   min-width: 340px;
   max-width: var(--ion-frame-max-width) !important;
   margin: 6px auto;
+
+  &div.item-inner {
+    flex: none !important;
+  }
 }
 
 ion-progress-bar {

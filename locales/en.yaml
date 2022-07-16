@@ -36,6 +36,7 @@ app:
   uploader: Uploader
   version: Version
   system: System
+  accounts: Accounts
 water_level:
   low: LT
   normal: NT
@@ -87,6 +88,19 @@ result:
   is_clear: Clear
 authentication:
   sign_in: Sign in
+  sign_out: Sign out
   github: GitHub
   twitter: Twitter
   google: Google
+message:
+  new_results: Get new %{salmon_id} results
+  sign_in:
+    success: Paired successfully
+    failure: Paired failure
+  sign_out:
+    success: Unpaired successfully
+    failure: Unpaired failure
+tab_type:
+  overview: Overview
+  results: Results
+  shifts: Shifts
