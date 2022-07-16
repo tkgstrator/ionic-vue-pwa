@@ -81,7 +81,7 @@ const app = createApp(App)
   })
   .use(router)
   .use(i18n)
-  .use(VueGtag, { property: { id: "G-ZTVD4X4NVR", router } })
+  .use(VueGtag, { property: { id: "G-YC1LNTWRXY", router } })
   .use(Ads.Adsense)
   .use(Ads.InArticleAdsense)
   .use(Ads.InFeedAdsense);
