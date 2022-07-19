@@ -55,7 +55,7 @@ export default defineComponent({
   </ion-item>
   <ion-item lines="none">
     <ion-label slot="start">{{ t("appearances.languages") }}</ion-label>
-    <ion-select slot="end" interface="action-sheet" :placeholder="t(`languages.${currentLang}`)" mode="ios"
+    <ion-select slot="end" interface="action-sheet" :placeholder="t(`languages.${currentLang}`)"
       :cancel-text="t('messages.cancel')" v-on:ion-change="onChange($event)">
       <template v-for="lang in availableLocales" :key="lang">
         <ion-select-option :value="lang">{{ t(`languages.${lang}`) }}</ion-select-option>

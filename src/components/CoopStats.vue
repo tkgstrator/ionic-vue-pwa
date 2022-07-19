@@ -69,7 +69,7 @@ export default defineComponent({
 
 <template>
   <ion-content fullscreen>
-    <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
+    <ion-refresher slot="fixed" :pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-segment mode="md" @ionChange="onStatsTypeChanged($event)" :value="statsType" scrollable>

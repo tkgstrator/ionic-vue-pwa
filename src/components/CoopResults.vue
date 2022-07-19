@@ -89,7 +89,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
+  <ion-refresher slot="fixed" :pull-factor="0.5" @ionRefresh="onRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list class="coop-result-list">

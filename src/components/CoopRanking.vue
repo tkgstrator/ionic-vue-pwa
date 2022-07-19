@@ -119,8 +119,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-content fullscreen="true">
-    <ion-refresher slot="fixed" pull-factor="0.5" @ionRefresh="onRefresh($event)">
+  <ion-content fullscreen>
+    <ion-refresher slot="fixed" :pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-segment mode="md" v-on:ion-change="segmentChanged($event)" :value="rankMode" v-model="rankMode">
