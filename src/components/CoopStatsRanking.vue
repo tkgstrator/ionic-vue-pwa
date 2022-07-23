@@ -18,7 +18,8 @@ export default defineComponent({
     const { t } = useI18n()
     const route = useRoute()
     const { start_time } = route.params
-    const { event_type, water_level, nightless } = route.query
+    const { event_type, water_level } = route.query
+    const { nightless } = route.params
     const results: Ref<WaveResult[]> = ref<WaveResult[]>([]);
     return { t, start_time, event_type, water_level, nightless, results };
   },
@@ -27,15 +28,15 @@ export default defineComponent({
   },
   methods: {
     async onLoad() {
-      const waterLevel: number = (() => {
-        if (this.water_level === null) {
-          return 0
+      const waterLevel: number | null = (() => {
+        if (this.water_level === undefined) {
+          return null
         }
         return parseInt(this.water_level as string)
       })()
-      const eventType: number = (() => {
-        if (this.event_type === null) {
-          return 0
+      const eventType: number | null = (() => {
+        if (this.event_type === undefined) {
+          return null
         }
         return parseInt(this.event_type as string)
       })()
@@ -45,7 +46,14 @@ export default defineComponent({
         }
         return this.nightless === 'nightless'
       })()
-      const url = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}/waves/${this.start_time}?water_level=${waterLevel}&event_type=${eventType}`;
+
+      const url: string = (() => {
+        const baseURL = `${process.env.VUE_APP_SERVER_URL}/${process.env.VUE_APP_SERVER_API_VER}`;
+        if (eventType === null && waterLevel === null) {
+          return `${baseURL}/totals/${this.start_time}?nightless=${night_less}`
+        }
+        return `${baseURL}/waves/${this.start_time}?event_type=${eventType}&water_level=${waterLevel}`
+      })()
       const headers = {
         "cache-control": "force-cache; max-age=3600",
       }

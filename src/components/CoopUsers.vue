@@ -61,22 +61,14 @@ const StageType: { [name: number]: string } = {
 export default defineComponent({
   name: 'UsersView',
   components: {
-    // IonList,
     IonRefresherContent,
     IonRefresher,
-    IonContent,
     IonAvatar,
     IonLabel,
     IonItem,
     IonSegment,
     IonSegmentButton,
     IonBadge,
-    // IonCard,
-    // IonCardContent,
-    // IonCardHeader,
-    // IonImg,
-    // IonCardSubtitle,
-    // IonCardTitle
     CoopResults,
     NotFound
   },
@@ -99,11 +91,10 @@ export default defineComponent({
         .then(response => response.json())
         .then((response: User) => {
           this.user = response
-          console.log("Response", this.user)
         })
         .catch((error) => {
-          this.openToast()
           console.log(error)
+          this.openToast()
         })
     },
     async openToast() {
@@ -127,42 +118,40 @@ export default defineComponent({
 </script>
 
 <template>
-  <ion-content fullscreen>
-    <ion-refresher slot="fixed" :pull-factor=0.5 @ionRefresh="onRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-    <template v-if="user !== undefined">
-      <ion-item lines="none">
-        <ion-avatar slot="start">
-          <img :src="user.thumbnail_url" />
-        </ion-avatar>
-        <ion-label slot="start" class="nickname">{{ user.nickname }}
-        </ion-label>
-        <ion-label>
-          <ul>
-            <li>
-              <ion-badge color="primary" class="user-label-item">{{ user.is_clear }}</ion-badge>
-              <ion-badge color="danger" class="user-label-item">{{ user.is_failure }}</ion-badge>
-            </li>
-            <li>
-              <ion-badge color="warning" class="user-label-item">{{ user.golden_ikura_num }}</ion-badge>
-              <ion-badge color="danger" class="user-label-item">{{ user.ikura_num }}</ion-badge>
-            </li>
-          </ul>
-        </ion-label>
-      </ion-item>
+  <ion-refresher slot="fixed" :pull-factor=0.5 @ionRefresh="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <template v-if="user !== undefined">
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <img :src="user.thumbnail_url" />
+      </ion-avatar>
+      <ion-label slot="start" class="nickname">{{ user.nickname }}
+      </ion-label>
+      <ion-label>
+        <ul>
+          <li>
+            <ion-badge color="primary" class="user-label-item">{{ user.is_clear }}</ion-badge>
+            <ion-badge color="danger" class="user-label-item">{{ user.is_failure }}</ion-badge>
+          </li>
+          <li>
+            <ion-badge color="warning" class="user-label-item">{{ user.golden_ikura_num }}</ion-badge>
+            <ion-badge color="danger" class="user-label-item">{{ user.ikura_num }}</ion-badge>
+          </li>
+        </ul>
+      </ion-label>
+    </ion-item>
+  </template>
+  <ion-segment mode="md" @ionChange="onChanged($event)" :value="tabType" scrollable>
+    <template v-for="tabType in Object.values(TabType)" :key="tabType">
+      <ion-segment-button :value="tabType">
+        <ion-label>{{ t(`tab_type.${tabType}`) }}</ion-label>
+      </ion-segment-button>
     </template>
-    <ion-segment mode="md" @ionChange="onChanged($event)" :value="tabType" scrollable>
-      <template v-for="tabType in Object.values(TabType)" :key="tabType">
-        <ion-segment-button :value="tabType">
-          <ion-label>{{ t(`tab_type.${tabType}`) }}</ion-label>
-        </ion-segment-button>
-      </template>
-    </ion-segment>
-    <NotFound v-if="tabType === TabType.OVERVIEW" />
-    <CoopResults v-if="tabType === TabType.RESULTS" :nsaid="nsaid" />
-    <NotFound v-if="tabType === TabType.SHIFTS" />
-  </ion-content>
+  </ion-segment>
+  <NotFound v-if="tabType === TabType.OVERVIEW" />
+  <CoopResults v-if="tabType === TabType.RESULTS" :nsaid="nsaid" />
+  <NotFound v-if="tabType === TabType.SHIFTS" />
 </template>
 
 <style lang="scss" scoped>

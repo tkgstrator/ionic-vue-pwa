@@ -19,9 +19,7 @@ export default defineComponent({
 <template>
   <ion-list-header>{{ t("app.uploader") }}</ion-list-header>
   <ion-item>
-    <p class="description">In order to upload results to Salmon Stats, you will need to use the following app,
-      which is compatible with both iPhone and Android.
-    </p>
+    <p class="description">{{ t("message.uploader_description") }}</p>
   </ion-item>
   <ion-item button lines="none">
     <ion-avatar slot="start">

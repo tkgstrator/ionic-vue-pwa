@@ -121,6 +121,9 @@ export default defineComponent({
     <ion-label slot="start">Paypal</ion-label>
     <ion-label slot="end" class="version">{{ t("message.subscription") }}</ion-label>
   </ion-item>
+  <ion-item>
+    <p class="description">{{ t("message.subscription_description") }}</p>
+  </ion-item>
   <ion-list-header>{{ t("app.authentication") }}</ion-list-header>
   <template v-if="user.uid === undefined">
     <ion-item button lines="full" v-on:click="signIn">

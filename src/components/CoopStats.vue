@@ -72,7 +72,7 @@ export default defineComponent({
     <ion-refresher slot="fixed" :pull-factor="0.5" @ionRefresh="onRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-segment mode="md" @ionChange="onStatsTypeChanged($event)" :value="statsType" scrollable>
+    <ion-segment @ionChange="onStatsTypeChanged($event)" :value="statsType" scrollable>
       <template v-for="statsType in Object.values(StatsType)" :key="statsType">
         <ion-segment-button :value="statsType">
           <ion-label>{{ t(`stats_type.${statsType}`) }}</ion-label>
@@ -83,7 +83,7 @@ export default defineComponent({
     <CoopStatsBossType :results="results?.boss_results" v-if="statsType == StatsType.SALMON_ID" />
     <CoopStatsGrade :results="results?.grade_results" v-if="statsType == StatsType.GRADE" />
     <CoopStatsWeapons :results="results?.weapon_results" v-if="statsType == StatsType.WEAPONS" />
-    <CoopStatsWave :results="results?.wave_results" v-if="statsType == StatsType.EGGS" />
+    <CoopStatsWave :results="results?.wave_results" :total=results?.total_results v-if="statsType == StatsType.EGGS" />
   </ion-content>
 </template>
 

@@ -62,6 +62,7 @@ messages:
   cancel: Cancel
   submit: Submit
 stats:
+  total: Total
   golden_ikura_num: Golden Eggs
   ikura_num: Power Eggs
   failure_wave: Failure Wave %{wave_id}
@@ -95,6 +96,7 @@ authentication:
   google: Google
 message:
   subscription: Subscribe
+  uploader_description: In order to upload results to Salmon Stats, you will need to use the following app, which is compatible with both iPhone and Android.
   forbidden: This feature is only available for Imperial Scholars
   not_found: This feature is under construction
   new_results: Get new %{salmon_id} results
@@ -108,3 +110,6 @@ tab_type:
   overview: Overview
   results: Results
   shifts: Shifts
+total:
+  night: Night
+  nightless: NightLess

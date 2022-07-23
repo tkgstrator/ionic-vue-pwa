@@ -4,6 +4,7 @@ export interface LegacyStats {
     is_failure: number;
     failure_waves: FailureWave[];
   };
+  total_results: TotalResult;
   wave_results: WaveResult[][];
   boss_results: BossResult[];
   weapon_results: WeaponResult[];
@@ -24,6 +25,25 @@ export interface BossResult {
   boss_kill_counts: number;
   boss_counts_max: number;
   boss_kill_counts_max: number;
+}
+
+interface TotalResult {
+  night: {
+    golden_ikura_num: number;
+    ikura_num: number;
+    count: number;
+    nightless: boolean;
+    rank?: number;
+    names?: string[];
+  };
+  nightLess: {
+    golden_ikura_num: number;
+    ikura_num: number;
+    count: number;
+    nightless: boolean;
+    rank?: number;
+    names?: string[];
+  };
 }
 
 interface WaveResult {

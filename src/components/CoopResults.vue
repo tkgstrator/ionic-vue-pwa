@@ -98,11 +98,14 @@ export default defineComponent({
         <section class="coop-result-summary">
           <div class="coop-result-job-result">
             <ion-label class="salmon_id">{{ result.salmon_id }}</ion-label>
-            <ion-label :class="result.job_result.is_clear ? 'job_clear' : 'job_failure'">{{ result.job_result.is_clear
-                ?
-                t("result.is_clear") : t("result.is_failure")
-            }}</ion-label>
-            <ion-label class="danger_rate">{{ result.danger_rate.toFixed(1) }}</ion-label>
+            <ion-label :class="result.job_result.is_clear ? 'job_clear' : 'job_failure'">
+              {{ result.job_result.is_clear
+                  ?
+                  t("result.is_clear") : t("result.is_failure")
+              }}</ion-label>
+            <ion-label class="danger_rate">
+              {{ result.danger_rate.toFixed(1) }}
+            </ion-label>
           </div>
           <div class="coop-result-job-waves">
             <div class="coop-result-job-waves-golden-ikura">
@@ -121,12 +124,15 @@ export default defineComponent({
             </div>
           </div>
           <div class="coop-result-job-detail">
-            <ion-label class="num golden_ikura_num">{{ result.golden_ikura_num }}</ion-label>
-            <ion-label class="num ikura_num">{{ result.ikura_num }}</ion-label>
+            <ion-label class="num golden_ikura_num">
+              {{ result.golden_ikura_num }}
+            </ion-label>
+            <ion-label class="num ikura_num">
+              {{ result.ikura_num }}
+            </ion-label>
           </div>
         </section>
       </ion-label>
-      <!-- <ion-label>{{ result.salmon_id }}</ion-label> -->
     </ion-item>
   </ion-list>
 </template>

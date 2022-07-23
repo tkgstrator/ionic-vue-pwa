@@ -62,6 +62,7 @@ messages:
   cancel: キャンセル
   submit: 送信
 stats:
+  total: 総合
   golden_ikura_num: 金イクラ
   ikura_num: イクラ
   failure_wave: WAVE %{wave_id} 失敗
@@ -95,6 +96,8 @@ authentication:
   google: Google
 message:
   subscription: 購読する
+  subscription_description: PaypalでSalmon Statsを支援していただいた方は限定機能がご利用になれますので、Paypal登録時のメールアドレスをDMでtkglingまでご連絡ください.
+  uploader_description: Salmon StatsにリザルトをアップロードするにはSalmonia3またはSinclairが必要になります.
   forbidden: この機能は現在インペリアルスカラー限定です
   not_found: この機能は開発中です
   new_results: %{salmon_id}件のリザルトを取得しました
@@ -108,3 +111,6 @@ tab_type:
   overview: Overview
   results: Results
   shifts: Shifts
+total:
+  night: 夜
+  nightless: 昼
